@@ -1,0 +1,32 @@
+# macleanup — Security Contact (RFC 9116)
+# https://macleanup-docs.aoneahsan.com/.well-known/security.txt
+
+Contact: mailto:aoneahsan@gmail.com
+Contact: https://aoneahsan.com
+Expires: 2027-07-25T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://macleanup-docs.aoneahsan.com/.well-known/security.txt
+
+# Responsible disclosure
+#
+# Report any security issue affecting macleanup (the CLI) or this
+# documentation site by email to aoneahsan@gmail.com — not a public issue.
+# Please include:
+#
+#   1. A description of the issue and the affected component (CLI / docs site).
+#   2. Steps to reproduce.
+#   3. The impact you assess.
+#   4. Your contact details.
+#
+# Initial response target: within 72 hours.
+#
+# Scope note: macleanup deletes files and invokes sudo, so a security report
+# here is often a data-loss report. Both are in scope and both are welcome —
+# path traversal, an unintended rm -rf, a privilege-escalation path, or a
+# scenario where the tool removes something outside the paths it documents.
+#
+# The tool makes no network calls other than the opt-in --check-update, an
+# unauthenticated GET to the public npm registry that transmits no user data.
+#
+# Out of scope: issues requiring an already-compromised host or a modified
+# install of the script.

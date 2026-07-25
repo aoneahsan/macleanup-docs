@@ -1,0 +1,113 @@
+/**
+ * macleanup — brand palette.
+ *
+ * Taken from the project's real logo gradient (assets/logo/macleanup-mark.svg):
+ * violet #6E56F7 → blue #4F8DF0 → teal #19D3C5 on a deep navy #0B1030.
+ */
+
+:root {
+  --ifm-color-primary: #6e56f7;
+  --ifm-color-primary-dark: #5a3ef5;
+  --ifm-color-primary-darker: #5032f4;
+  --ifm-color-primary-darkest: #3c19dd;
+  --ifm-color-primary-light: #826ef9;
+  --ifm-color-primary-lighter: #8c7af9;
+  --ifm-color-primary-lightest: #a89dfb;
+
+  --ifm-color-secondary: #19d3c5;
+  --ifm-color-success: #10b981;
+  --ifm-color-info: #4f8df0;
+  --ifm-color-warning: #f59e0b;
+  --ifm-color-danger: #ef4444;
+
+  --ifm-code-font-size: 92%;
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', sans-serif;
+  --ifm-font-family-monospace: 'Fira Code', ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+  --ifm-heading-font-weight: 700;
+  --ifm-global-border-radius: 8px;
+
+  --docusaurus-highlighted-code-line-bg: rgba(110, 86, 247, 0.1);
+
+  /* Soft surfaces used by the hero and the destructive-action callout */
+  --ml-surface-brand: rgba(110, 86, 247, 0.06);
+  --ml-surface-accent: rgba(25, 211, 197, 0.08);
+  --ml-surface-danger: rgba(239, 68, 68, 0.07);
+}
+
+/* Dark mode — keep the brand recognisable, raise contrast. */
+[data-theme='dark'] {
+  --ifm-color-primary: #a493ff;
+  --ifm-color-primary-dark: #8b75ff;
+  --ifm-color-primary-darker: #7f66ff;
+  --ifm-color-primary-darkest: #5a3aff;
+  --ifm-color-primary-light: #bdb1ff;
+  --ifm-color-primary-lighter: #c9c0ff;
+  --ifm-color-primary-lightest: #e2ddff;
+
+  --ifm-color-secondary: #4fe3d7;
+  --ifm-color-info: #7fb0f6;
+
+  --ifm-background-color: #0b1030;
+  --ifm-background-surface-color: #151a3d;
+  --ifm-font-color-base: #e2e6f5;
+
+  --docusaurus-highlighted-code-line-bg: rgba(164, 147, 255, 0.18);
+
+  --ml-surface-brand: rgba(164, 147, 255, 0.09);
+  --ml-surface-accent: rgba(79, 227, 215, 0.1);
+  --ml-surface-danger: rgba(248, 113, 113, 0.12);
+}
+
+.theme-code-block {
+  border-radius: 10px;
+}
+
+/* Active sidebar item gets a brand accent rail. */
+.menu__link--active:not(.menu__link--sublist) {
+  border-left: 3px solid var(--ifm-color-primary);
+  padding-left: calc(var(--ifm-menu-link-padding-horizontal) - 3px);
+}
+
+/* Tables in reference pages are wide — never let one break the layout. */
+.markdown table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+/* Subtle entrance animation; disabled for reduced-motion users. */
+@media (prefers-reduced-motion: no-preference) {
+  .markdown > h1,
+  .markdown > h2 {
+    animation: ml-fade-up 420ms ease-out both;
+  }
+  @keyframes ml-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Author card on the About page. */
+.ml-author-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-left: 4px solid var(--ifm-color-primary);
+  border-radius: 12px;
+  background: var(--ml-surface-brand);
+  margin: 1.5rem 0;
+}
+
+.ml-author-card a {
+  font-weight: 600;
+}

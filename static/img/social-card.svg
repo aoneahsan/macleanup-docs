@@ -1,0 +1,41 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="macleanup — safe-by-default macOS cleanup CLI">
+  <title>macleanup — safe-by-default macOS cleanup CLI</title>
+  <defs>
+    <linearGradient id="card-bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B1030"/>
+      <stop offset="1" stop-color="#1F2440"/>
+    </linearGradient>
+    <linearGradient id="card-accent" x1="80" y1="120" x2="240" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6E56F7"/>
+      <stop offset="0.5" stop-color="#4F8DF0"/>
+      <stop offset="1" stop-color="#19D3C5"/>
+    </linearGradient>
+    <linearGradient id="card-rule" x1="80" y1="0" x2="1120" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6E56F7"/>
+      <stop offset="0.5" stop-color="#4F8DF0"/>
+      <stop offset="1" stop-color="#19D3C5"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#card-bg)"/>
+  <rect x="0" y="0" width="1200" height="8" fill="url(#card-rule)"/>
+
+  <!-- Mark -->
+  <rect x="80" y="112" width="132" height="132" rx="34" fill="url(#card-accent)"/>
+  <path fill="#FFFFFF"
+        d="M146 140 C151.4 172.4 158.6 179.6 191 185 C158.6 190.4 151.4 197.6 146 230 C140.6 197.6 133.4 190.4 101 185 C133.4 179.6 140.6 172.4 146 140 Z"
+        transform="translate(0, -7)"/>
+
+  <text x="248" y="176" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="#FFFFFF">macleanup</text>
+  <text x="248" y="222" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="27" font-weight="500" fill="#19D3C5">macOS cleanup &amp; maintenance CLI · v4.6.1 · MIT</text>
+
+  <text x="80" y="330" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="40" font-weight="600" fill="#E6F4FF">28 targeted sections. Every destructive</text>
+  <text x="80" y="384" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="40" font-weight="600" fill="#E6F4FF">action confirms before it runs.</text>
+
+  <!-- Terminal chip -->
+  <rect x="80" y="428" width="700" height="76" rx="14" fill="#000000" fill-opacity="0.36" stroke="#4F8DF0" stroke-opacity="0.45" stroke-width="2"/>
+  <text x="108" y="476" font-family="Fira Code, SFMono-Regular, Menlo, Consolas, monospace" font-size="30" fill="#19D3C5">npx macleanup --dry-run --all</text>
+
+  <text x="80" y="566" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="25" fill="#8E97C4">macleanup-docs.aoneahsan.com</text>
+  <text x="1120" y="566" text-anchor="end" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="25" fill="#8E97C4">by Ahsan Mahmood</text>
+</svg>

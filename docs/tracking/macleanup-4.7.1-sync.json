@@ -1,14 +1,15 @@
 {
   "task": "Align macleanup documentation with the 4.7.0 safety release and planned 4.7.1 audit correction",
-  "status": "publicationInProgress",
+  "status": "published",
   "lastUpdated": "2026-10-26",
   "runHistory": [
     "2026-10-23: Corrected 4.7.0 safety references, refreshed compatible direct dependencies, and passed the docs build.",
     "2026-10-26: Owner approved Story Bible GATE 1 and content map GATE 2; updated 4.7.1 audit and version references; GitHub Pages custom domain now serves valid HTTPS. GATE 4 remains pending.",
     "2026-10-26: Full-diff review found section 25 --yes silently deleted candidates. Product guard and public docs now require both --yes and --i-understand-deep for batch removal; release verification repeated.",
-    "2026-10-26: Owner wrote “approve all, finish all remaining work now” for final publication. Product commit 7e02218 pushed to main; npm accepted 4.7.1 and is processing it."
+    "2026-10-26: Owner wrote “approve all, finish all remaining work now” for final publication. Product commit 7e02218 pushed to main; npm accepted 4.7.1 and is processing it.",
+    "2026-10-26: npm registry now serves macleanup@4.7.1 with SHA e49091cc329da5051db9200babbba685d7e06f4e. GitHub Pages workflow 40321434166 passed and the HTTPS custom-domain intro returns 200."
   ],
-  "source": "../macleanup main commit 7e02218; npm publish of macleanup@4.7.1 accepted and registry processing",
+  "source": "../macleanup main commit 7e02218; npm registry macleanup@4.7.1; GitHub Pages workflow 40321434166",
   "scope": "Correct version labels and technical reference pages for the changed Trash gate, Finder failure behavior, temp pruning, and LaunchAgent path audit; refresh compatible direct runtime dependencies and move CI to supported Node 24 LTS. Clarify that section 25 can permanently remove plists and that --yes alone leaves batch audit report-only.",
   "paths": [
     "AGENTS.md",
@@ -65,5 +66,5 @@
   ],
   "success": "Every current-version page matches macleanup 4.7.1 behavior, the site builds, npm publishes the verified patch, and GitHub main deploys the docs changes over valid HTTPS.",
   "rollback": "Revert the docs commit and redeploy GitHub Pages. An npm publication needs a corrective patch version; do not unpublish the existing package.",
-  "unresolved": "npm registry availability and updated docs GitHub Pages deployment are being verified."
+  "unresolved": "None for the 4.7.1 documentation release."
 }

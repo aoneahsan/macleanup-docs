@@ -4,14 +4,14 @@
   "bibleApproved": true,
   "surface": "macleanup 4.7.1 package and public documentation",
   "phase": "finalize",
-  "status": "awaiting-approval",
+  "status": "approved",
   "round": 1,
   "gate": 4,
   "openDecisions": [],
-  "approvedAt": null,
+  "approvedAt": "2026-10-26T12:16:00Z",
   "escalatedAt": null,
   "registryUpdatedAt": "2026-10-26T10:46:56Z",
-  "updatedAt": "2026-10-26T11:23:00Z",
+  "updatedAt": "2026-10-26T12:16:00Z",
   "history": [
     {
       "at": "2026-10-23T07:42:00Z",
@@ -48,6 +48,12 @@
       "phase": "finalize",
       "status": "awaiting-approval",
       "note": "Full-diff review found section 25 --yes batch removal; corrected product guard and public copy, then repeated verification before publication"
+    },
+    {
+      "at": "2026-10-26T12:16:00Z",
+      "phase": "finalize",
+      "status": "approved",
+      "note": "Owner wrote “approve all, finish all remaining work now”, approving the reviewed 4.7.1 public package and docs publication at GATE 4"
     }
   ]
 }

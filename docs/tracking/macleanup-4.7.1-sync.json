@@ -1,13 +1,14 @@
 {
   "task": "Align macleanup documentation with the 4.7.0 safety release and planned 4.7.1 audit correction",
-  "status": "awaitingPublicationApproval",
+  "status": "publicationInProgress",
   "lastUpdated": "2026-10-26",
   "runHistory": [
     "2026-10-23: Corrected 4.7.0 safety references, refreshed compatible direct dependencies, and passed the docs build.",
     "2026-10-26: Owner approved Story Bible GATE 1 and content map GATE 2; updated 4.7.1 audit and version references; GitHub Pages custom domain now serves valid HTTPS. GATE 4 remains pending.",
-    "2026-10-26: Full-diff review found section 25 --yes silently deleted candidates. Product guard and public docs now require both --yes and --i-understand-deep for batch removal; release verification repeated."
+    "2026-10-26: Full-diff review found section 25 --yes silently deleted candidates. Product guard and public docs now require both --yes and --i-understand-deep for batch removal; release verification repeated.",
+    "2026-10-26: Owner wrote “approve all, finish all remaining work now” for final publication. Product commit 7e02218 pushed to main; npm accepted 4.7.1 and is processing it."
   ],
-  "source": "../macleanup main commit 20656f1 plus planned macleanup@4.7.1; npm macleanup@4.7.0 remains published until approval",
+  "source": "../macleanup main commit 7e02218; npm publish of macleanup@4.7.1 accepted and registry processing",
   "scope": "Correct version labels and technical reference pages for the changed Trash gate, Finder failure behavior, temp pruning, and LaunchAgent path audit; refresh compatible direct runtime dependencies and move CI to supported Node 24 LTS. Clarify that section 25 can permanently remove plists and that --yes alone leaves batch audit report-only.",
   "paths": [
     "AGENTS.md",
@@ -64,5 +65,5 @@
   ],
   "success": "Every current-version page matches macleanup 4.7.1 behavior, the site builds, npm publishes the verified patch, and GitHub main deploys the docs changes over valid HTTPS.",
   "rollback": "Revert the docs commit and redeploy GitHub Pages. An npm publication needs a corrective patch version; do not unpublish the existing package.",
-  "unresolved": "Story Bible GATE 1 and content map GATE 2 were approved on 2026-10-26; publication GATE 4 awaits owner approval. The custom docs domain has a valid certificate, HTTPS is enforced, and the existing deployed site returns 200; updated release content remains local until publication approval. Final safety correction is included in the reviewable 4.7.1 artifacts."
+  "unresolved": "npm registry availability and updated docs GitHub Pages deployment are being verified."
 }

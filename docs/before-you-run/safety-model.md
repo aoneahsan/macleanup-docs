@@ -27,11 +27,11 @@ affected by `--yes`.
 Every destructive call routes through a helper that no-ops in dry mode. See
 [Preview with `--dry-run`](/before-you-run/dry-run).
 
-### 3. Apps are moved to the Trash, not `rm`-ed
+### 3. App data and apps are moved to the Trash
 
-Section 21 uses Finder to move an application to `~/.Trash`, so an uninstall
-stays recoverable until the Trash is emptied. Section 24 does the same for
-large stale files.
+Sections 12 and 21 use Finder to move orphaned data and applications to the
+Trash, so they stay recoverable until it is emptied. Section 24 does the same
+for large stale files. If Finder fails, the affected item stays in place.
 
 ### 4. Sudo sections are skipped, never silently bypassed
 
@@ -43,7 +43,7 @@ clear).
 
 ### 5. The deepest sections never run unattended by accident
 
-Five sections are gated: **6** (system caches as root), **11** (Time Machine
+Six sections are gated: **6** (system caches as root), **10** (Empty Trash), **11** (Time Machine
 snapshots), **14** (`/private/var/folders` wipe), **21** (app uninstall) and
 **24** (large stale files → Trash).
 
@@ -51,7 +51,8 @@ snapshots), **14** (`/private/var/folders` wipe), **21** (app uninstall) and
 - To run one unattended via `--only` or `--profile`, you need
   **`--i-understand-deep` in addition to `--yes`**. `--yes` alone is refused,
   with a warning, and the section is skipped.
-- `--dry-run` previews are always permitted, since they cannot touch disk.
+- `--dry-run` previews are always permitted: they delete nothing, although
+  normal logs and reports may be written to disk.
 - Section 14 additionally requires a typed `yes`.
 
 The gate exists so that a one-character typo in a section number cannot
@@ -66,24 +67,26 @@ your home directory, outside any npx cache, and survive every invocation. See
 
 ## The two-condition rule {#the-two-condition-rule}
 
-Introduced in 4.3.3, this governs the four sections that delete non-cache data:
-**12** (orphaned app data), **21** (idle apps), **23** (stale build artefacts)
-and **24** (large unused files).
+Introduced in 4.3.3, this governs candidate selection in four sections that
+can remove non-cache data: **12** (orphaned app data), **21** (idle apps), **23**
+(stale build artefacts) and **24** (large unused files).
 
-In those sections an item is deleted automatically only when **both** hold:
+An item qualifies only when **both** hold:
 
 1. **It is not in use by any installed software or tool.** The per-section
    detection decides this — no matching installed app for orphan data, no
    last-used signal and not currently running for an idle app.
-2. **It has not been touched for at least `--idle-days` days** — measured on
-   `atime` **and** `mtime`, default 100.
+2. **It meets that section's age threshold** — `--idle-days` for 12 and 23,
+   `--threshold` for 21, or `--large-file-days` for 24. All default to 100
+   days. Sections 12, 23 and 24 check `atime` and `mtime`; section 21 uses
+   available app last-use signals and skips apps without a usable signal.
 
 Condition 2 is what makes the rule work in practice. A `node_modules` your
 editor reads for autocomplete keeps a recent access time and survives. A Gradle
-distribution you invoke monthly survives. `--idle-days 0` disables condition 2
-and reverts to pre-4.3.3 behaviour, where modification time alone was enough.
+distribution you invoke monthly survives. Lowering an age threshold widens the
+candidate list; review it before confirming a deletion.
 
-:::note Sections 16 and 17 are different
+:::note[Sections 16 and 17 are different]
 For iOS backups (16) and Xcode archives (17), `--idle-days` only **highlights**
 idle items with an `[idle ≥Nd]` marker. There is no automatic delete gate —
 both are interactive-only and will delete any item you confirm, recent or not.
@@ -130,19 +133,20 @@ npx macleanup --only 23 \
 |---|---|---|
 | Batch-mode section prompt | Most destructive sections | `--yes` |
 | Per-item interactive selection | Sections 12, 16, 17, 21, 23, 24 | Running the section in batch mode |
-| Deep-section gate | Sections 6, 11, 14, 21, 24 | `--yes` **and** `--i-understand-deep` together |
+| Deep-section gate | Sections 6, 10, 11, 14, 21, 24 | `--yes` **and** `--i-understand-deep` together |
 | Typed `yes` | Section 14 | Nothing — always required |
 
 ## Privacy: no telemetry
 
-The script makes **no network calls**. The Node launcher only spawns bash — no
+The script makes **no network calls by default**. The Node launcher only spawns bash — no
 analytics, no crash reporting, no phone-home. Logs and reports never leave
 `~/.mac-cleanup/`.
 
 The one exception is opt-in: `--check-update` makes a single unauthenticated
 `GET` to `https://registry.npmjs.org/macleanup/latest` to compare versions. It
-sends no information about you or your machine, times out in seconds, and never
-blocks the run. `--feedback` and `--report-issue` open your mail client or a
+sends no cleanup paths or reports. npm still receives normal request metadata,
+such as your IP address. The check times out in seconds and never blocks the
+run. `--feedback` and `--report-issue` open your mail client or a
 pre-filled GitHub issue for **you** to review and submit — nothing is sent
 automatically.
 
@@ -153,7 +157,7 @@ of a cleanup you asked for:
 
 - **There is no undo.** No restore point, no transaction log, no
   `macleanup --undo`. The Trash is the only built-in second chance, and only
-  for sections 21 and 24.
+  for sections 12, 21 and 24.
 - **Deleting the right file at the wrong time still hurts.** A stale
   `node_modules` is only reinstallable while the lockfile resolves and the
   registry still has those versions.

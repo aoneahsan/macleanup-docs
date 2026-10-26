@@ -62,9 +62,9 @@ npx macleanup --profile deep --dry-run
 
 ## Deep sections preview safely too
 
-The five deep sections — 6, 11, 14, 21 and 24 — are refused in unattended
-batch mode without `--i-understand-deep`. **A `--dry-run` preview is always
-allowed**, because it cannot touch the disk:
+The six deep sections — 6, 10, 11, 14, 21 and 24 — are refused in unattended
+batch mode unless both `--yes` and `--i-understand-deep` are present. **A `--dry-run` preview is always
+allowed** and does not delete files; it still writes its normal log:
 
 ```bash
 npx macleanup --only 21 --yes --dry-run   # previews; deletes nothing
@@ -111,7 +111,8 @@ promise about your filesystem:
 - **It does not validate your judgement.** macleanup can tell you a
   directory has not been touched in 200 days. It cannot tell you whether you
   need it.
-- **It is not a backup.** Take a Time Machine snapshot before a large run:
+- **It is not a backup.** Keep a separate current backup before a large run.
+  If Time Machine is configured, you can also request a local snapshot:
 
   ```bash
   tmutil snapshot

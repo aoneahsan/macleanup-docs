@@ -13,22 +13,23 @@ keywords: [is macleanup safe, does macleanup collect data, macleanup license, ma
 
 ### Will this brick my Mac?
 
-Not if you read each prompt. The section that most warrants care is **14**
-(`/private/var/folders`), which requires a reboot afterwards — it is behind a
-typed `yes`, is never part of `--all`, and needs `--i-understand-deep` to run
-unattended.
+No cleanup tool can guarantee that. Section **14** (`/private/var/folders`)
+particularly warrants care: it requires a reboot afterwards, is behind a typed
+`yes`, is never part of `--all`, and needs `--i-understand-deep` to run
+unattended. Have a current backup before running it.
 
-The realistic risk is not a broken Mac; it is **deleting something you wanted
-to keep**. That is what [What gets deleted](/before-you-run/what-gets-deleted)
-and [`--dry-run`](/before-you-run/dry-run) exist to prevent.
+Another risk is **deleting something you wanted to keep**. Read
+[What gets deleted](/before-you-run/what-gets-deleted) and preview with
+[`--dry-run`](/before-you-run/dry-run) before choosing a section.
 
 ### Can I undo a cleanup?
 
 No. There is no `macleanup --undo`, no restore point and no transaction log.
 
-Two partial exceptions: sections 21 and 24 move items to the **Trash**, so they
-are recoverable until you empty it. Everything else needs a backup. Take a
-snapshot first:
+Three partial exceptions: sections 12, 21 and 24 move items to the **Trash**, so they
+are recoverable until you empty it. Direct deletion needs a backup. A local
+snapshot may help if Time Machine is configured, but it is not a separate
+backup:
 
 ```bash
 tmutil snapshot
@@ -36,19 +37,19 @@ tmutil snapshot
 
 ### Is it safe to run `--all --yes` unattended?
 
-Yes, with the caveat that you should validate the exact command with
-`--dry-run` first. `--all` is the safe batch only — sections
-`0, 3, 5, 7, 8, 9, 15, 18, 22, 26` — and it **never** runs the deep sections,
+The safe batch excludes the deep sections, but no automated deletion is risk
+free. Preview the exact command with `--dry-run` and keep a current backup.
+`--all` selects sections `0, 3, 5, 7, 8, 9, 15, 18, 22, 26` — and it **never** runs the deep sections,
 even with `--yes`.
 
-Be more careful with `--profile … --yes`. Three of the five profiles include a
-section that deletes permanently, and `--profile minimal --yes` empties your
-Trash. See [Profiles](/reference/profiles).
+Be more careful with `--profile … --yes`. The `dev` and `deep` profiles include
+sections that can delete permanently. `minimal` leaves Trash alone. See
+[Profiles](/reference/profiles).
 
 ### Will it delete my documents or photos?
 
-Not by intent, and not by any path list. Two sections could reach a personal
-file:
+Not by intent, and not by any fixed document path list. These sections can
+reach personal data:
 
 - **Section 24** flags files at or above your size threshold whose atime and
   mtime are both older than your age threshold. Defaults are 1 GB and 100 days,
@@ -56,8 +57,15 @@ file:
 - **Section 23** deletes build directories inside your scan roots. If you keep
   a folder literally named `dist` or `vendor` full of documents, protect it
   with `--exclude-path`.
+- **Section 12** may identify an app's support data as orphaned. Review its
+  list before moving anything to the Trash.
+- **Section 21** moves an app and known companion data to the Trash. Export
+  documents kept inside the app's container first.
+- **Section 4** can prune Docker volumes containing databases, but only after
+  a separate typed `yes` in interactive mode.
 
-Everything else works from explicit cache, log and temp paths.
+Other sections work from their documented paths and prompts; see the
+[full inventory](/before-you-run/what-gets-deleted).
 
 ### Does it delete my browser passwords or history?
 
@@ -71,10 +79,11 @@ because session data can live in caches.
 
 ### What is the two-condition rule?
 
-In sections 12, 21, 23 and 24, an item is deleted automatically only when
-**both** are true: it is not in use by any installed software, **and** it has
-not been touched — atime *and* mtime — for at least `--idle-days` days
-(default 100).
+In sections 12, 21, 23 and 24, an item qualifies only when **both** are true:
+the section's checks find no current use, **and** it meets that section's age
+threshold. Sections 12 and 23 use `--idle-days`; 21 uses `--threshold`; 24 uses
+`--large-file-days`. All default to 100 days. Sections 12, 23 and 24 check
+access and modification times; 21 uses app last-use signals.
 
 Because access time counts, a `node_modules` your editor reads for autocomplete
 survives, and so does a Gradle distribution you invoke monthly. Details:
@@ -120,13 +129,14 @@ something unpredictable.
 
 ### Do you collect any telemetry?
 
-None. The script makes **no network calls**. The Node launcher only spawns
+None. The script makes **no network calls by default**. The Node launcher only spawns
 bash — no analytics, no crash reporting, no phone-home. Logs and reports stay
 on your machine in `~/.mac-cleanup/`.
 
 The single exception is opt-in: `--check-update` performs one unauthenticated
 `GET` to `https://registry.npmjs.org/macleanup/latest` to compare version
-numbers. It sends no information about you or your machine.
+numbers. It sends no cleanup paths or reports; npm still sees normal request
+metadata, such as your IP address.
 
 `--feedback` and `--report-issue` open your mail client or a pre-filled GitHub
 issue for **you** to review and submit. Nothing is sent automatically.
@@ -190,7 +200,7 @@ There is no schedule the tool needs. A pattern that works:
 
 | Cadence | Command |
 |---|---|
-| Weekly | `mac-cleanup --profile minimal --exclude 10 --yes` |
+| Weekly | `mac-cleanup --profile minimal --yes` |
 | Monthly | `mac-cleanup --profile dev --dry-run`, then run what looks right |
 | When low on space | `mac-cleanup --profile audit`, read the reports, then decide |
 

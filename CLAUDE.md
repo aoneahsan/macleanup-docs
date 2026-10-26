@@ -50,8 +50,8 @@ find build -iname '*MANUAL*'    # must return nothing
   invisible to search and ships an empty meta description.
 - **This tool deletes files, and that shapes the docs.** Lead with what is removed and how to preview
   safely; the "Before you run" category deliberately sits above "Getting started" in `sidebars.ts`.
-- **Never imply a deletion is reversible when it is not.** Only sections 21 and 24 move items to the
-  Trash. Everything else is permanent. The three-tier classification in
+- **Never imply a deletion is reversible when it is not.** Sections 12, 21 and 24 move items to the
+  Trash. Other direct deletions need a backup. The three-tier classification in
   `docs/before-you-run/what-gets-deleted.md` is the single home for that fact — link to it, do not
   restate it differently elsewhere.
 - **No invented numbers.** Do not claim how much space the tool frees. Source every factual claim from
@@ -79,6 +79,6 @@ yarn typecheck
 
 ## Version drift
 
-The site documents **macleanup 4.6.1**. When the package publishes a new version, update
+The site documents **macleanup 4.7.1**. When the package publishes a new version, update
 `PKG_VERSION` in `docusaurus.config.ts`, the version line in `docs/intro.md`, `docs/changelog.md`, and
 `static/llms.txt` in the same change.

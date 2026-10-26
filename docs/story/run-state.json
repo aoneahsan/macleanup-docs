@@ -1,0 +1,53 @@
+{
+  "schema": "story-run-state/1",
+  "project": "macleanup",
+  "bibleApproved": true,
+  "surface": "macleanup 4.7.1 package and public documentation",
+  "phase": "finalize",
+  "status": "awaiting-approval",
+  "round": 1,
+  "gate": 4,
+  "openDecisions": [],
+  "approvedAt": null,
+  "escalatedAt": null,
+  "registryUpdatedAt": "2026-10-26T10:46:56Z",
+  "updatedAt": "2026-10-26T11:23:00Z",
+  "history": [
+    {
+      "at": "2026-10-23T07:42:00Z",
+      "phase": "bible",
+      "status": "awaiting-approval",
+      "note": "Discover draft prepared; GATE 1 pending"
+    },
+    {
+      "at": "2026-10-26T10:46:56Z",
+      "phase": "bible",
+      "status": "approved",
+      "note": "Owner approved draft Bible as written at GATE 1 and authorized the voice and palette registries"
+    },
+    {
+      "at": "2026-10-26T10:46:56Z",
+      "phase": "map",
+      "status": "awaiting-approval",
+      "note": "Surface and question rows drafted; GATE 2 pending"
+    },
+    {
+      "at": "2026-10-26T10:53:16Z",
+      "phase": "map",
+      "status": "approved",
+      "note": "Owner approved content map at GATE 2"
+    },
+    {
+      "at": "2026-10-26T11:05:00Z",
+      "phase": "finalize",
+      "status": "awaiting-approval",
+      "note": "Reviewed 4.7.1 package and docs copy; GATE 4 publication approval requested"
+    },
+    {
+      "at": "2026-10-26T11:23:00Z",
+      "phase": "finalize",
+      "status": "awaiting-approval",
+      "note": "Full-diff review found section 25 --yes batch removal; corrected product guard and public copy, then repeated verification before publication"
+    }
+  ]
+}

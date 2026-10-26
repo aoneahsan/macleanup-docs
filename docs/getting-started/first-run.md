@@ -1,6 +1,6 @@
 ---
 title: Your first run
-description: A step-by-step first session with macleanup — preview, read the report, run one section, then widen. Written so nothing is deleted until you have seen it listed.
+description: A step-by-step first session with macleanup — preview, read the report, run one section, then widen. Nothing is deleted before you choose to run a cleanup.
 tags: [getting-started, tutorial, dry-run, walkthrough]
 sidebar_position: 2
 sidebar_label: Your first run
@@ -9,19 +9,22 @@ keywords: [macleanup tutorial, first cleanup mac, how to use macleanup]
 
 # Your first run
 
-**This walkthrough deletes nothing until step 5, and by then you will have seen
-every path in a preview first.** It takes about fifteen minutes on a typical
-developer machine, most of which is reading.
+**This walkthrough deletes nothing until step 5.** Review the preview and its
+[limits](/before-you-run/dry-run#the-honest-limits-of-a-preview) before choosing
+the first cleanup.
 
-## Step 0 — Take a snapshot
+## Step 0 — Check your backup
 
-Not required. Strongly recommended before the first cleanup on any machine:
+Use a current backup before the first cleanup, especially before a section that
+deletes directly. If Time Machine is configured, you can also request a local
+snapshot:
 
 ```bash
 tmutil snapshot
 ```
 
-macleanup has no undo. This is the thing that does.
+A local snapshot is not a substitute for a separate backup and may be
+unavailable when Time Machine is not configured. macleanup has no built-in undo.
 
 ## Step 1 — See the section catalogue
 
@@ -56,12 +59,13 @@ npx macleanup --dry-run --all --no-color > ~/Desktop/macleanup-preview.txt
 ## Step 3 — Run an audit that deletes nothing
 
 ```bash
-npx macleanup --profile audit
+npx macleanup --profile audit --dry-run
 ```
 
-The `audit` profile is sections `0, 12, 18, 21, 25, 26` in read-only form: system
-health, orphaned app data, large files, idle apps, the LaunchAgents audit and a
-disk-usage report. It writes dated `.txt` files to `~/.mac-cleanup/reports/`.
+The `audit` profile is sections `0, 12, 18, 21, 25, 26`: system health,
+orphaned app data, large files, idle apps, the LaunchAgents audit and a
+disk-usage report. `--dry-run` guarantees this first pass deletes nothing.
+It can still write dated `.txt` files to `~/.mac-cleanup/reports/`.
 
 ```bash
 open ~/.mac-cleanup/reports/
@@ -72,9 +76,9 @@ useful than any single cleanup.
 
 ## Step 4 — Pick one section and preview it
 
-Start narrow. Section 3 (package-manager caches) is the highest-value,
-lowest-risk section on most developer machines — everything it removes is
-re-downloadable.
+Start narrow. Section 3 covers package-manager caches. Removed packages may
+need downloading again, and a package may no longer be available from its
+registry.
 
 ```bash
 npx macleanup --only 3 --dry-run
@@ -140,10 +144,9 @@ mac-cleanup --profile dev --dry-run
 mac-cleanup --all --yes --quiet --notify
 ```
 
-:::warning Check a profile before automating it
-`--profile minimal` includes section 10, which **empties the Trash** — and
-section 10 is not one of the deep-gated sections, so `--yes` will confirm it
-for you. Always run a profile with `--dry-run` once before adding `--yes`.
+:::warning[Check a profile before automating it]
+`--profile minimal` now leaves Trash alone. Other profiles can still remove
+data you need. Always run a profile with `--dry-run` before adding `--yes`.
 :::
 
 More ready-made commands: [Recipes](/recipes).

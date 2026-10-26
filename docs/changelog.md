@@ -4,7 +4,7 @@ description: What changed in each macleanup release — the safety fixes, the tw
 tags: [changelog, releases, versions, history]
 sidebar_position: 6
 sidebar_label: Release history
-keywords: [macleanup changelog, macleanup versions, macleanup 4.6.1, macleanup 4.3.1 safety fix]
+keywords: [macleanup changelog, macleanup versions, macleanup 4.7.1, macleanup 4.3.1 safety fix]
 ---
 
 # Release history
@@ -14,12 +14,44 @@ changelog lives with the source:
 [CHANGELOG.md](https://github.com/aoneahsan/macleanup/blob/main/CHANGELOG.md).
 Versions follow [semantic versioning](https://semver.org).
 
-This documentation describes **4.6.1**, the current published version.
+This documentation describes **4.7.1**. Verify the published version with
+`mac-cleanup --check-update` before installing or updating.
 
 ```bash
 mac-cleanup --version        # what you have
 mac-cleanup --check-update   # what is published
 ```
+
+## 4.7.1 — launch-item audit correction
+
+- Section 25 preserves spaces in structured LaunchAgent program paths. It no
+  longer reports an existing target such as one under `Application Support` as
+  missing. Ambiguous raw plist strings are skipped; genuinely missing targets
+  still appear in the audit.
+- Section 25 is report-only in batch mode unless both `--yes` and
+  `--i-understand-deep` are supplied. The interactive menu always asks which
+  candidates to remove. Previously, `--yes` alone selected and removed every
+  reported stale launch item.
+
+## 4.7.0 — safety release
+
+- The `minimal` profile no longer selects Empty Trash. Section 10 now needs
+  both `--yes` and `--i-understand-deep` when run unattended.
+- A refused deep section no longer appears as completed in the run summary.
+- Section 8 leaves `~/tmp` and nested temp entries alone. It removes only old,
+  top-level regular files from the system temp locations.
+- Sections 12 and 21 leave affected data in place when Finder cannot move it
+  to the Trash. They no longer fall back to permanent deletion.
+
+## 4.6.3 — patch
+
+- Corrected the README version row to match the published package version.
+
+## 4.6.2 — licensing and documentation
+
+- Changed the package license to MIT.
+- Reworked the README to make destructive behavior, recovery limits, and the
+  package's public interface clearer.
 
 ## 4.6.1 — patch
 
@@ -175,5 +207,5 @@ loss arising from its use.
 ## Next
 
 - [Introduction](/intro) — what the current version does.
-- [CLI reference](/reference/cli) — every flag in 4.6.1.
+- [CLI reference](/reference/cli) — every flag in 4.7.1.
 - [Recovery](/recovery) — the 4.3.0 incident in full.

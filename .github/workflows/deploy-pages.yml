@@ -5,9 +5,9 @@
 # Docs sites deploy to GitHub Pages ONLY; they never get a Firebase project.
 #
 # Uses the official Pages flow (upload-pages-artifact + deploy-pages), so there
-# is no gh-pages branch to maintain. The custom domain is pinned by static/CNAME,
-# which Docusaurus copies verbatim into build/ — so build/CNAME ships inside the
-# artifact automatically and needs no extra step.
+# is no gh-pages branch to maintain. The custom domain is set in repository
+# Pages settings. static/CNAME is copied into build/ but is ignored for Actions
+# custom-domain configuration.
 #
 # Optional analytics keys come from repo Actions secrets; when a secret is unset
 # the corresponding provider is skipped entirely, so the build never depends on
@@ -49,7 +49,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Enable Corepack
         # Respects the `packageManager` pin in package.json. Do NOT add

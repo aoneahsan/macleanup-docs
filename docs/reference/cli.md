@@ -34,7 +34,7 @@ Both `--flag value` and `--flag=value` forms are accepted (the `=` form since
 | `--exclude "L"` | string | — | Skip the listed sections |
 | `--profile NAME` | string | — | Run a named bundle |
 | `--yes`, `-y` | switch | off | Auto-confirm `[y/N]` prompts |
-| `--i-understand-deep` | switch | off | Allow deep sections (6, 11, 14, 21, 24) unattended, with `--yes` |
+| `--i-understand-deep` | switch | off | With `--yes`, allow deep sections (6, 10, 11, 14, 21, 24) and section 25 removal in batch mode |
 | `--dry-run` | switch | off | Preview without deleting |
 | `--no-sudo` | switch | off | Skip every sudo section |
 | `--quiet` | switch | off | Suppress info chatter |
@@ -77,9 +77,9 @@ Run the **safe batch** without a per-section prompt. The safe batch is exactly:
 
 Caches, logs, temp files and read-only reports. Nothing else.
 
-**`--all` never runs the deep sections — not even `--all --yes`.** Sections 6,
-11, 14, 21 and 24 are refused unless you also pass
-[`--i-understand-deep`](#i-understand-deep).
+**`--all` never selects the deep sections — not even `--all --yes`.** To run
+sections 6, 10, 11, 14, 21 or 24 unattended, select them explicitly and pass
+both `--yes` and [`--i-understand-deep`](#i-understand-deep).
 
 ```bash
 mac-cleanup --all             # safe batch, batch mode
@@ -87,7 +87,7 @@ mac-cleanup --all --yes       # unattended safe batch
 mac-cleanup --all --dry-run   # preview it
 ```
 
-:::note Section 13 left the safe batch in 4.5.0
+:::note[Section 13 left the safe batch in 4.5.0]
 It ran `sudo periodic` unattended, which is privileged system maintenance
 rather than cache cleanup. Run it from the menu or with `--only 13`.
 :::
@@ -143,11 +143,12 @@ mac-cleanup --only 21 --yes --i-understand-deep  # actually uninstalls idle apps
 ### `--i-understand-deep` {#i-understand-deep}
 
 Required **in addition to `--yes`** to let the deepest sections run unattended
-via `--only`, `--profile` or `--all`. The gated set:
+via `--only` or a profile that includes them. `--all` never selects them. The gated set:
 
 | Section | What it does |
 |---|---|
 | 6 | System caches wiped as root |
+| 10 | Empty Trash, including external-volume Trash |
 | 11 | Time Machine local snapshots deleted |
 | 14 | `/private/var/folders` deep wipe |
 | 21 | App uninstall plus companion data |
@@ -157,12 +158,16 @@ Without it those sections are refused in batch mode, so a mistyped section
 number cannot trigger an irreversible operation. `--dry-run` previews are
 always allowed.
 
+Section 25 still runs as a report in batch mode without this flag. To remove
+its stale launch-item candidates unattended, supply both `--yes` and
+`--i-understand-deep`; that selects every candidate.
+
 ```bash
 mac-cleanup --only 14 --yes --i-understand-deep
 mac-cleanup --profile deep --yes --i-understand-deep
 ```
 
-:::danger `--only 21 --yes --i-understand-deep` uninstalls without asking
+:::danger[`--only 21 --yes --i-understand-deep` uninstalls without asking]
 That combination moves **every** app idle past `--threshold` to the Trash with
 no further prompt. Read [Section 21](/reference/sections#section-21) before
 running it on a machine you depend on.
@@ -211,7 +216,7 @@ object. Implies `--quiet`.
 ```json
 {
   "tool": "mac-cleanup",
-  "version": "4.6.1",
+  "version": "4.7.1",
   "dry_run": false,
   "freed_kb": 1048576,
   "disk_free_delta_kb": 1310720,

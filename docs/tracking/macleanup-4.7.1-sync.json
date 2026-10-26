@@ -1,0 +1,68 @@
+{
+  "task": "Align macleanup documentation with the 4.7.0 safety release and planned 4.7.1 audit correction",
+  "status": "awaitingPublicationApproval",
+  "lastUpdated": "2026-10-26",
+  "runHistory": [
+    "2026-10-23: Corrected 4.7.0 safety references, refreshed compatible direct dependencies, and passed the docs build.",
+    "2026-10-26: Owner approved Story Bible GATE 1 and content map GATE 2; updated 4.7.1 audit and version references; GitHub Pages custom domain now serves valid HTTPS. GATE 4 remains pending.",
+    "2026-10-26: Full-diff review found section 25 --yes silently deleted candidates. Product guard and public docs now require both --yes and --i-understand-deep for batch removal; release verification repeated."
+  ],
+  "source": "../macleanup main commit 20656f1 plus planned macleanup@4.7.1; npm macleanup@4.7.0 remains published until approval",
+  "scope": "Correct version labels and technical reference pages for the changed Trash gate, Finder failure behavior, temp pruning, and LaunchAgent path audit; refresh compatible direct runtime dependencies and move CI to supported Node 24 LTS. Clarify that section 25 can permanently remove plists and that --yes alone leaves batch audit report-only.",
+  "paths": [
+    "AGENTS.md",
+    "CLAUDE.md",
+    ".github/workflows/deploy-pages.yml",
+    ".nvmrc",
+    "README.md",
+    "docusaurus.config.ts",
+    "docs/intro.md",
+    "docs/changelog.md",
+    "docs/before-you-run/",
+    "docs/reference/",
+    "docs/getting-started/first-run.md",
+    "docs/faq.md",
+    "docs/troubleshooting.md",
+    "docs/recipes.md",
+    "docs/recovery.md",
+    "docs/MANUAL-TASKS.md",
+    "docs/story/",
+    "static/llms.txt",
+    "static/img/social-card.svg",
+    "package.json",
+    "yarn.lock"
+  ],
+  "schemaChanges": "None; existing URLs, Docusaurus configuration structure, and GitHub Pages deployment remain the same.",
+  "order": [
+    "Read published 4.7.0 package and main branch audit correction",
+    "Correct all stale version, safety, and section 25 statements",
+    "Run typecheck and production build",
+    "Verify excluded internal files and check for secrets",
+    "Obtain Story GATE 4 publication approval",
+    "Publish product 4.7.1, then fetch and merge docs remote main, commit and push docs"
+  ],
+  "edgeCases": [
+    "Historical 4.6.x and 4.7.0 changelog entries remain historical",
+    "Section 10 is excluded from minimal but still available with both safety flags",
+    "Finder failure leaves app and data in place",
+    "Section 12 now moves to Trash",
+    "Section 8 leaves ~/tmp and nested temp files alone",
+    "Section 25 preserves structured program paths with spaces",
+    "GitHub Pages domain may be available while a new deployment is still pending",
+    "Section 25 --yes alone must report candidates and preserve plists; both opt-in flags select all candidates"
+  ],
+  "security": "No credentials or secret files in the public repository or published build; do not run cleanup or touch user data from this docs checkout.",
+  "verification": [
+    "rg for stale 4.6.3 and old profile claims",
+    "yarn install --immutable",
+    "yarn typecheck",
+    "yarn build",
+    "find build -iname '*MANUAL*'",
+    "git diff --check",
+    "tracked-file secret-name sweep",
+    "isolated HOME fixture survives section 25 --yes without deep opt-in"
+  ],
+  "success": "Every current-version page matches macleanup 4.7.1 behavior, the site builds, npm publishes the verified patch, and GitHub main deploys the docs changes over valid HTTPS.",
+  "rollback": "Revert the docs commit and redeploy GitHub Pages. An npm publication needs a corrective patch version; do not unpublish the existing package.",
+  "unresolved": "Story Bible GATE 1 and content map GATE 2 were approved on 2026-10-26; publication GATE 4 awaits owner approval. The custom docs domain has a valid certificate, HTTPS is enforced, and the existing deployed site returns 200; updated release content remains local until publication approval. Final safety correction is included in the reviewable 4.7.1 artifacts."
+}

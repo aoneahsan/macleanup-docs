@@ -24,7 +24,7 @@ mac-cleanup --list
 | Column | Meaning |
 |---|---|
 | **Sudo** | Needs root. Skipped, never half-run, when sudo is unavailable or `--no-sudo` is set |
-| **Risk** | 🟢 regenerates · 🟡 goes to the Trash · 🔴 permanently deleted · ⚪️ report only |
+| **Risk** | 🟢 routine direct removal (not always regenerable) · 🟡 goes to the Trash · 🔴 higher-impact permanent deletion · ⚪️ report only |
 | **In `--all`** | Part of the safe batch `0, 3, 5, 7, 8, 9, 15, 18, 22, 26` |
 | **Deep** | Requires `--i-understand-deep` on top of `--yes` to run unattended |
 
@@ -36,15 +36,15 @@ mac-cleanup --list
 | 1 | Xcode caches, DerivedData, simulators | — | 🟢 | — | — |
 | 2 | Android / Gradle caches | — | 🟢 | — | — |
 | 3 | Package-manager caches | — | 🟢 | ✅ | — |
-| 4 | Docker prune | — | 🟢 | — | — |
+| 4 | Docker prune; optional interactive volume prune | — | 🔴* | — | — |
 | 5 | User caches | — | 🟢 | ✅ | — |
 | 6 | System caches (`/Library/Caches`) | ✅ | 🟢 | — | ✅ |
 | 7 | Logs, user and system | ✅ | 🟢 | ✅ | — |
 | 8 | Temp files | — | 🟢 | ✅ | — |
 | 9 | Update caches | ✅ | 🟢 | ✅ | — |
-| 10 | Empty Trash | — | 🔴 | — | — |
+| 10 | Empty Trash | — | 🔴 | — | ✅ |
 | 11 | Time Machine local snapshots | ✅ | 🔴 | — | ✅ |
-| 12 | Orphaned app-data scan | — | 🔴 | — | — |
+| 12 | Orphaned app-data scan | — | 🟡 | — | — |
 | 13 | System maintenance (`periodic`) | ✅ | 🟢 | — | — |
 | 14 | Deep cache `/private/var/folders` — **needs reboot** | ✅ | 🔴 | — | ✅ |
 | 15 | Installer leftovers report | — | ⚪️ | ✅ | — |
@@ -57,17 +57,18 @@ mac-cleanup --list
 | 22 | Purgeable space trigger | — | 🟢 | ✅ | — |
 | 23 | Stale build artefacts N+ days | — | 🔴 | — | — |
 | 24 | Large stale files ≥ N GB, unused N+ days | — | 🟡 | — | ✅ |
-| 25 | LaunchAgents / LaunchDaemons audit | ✅* | ⚪️ | — | — |
+| 25 | LaunchAgents / LaunchDaemons audit and optional removal | ✅* | 🔴 | — | Removal* |
 | 26 | Disk-usage report | — | ⚪️ | ✅ | — |
 | 27 | macOS UI maintenance — QuickLook + font caches | ✅† | 🟢 | — | — |
 
-\* Sudo only when removing items under `/Library/`.
+\* Section 4 preserves volumes by default. Its separate, interactive-only volume prune permanently deletes their data. Section 25 needs sudo only when removing items under `/Library/`; batch removal requires both `--yes` and `--i-understand-deep`.
 † Sudo only for the optional system-wide font-cache clear. Menu / `--only` only.
 
 ## Read-only sections
 
 These write a dated `.txt` to `~/.mac-cleanup/reports/` and delete nothing.
-`--profile audit` bundles them.
+`--profile audit` includes these and sections 12 and 21, which can move items
+to the Trash when confirmed, and section 25, which can remove launch items.
 
 ### Section 0 — System health and process monitor
 
@@ -83,15 +84,24 @@ Everything ≥ 500 MB under `$HOME`. Unlike section 24 this applies **no age
 filter**, so it is the right section when you want to see big files regardless
 of when you last opened them.
 
-### Section 25 — LaunchAgents / LaunchDaemons audit
-
-Finds orphaned login items — launch entries whose target no longer exists. Only
-needs sudo if you choose to remove something under `/Library/`.
-
 ### Section 26 — Disk-usage report
 
 Per-directory usage for `$HOME` and `~/Library`. Usually the fastest answer to
 "where did my disk go".
+
+## Audit with optional removal
+
+### Section 25 — LaunchAgents / LaunchDaemons audit
+
+Finds orphaned login items — launch entries whose target no longer exists.
+Interactive runs let you select plists to unload and permanently remove. Batch
+runs stay report-only unless **both** `--yes` and `--i-understand-deep` are
+present; that combination selects every reported stale item. Removing an item
+under `/Library/` needs sudo. Use `--dry-run` to inspect the candidates first.
+
+Version 4.7.1 preserves spaces in a plist's structured program path, so an
+existing target under `Application Support` is not mistaken for an orphan.
+The audit skips an ambiguous raw string rather than guessing its path.
 
 ## Cache sections
 
@@ -117,8 +127,8 @@ Age-aware pruning of Gradle build caches and Android SDK build caches. Tuned by
 ### Section 3 — Package-manager caches
 
 npm, yarn, pnpm, Homebrew, pip, CocoaPods, cargo, go, Ruby and Flutter caches.
-Everything removed here is re-downloadable, which makes this the highest-value,
-lowest-risk section on most developer machines.
+The selected package caches can generally be downloaded again. Rebuilding them
+may take time or require a working network connection.
 
 `brew autoremove` is **off by default** and must be opted into with
 `--brew-autoremove` — it can uninstall formulae that are now considered unused
@@ -126,8 +136,10 @@ dependencies and break globally installed tools. See [Recovery](/recovery).
 
 ### Section 4 — Docker prune
 
-Prunes containers, images and volumes. The Docker daemon must be running or the
-section is skipped.
+Prunes unused containers, images, networks and build cache. Volumes are
+preserved by default. An interactive-only, separate typed-`yes` prompt offers
+to prune unused volumes; those can contain the only copy of a database. Batch
+mode skips volume pruning. The Docker daemon must be running.
 
 ### Section 5 — User caches
 
@@ -153,7 +165,8 @@ Only old files go. Sudo is needed for the system-log portion.
 
 ### Section 8 — Temp files
 
-Entries in `$TMPDIR`, `/tmp` and `~/tmp` — user-owned files only.
+Only user-owned, top-level regular files at least two days old in `$TMPDIR` and
+`/private/tmp`. Nested entries and `~/tmp` are left alone.
 
 ### Section 9 — Update caches
 
@@ -199,13 +212,12 @@ Counts, then empties `~/.Trash` after an explicit confirmation, and then the
 per-user trash on each mounted **external** volume — each with its own
 confirmation and size count. The boot volume and read-only mounts are skipped.
 
-:::danger This is irreversible
-Emptying the Trash also gives up the recovery option for anything sections 21
-and 24 moved there earlier in the same session.
+:::danger[This is irreversible]
+Emptying the Trash also gives up the recovery option for anything sections 12,
+21 and 24 moved there earlier in the same session.
 
-Section 10 is not in the `--all` safe batch, but it **is** in the `minimal`
-profile, and it is not one of the five deep-gated sections — so
-`--profile minimal --yes` will empty your Trash without asking again.
+Section 10 is not in `--all` or `minimal`. For an unattended run, select it
+explicitly and pass both `--yes` and `--i-understand-deep`.
 :::
 
 ### Section 11 — Time Machine local snapshots
@@ -220,11 +232,12 @@ immediately — it reclaims lazily, so an unchanged `df -h /` is expected.
 ### Section 12 — Orphaned app data
 
 Scans `~/Library` for application data whose parent app is no longer installed,
-and offers it for removal. Interactive.
+and offers to move it to the Trash. Interactive. A failed Finder move leaves
+the affected data in place.
 
 Subject to the [two-condition rule](/before-you-run/safety-model#the-two-condition-rule):
-an item is deleted automatically only when it is both unmatched by any
-installed app **and** untouched for at least `--idle-days` days.
+an item is offered only when it is both unmatched by any installed app
+**and** untouched for at least `--idle-days` days. You still select it.
 
 "Orphaned" is a heuristic. Review the list rather than confirming blind.
 

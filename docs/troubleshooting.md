@@ -201,8 +201,8 @@ sudo sections are 6, 7 (system logs), 9 (system updates), 11, 13, 14, 20, 25
 
 ### A deep section was refused in batch mode
 
-Also expected. Sections 6, 11, 14, 21 and 24 need `--i-understand-deep` **in
-addition to** `--yes` to run unattended:
+Also expected. Sections 6, 10, 11, 14, 21 and 24 need `--i-understand-deep`
+**in addition to** `--yes` to run unattended:
 
 ```bash
 mac-cleanup --only 21 --yes                       # refused, warns and skips
@@ -221,10 +221,9 @@ Open **System Settings → Privacy & Security → Automation**, find your termin
 (Terminal, iTerm, Warp…), and allow it to control **Finder** and **System
 Events**.
 
-If you would rather not grant it, drop `--notify`. Section 21 then falls back
-to a direct removal instead of the Finder move-to-Trash — which means the
-uninstall is **no longer recoverable from the Trash**. Grant the permission if
-recoverability matters to you.
+`--notify` controls the completion notification, not Finder's Trash operation.
+If Finder access is denied, sections 12 and 21 warn and leave affected items
+in place. Grant the permission before retrying those sections.
 
 ## Logs and reports
 

@@ -13,7 +13,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // ---------------------------------------------------------------------------
 
 const SITE_URL = 'https://macleanup-docs.aoneahsan.com';
-const PKG_VERSION = '4.6.1';
+const PKG_VERSION = '4.7.1';
 
 // Optional analytics. Absent ⇒ provider skipped entirely (no tag, no init).
 const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID || '';
@@ -29,11 +29,12 @@ console.log(
 const config: Config = {
   title: 'macleanup',
   tagline:
-    'A safe-by-default macOS cleanup CLI — 28 targeted sections, every destructive action confirms first, and a real --dry-run.',
+    'A safe-by-default macOS cleanup CLI with 28 targeted sections, confirmation by default, and a dry run that deletes no files.',
   favicon: 'img/favicon.svg',
 
-  // Production URL — GitHub Pages on the custom domain macleanup-docs.aoneahsan.com,
-  // pinned by static/CNAME (copied verbatim into build/ by Docusaurus).
+  // Production URL — GitHub Pages on the custom domain macleanup-docs.aoneahsan.com.
+  // Repository Pages settings own the domain for Actions deployments;
+  // static/CNAME remains a matching build artifact.
   url: SITE_URL,
   baseUrl: '/',
 
@@ -203,6 +204,7 @@ const config: Config = {
             '**/*.test.{js,jsx,ts,tsx}',
             '**/__tests__/**',
             'MANUAL-TASKS.md',
+            'story/**',
           ],
         },
         blog: false,

@@ -7,28 +7,19 @@
 > `docusaurus.config.ts`. It must never become a public page. Verify after any build:
 > `find build -iname '*MANUAL*'` → must return nothing.
 >
-> **Last updated:** 2026-07-25
+> **Last updated:** 2026-10-26
 
 ## ⏳ Pending manual tasks
 
-| # | Task | Why only you | Details | Status |
-|---|------|--------------|---------|--------|
-| 1 | Create the GitHub repo `aoneahsan/macleanup-docs` (**public**) and push `main` | Repo creation + visibility is an owner decision | Public repo is required for GitHub Pages on the free plan | ☐ Not started |
-| 2 | Add the Hostinger DNS record: `CNAME` `macleanup-docs` → `aoneahsan.github.io` | DNS registrar access | Probe today returns `000` — the record does not exist yet. This is the expected pre-launch state | ☐ Not started |
-| 3 | Enable Pages with source = GitHub Actions | Repo settings | `gh api -X POST repos/aoneahsan/macleanup-docs/pages -f build_type=workflow` (409 = already enabled) | ☐ Not started |
-| 4 | Settings → Pages → set custom domain `macleanup-docs.aoneahsan.com`, then tick **Enforce HTTPS** | Repo settings + certificate issuance | ⚠️ Must be done **after** task 2 — GitHub rejects a domain it cannot validate (`The certificate does not exist yet`). Certificate issuance takes minutes to an hour after DNS propagates | ☐ Not started |
-| 5 | Apply the public-repo branch ruleset on `main` (PR + 1 approval + CI, no force-push/delete, bypass = Repository admin only) | Repo admin | Spec: `~/.claude/rules/public-repo-governance.md` | ☐ Not started |
-| 6 | Verify the live site after the first deploy | Needs the deploy to have happened | `curl -s -o /dev/null -w '%{http_code}' https://macleanup-docs.aoneahsan.com` → expect 200 | ☐ Not started |
+None for DNS or HTTPS. The site is reachable at `https://macleanup-docs.aoneahsan.com`.
 
 ## 📋 Owner decisions needed elsewhere (outside this repo's scope)
 
-These are **not** edits to this repo — they were out of the docs-site agent's exclusive scope and are
-recorded here so they are not lost:
+Reassess this as part of the next package release:
 
 | # | File | Change needed |
 |---|------|---------------|
-| 7 | `code/projects/project-live-urls.json` | Set the `macleanup` entry's `docsUrl` to `https://macleanup-docs.aoneahsan.com` (currently `""`) |
-| 8 | `utility-projects/macleanup/README.md` + `CLAUDE.md` + `AGENTS.md` | Add a Links entry pointing at the docs site |
+| 1 | `utility-projects/macleanup/README.md` + `CLAUDE.md` + `AGENTS.md` | Point public docs links at the now-live domain after the Story content and publication gates |
 
 ## 🔐 Optional — analytics secrets
 
@@ -40,6 +31,10 @@ If you want analytics, add these as repo **Actions secrets** (never as committed
 | `GA_MEASUREMENT_ID` | Google Analytics 4 |
 | `CLARITY_PROJECT_ID` | Microsoft Clarity |
 
-## ✅ Completed manual tasks
+## ✅ Completed setup
 
-(move rows here with the date once done)
+- 2026-07-25: Created and pushed the public `aoneahsan/macleanup-docs` repository. The GitHub Pages workflow deployed successfully.
+- 2026-10-23: Verified Pages uses GitHub Actions, its custom domain is already set to `macleanup-docs.aoneahsan.com`, and the active `main` ruleset requires a PR with owner bypass.
+- 2026-10-23: The owner added Hostinger CNAME `macleanup-docs` → `aoneahsan.github.io`; local DNS lookup confirmed it resolved. Certificate issuance was pending at that point and completed on 2026-10-26.
+- 2026-10-26: Removed and immediately re-added the same GitHub Pages custom domain to restart certificate provisioning, per GitHub's troubleshooting guide. Pages now reports `authorization_pending`; the HTTP site returns 200.
+- 2026-10-26: GitHub Pages approved the certificate; enabled Enforce HTTPS. The Pages API reports `https_enforced: true` and the HTTPS site returns HTTP 200 with a valid certificate.

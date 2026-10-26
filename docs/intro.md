@@ -14,20 +14,22 @@ files from your machine to reclaim disk space.** It ships as one bash script
 with twenty-eight numbered sections — developer caches, browser caches, system
 and user logs, temp files, orphaned application data, stale build artefacts,
 large dormant files, unused apps and several read-only reports. You pick which
-sections run; each destructive one asks before it acts, and `--dry-run` shows
-you every path it would remove without touching a thing.
+sections run; each destructive one asks by default before it acts, and
+`--dry-run` shows the planned cleanup without deleting files. It still writes
+its normal run log unless you choose a different log location.
 
 It is MIT-licensed, makes no network calls beyond an opt-in version check, and
 requires nothing but macOS 11+ and bash 3.2+.
 
-:::danger This tool deletes files
+:::danger[This tool deletes files]
 Deletion is the point of the tool, and most of it is **not reversible**.
-Cache and log removal is safe in the sense that the data regenerates — but a
-deleted `node_modules`, a purged Xcode archive, or an emptied Trash is gone.
+Many caches can regenerate, but logs may be needed for diagnosis. A deleted
+`node_modules`, a purged Xcode archive, or an emptied Trash may require a backup
+to recover.
 
 Before your first real run: read [What gets deleted](/before-you-run/what-gets-deleted),
-then preview with [`--dry-run`](/before-you-run/dry-run). Both take about five
-minutes and they are the difference between a cleanup and an incident.
+then preview with [`--dry-run`](/before-you-run/dry-run). Check the listed paths
+and recovery method before you confirm a destructive section.
 :::
 
 ## The thirty-second version
@@ -43,8 +45,8 @@ npx macleanup --list
 npx macleanup
 ```
 
-No install step is required — `npx` fetches the package, runs it, and npm
-reclaims the cache afterwards. Your logs and reports are written to
+No separate install step is required — `npx` fetches and runs the package. npm
+may retain its download cache. Your logs and reports are written to
 `~/.mac-cleanup/` and survive every invocation.
 
 ## What it is good at
@@ -54,7 +56,7 @@ reclaims the cache afterwards. Your logs and reports are written to
 | Reclaiming developer disk space | Sections 1–4 cover Xcode, Gradle/Android, package managers and Docker; section 23 sweeps stale `node_modules` and friends |
 | Emptying caches without losing settings | Browser caches are cleared per profile; bookmarks, history and passwords are not touched |
 | Uninstalling an app completely | Section 21 moves the app to the Trash and removes its known companion data, including Group Containers |
-| Auditing before deciding | Sections 0, 15, 18, 25 and 26 only produce reports — they delete nothing |
+| Auditing before deciding | Sections 0, 15, 18 and 26 only produce reports; section 25 reports stale launch items in batch mode unless both removal flags are set |
 | Scripted, repeatable cleanups | `--only`, `--profile`, `--yes`, `--quiet` and `--json` make it cron- and CI-friendly |
 
 ## What it is not
@@ -62,10 +64,12 @@ reclaims the cache afterwards. Your logs and reports are written to
 Honesty matters more here than in most tools, because the failure mode is lost
 data:
 
-- **It is not a backup tool, and it does not create restore points.** Take a
-  Time Machine snapshot (or `tmutil snapshot`) before a large run.
-- **It is not undoable.** There is no `macleanup --undo`. The only recovery
-  paths are the Trash (for apps and large stale files) and your own backup.
+- **It is not a backup tool, and it does not create restore points.** Keep a
+  verified external backup before a large run. A local Time Machine snapshot
+  can help with some recovery, but it is not a substitute for a separate backup.
+- **It is not undoable.** There is no `macleanup --undo`. Items moved by
+  sections 12, 21 and 24 may be restored from Trash until it is emptied;
+  directly deleted items need your own backup.
 - **It is not a Linux tool.** It reads macOS-specific paths and calls
   `tmutil`, `xcrun`, `dscacheutil`, `launchctl` and `osascript`. There is no
   Linux port and it refuses to start on a non-Darwin platform.
@@ -107,7 +111,7 @@ flowchart LR
 
 | | |
 |---|---|
-| Package | [`macleanup` on npm](https://www.npmjs.com/package/macleanup) — current documented version **4.6.1** |
+| Package | [`macleanup` on npm](https://www.npmjs.com/package/macleanup) — current documented version **4.7.1** |
 | Commands installed | `mac-cleanup` and `macleanup` (identical) |
 | Source | [github.com/aoneahsan/macleanup](https://github.com/aoneahsan/macleanup) |
 | Requirements | macOS 11+, bash 3.2+; Node only if you use `npx` or a global npm install |

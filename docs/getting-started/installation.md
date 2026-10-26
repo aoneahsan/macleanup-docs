@@ -45,7 +45,7 @@ To force the newest published version, bypassing a stale npx cache:
 npx macleanup@latest --version
 ```
 
-:::tip Your logs and reports are never inside the npx cache
+:::tip[Your logs and reports are never inside the npx cache]
 They are written to `~/.mac-cleanup/{logs,reports}/` in your home directory, so
 they survive every `npx` invocation and the cache reclaim that follows it. See
 [Reports and logs](/reference/reports-and-logs).

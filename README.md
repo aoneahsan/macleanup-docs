@@ -19,7 +19,7 @@ Built with [Docusaurus](https://docusaurus.io), deployed to **GitHub Pages** on 
 <a id="local-development"></a>
 ## 🚀 Local development&nbsp;[#](#local-development)
 
-Requires Node 18+ and Yarn 4 (via Corepack).
+Requires Node 22+ and Yarn 4 (via Corepack). `.nvmrc` selects Node 24 LTS.
 
 ```bash
 corepack enable

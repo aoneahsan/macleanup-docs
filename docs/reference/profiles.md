@@ -22,14 +22,14 @@ mac-cleanup --profile deep --exclude 14,17 --yes
 
 | Profile | Sections | Deletes permanently? | When to use |
 |---|---|:-:|---|
-| `audit` | `0, 12, 18, 21, 25, 26` | reports only, but see below | Find out where the disk went, before deciding anything |
+| `audit` | `0, 12, 18, 21, 25, 26` | optional Trash moves and launch-item removal if confirmed | Find out where the disk went, before deciding anything |
 | `dev` | `1, 2, 3, 4, 23` | ⚠️ yes — section 23 | Reclaim developer-tool caches and stale `node_modules` |
-| `minimal` | `5, 7, 8, 9, 10` | ⚠️ yes — section 10 | A quick weekly sweep |
-| `cache-only` | `3, 5, 6, 7, 9, 19` | no | Every cache layer and nothing else |
+| `minimal` | `5, 7, 8, 9` | no | A quick weekly sweep that leaves Trash alone |
+| `cache-only` | `3, 5, 6, 7, 9, 19` | direct log and cache removal | Cache and log layers |
 | `deep` | `0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 19, 23, 26` | ⚠️ yes — sections 17 and 23 | A big monthly cleanup |
 
-:::warning "Profile" does not mean "safe"
-Three of the five include a section that deletes permanently. Run any profile
+:::warning["Profile" does not mean "safe"]
+Two of the five include a section that deletes permanently. Run any profile
 with `--dry-run` before you run it with `--yes`.
 :::
 
@@ -43,11 +43,11 @@ Sections `0, 12, 18, 21, 25, 26`: system health, orphaned app data, large
 files, idle apps, the LaunchAgents audit and a disk-usage report. Writes dated
 `.txt` files to `~/.mac-cleanup/reports/`.
 
-Sections 0, 18, 25 and 26 are pure reports. Sections **12 and 21 are
-interactive and can delete** — 12 permanently, 21 to the Trash — so the profile
-is read-only in the sense that it deletes nothing on its own, and you can still
-confirm a deletion inside it. Section 21 is deep-gated, so it cannot delete
-unattended without `--i-understand-deep`.
+Sections 0, 18 and 26 are pure reports. Sections **12 and 21 can move data to
+the Trash** when confirmed. Section 25 can permanently remove selected launch
+items. In batch mode it stays report-only unless both `--yes` and
+`--i-understand-deep` are supplied; that combination removes every candidate.
+Section 21 also needs both flags to run unattended.
 
 Add `--dry-run` if you want a guaranteed look-only pass:
 
@@ -66,7 +66,9 @@ mac-cleanup --profile dev --dry-run
 Sections `1, 2, 3, 4, 23`: Xcode, Gradle/Android, package managers, Docker, and
 stale build artefacts.
 
-The first four are regenerable caches. **Section 23 permanently deletes build
+The first three cover developer caches. Section 4 also offers interactive
+Docker volume pruning, which can permanently delete database data; batch mode
+skips that offer. **Section 23 permanently deletes build
 directories** — `node_modules`, `vendor`, `dist`, `.next`, `target`, `Pods` —
 that have been untouched for `--stale-build-days` days. Combine with a tighter
 threshold and protected paths:
@@ -76,7 +78,9 @@ mac-cleanup --profile dev --stale-build-days 120 \
   --exclude-path "$HOME/Code/active-client" --dry-run
 ```
 
-Or drop section 23 entirely for a pure cache pass:
+Or drop section 23 entirely for a developer maintenance pass without build
+directory deletion. In interactive mode, section 4 still offers an optional
+Docker volume prune; decline it if the volumes matter:
 
 ```bash
 mac-cleanup --profile dev --exclude 23 --yes
@@ -88,19 +92,9 @@ mac-cleanup --profile dev --exclude 23 --yes
 mac-cleanup --profile minimal --dry-run
 ```
 
-Sections `5, 7, 8, 9, 10`: user caches, logs, temp files, update caches, and
-**empty Trash**.
-
-:::danger `--profile minimal --yes` empties your Trash
-Section 10 is a permanent deletion, and it is **not** one of the five
-deep-gated sections — so `--yes` auto-confirms it with no further prompt.
-
-If that is not what you want, subtract it:
-
-```bash
-mac-cleanup --profile minimal --exclude 10 --yes
-```
-:::
+Sections `5, 7, 8, 9`: user caches, logs, old top-level temp files and update
+caches. This profile does not empty Trash. Section 10 requires an explicit
+selection and both `--yes` and `--i-understand-deep` when run unattended.
 
 ## `cache-only` — every cache layer
 
@@ -111,7 +105,8 @@ mac-cleanup --profile cache-only --dry-run
 Sections `3, 5, 6, 7, 9, 19`: package managers, user caches, system caches
 (sudo), logs, update caches and browser caches.
 
-The only profile where everything removed regenerates on its own. Section 6
+This profile focuses on caches and logs, but deleted logs and saved window state
+may be unique. Section 6
 needs sudo and is deep-gated, so unattended runs need `--i-understand-deep`, or
 skip it:
 

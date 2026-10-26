@@ -27,7 +27,7 @@
         transform="translate(0, -7)"/>
 
   <text x="248" y="176" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="#FFFFFF">macleanup</text>
-  <text x="248" y="222" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="27" font-weight="500" fill="#19D3C5">macOS cleanup &amp; maintenance CLI · v4.6.1 · MIT</text>
+  <text x="248" y="222" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="27" font-weight="500" fill="#19D3C5">macOS cleanup &amp; maintenance CLI · v4.7.1 · MIT</text>
 
   <text x="80" y="330" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="40" font-weight="600" fill="#E6F4FF">28 targeted sections. Every destructive</text>
   <text x="80" y="384" font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif" font-size="40" font-weight="600" fill="#E6F4FF">action confirms before it runs.</text>

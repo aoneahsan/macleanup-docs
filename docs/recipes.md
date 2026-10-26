@@ -42,7 +42,7 @@ cleanup blind.
 # Preview the whole developer bundle
 mac-cleanup --profile dev --dry-run
 
-# Caches only — nothing permanent, everything re-downloadable
+# Developer caches and Docker prune; Docker volume deletion has a separate prompt
 mac-cleanup --only "1,2,3,4" --dry-run
 
 # Xcode alone: DerivedData, DeviceSupport, simulator leftovers
@@ -51,7 +51,7 @@ mac-cleanup --only 1 --dry-run
 # Package-manager caches with a tighter age threshold
 mac-cleanup --only 3 --cache-age-days 30 --dry-run
 
-# Docker: containers, images, volumes (daemon must be running)
+# Docker: containers, images and build cache; volumes require a separate interactive yes
 mac-cleanup --only 4 --dry-run
 ```
 
@@ -73,7 +73,7 @@ mac-cleanup --only 23 \
   --stale-build-days 120 --dry-run
 ```
 
-:::warning Reinstallable is not the same as guaranteed
+:::warning[Reinstallable is not the same as guaranteed]
 A deleted `node_modules` comes back only while the lockfile resolves and the
 registry still serves those versions. For a repo you are actively shipping,
 protect it with `--exclude-path`.
@@ -112,7 +112,7 @@ mac-cleanup --only 21 --threshold 180
 The interactive run supports multi-select — `all`, `1,3,5-7,12`, or `none`.
 Apps and their companion data move to the Trash.
 
-:::danger Unattended uninstall
+:::danger[Unattended uninstall]
 `mac-cleanup --only 21 --yes --i-understand-deep` moves **every** idle app to
 the Trash with no further prompt. Preview first, always.
 :::
@@ -139,7 +139,7 @@ mac-cleanup --only "1,17" --dry-run
 Section 1 clears DerivedData and simulator leftovers; section 17 offers Xcode
 archives for review.
 
-:::note Archives hold your dSYMs
+:::note[Archives hold your dSYMs]
 Deleting the archive for a build you already shipped means its crash reports
 can no longer be symbolicated. Keep the archives for live releases.
 :::
@@ -153,6 +153,9 @@ mac-cleanup --only 25
 Finds LaunchAgents and LaunchDaemons whose target no longer exists — a common
 cause of slow logins and mysterious background processes. Sudo is only needed
 if you choose to remove something under `/Library/`.
+In batch mode, the command above reports candidates without removing them.
+Removing them unattended requires both `--yes` and `--i-understand-deep` and
+selects every candidate, so preview with `--dry-run` first.
 
 ## Automate a routine sweep
 

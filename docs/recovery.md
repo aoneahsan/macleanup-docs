@@ -10,7 +10,7 @@ keywords: [macleanup broke my tools, restore bun pnpm after cleanup, macleanup 4
 # Recovery
 
 **macleanup has no undo.** The Trash is the only built-in second chance, and it
-covers only sections 21 and 24. Everything else is restored from a backup, or
+covers only sections 12, 21 and 24. Everything else is restored from a backup, or
 by reinstalling.
 
 This page covers the general recovery paths, and then the specific v4.3.0
@@ -18,7 +18,7 @@ incident that gave section 23 its safety rails.
 
 ## First: check the Trash
 
-Sections 21 (app uninstall) and 24 (large stale files) **move** items rather
+Sections 12 (orphaned app data), 21 (app uninstall) and 24 (large stale files) **move** items rather
 than deleting them. If you have not emptied the Trash — including via section
 10 in the same session — open it and put them back:
 
@@ -29,11 +29,10 @@ open ~/.Trash
 In Finder, right-click an item and choose **Put Back** to restore it to its
 original location.
 
-:::caution Two things break this
-Emptying the Trash, and the `osascript` Automation permission being denied. In
-the second case section 21 falls back to a direct removal instead of the Finder
-move-to-Trash, so nothing lands in the Trash at all. See
-[Troubleshooting](/troubleshooting).
+:::warning[Finder permission matters]
+Emptying the Trash ends recovery. If macOS denies Finder Automation access,
+sections 12 and 21 leave affected items in place and warn; they do not fall
+back to direct deletion. See [Troubleshooting](/troubleshooting).
 :::
 
 ## Then: check your snapshots
@@ -59,7 +58,6 @@ that does not exist:
 |---|---|
 | Section 10 — emptied Trash | No. Backup only |
 | Section 11 — Time Machine local snapshots | No |
-| Section 12 — orphaned app data | No |
 | Section 14 — `/private/var/folders` | No, and it is meant to be transient. Reboot |
 | Section 16 — iOS device backups | No. Re-back-up the device if you still have it |
 | Section 17 — Xcode archives | No. A shipped build's crashes can no longer be symbolicated |

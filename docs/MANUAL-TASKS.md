@@ -7,7 +7,7 @@
 > `docusaurus.config.ts`. It must never become a public page. Verify after any build:
 > `find build -iname '*MANUAL*'` → must return nothing.
 >
-> **Last updated:** 2026-10-26
+> **Last updated:** 2026-10-29
 
 ## ⏳ Pending manual tasks
 
@@ -19,7 +19,7 @@ Reassess this as part of the next package release:
 
 | # | File | Change needed |
 |---|------|---------------|
-| 1 | `utility-projects/macleanup/README.md` + `CLAUDE.md` + `AGENTS.md` | Point public docs links at the now-live domain after the Story content and publication gates |
+| 1 | `code/macleanup-root/macleanup/README.md` + `CLAUDE.md` + `AGENTS.md` | Point public docs links at the now-live domain after the Story content and publication gates |
 
 ## 🔐 Optional — analytics secrets
 

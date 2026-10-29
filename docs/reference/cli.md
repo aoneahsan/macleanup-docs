@@ -4,18 +4,18 @@ description: Every macleanup command-line flag — selection, confirmation, thre
 tags: [reference, cli, flags, options]
 sidebar_position: 1
 sidebar_label: CLI reference
-keywords: [macleanup flags, mac-cleanup options, macleanup cli reference, dry-run, only, profile]
+keywords: [macleanup flags, macleanup options, macleanup cli reference, dry-run, only, profile]
 ---
 
 # CLI reference
 
 **Every flag macleanup accepts, what it does, and when to use it.** The flag
 set is identical however you invoke the tool — `npx macleanup`, the global
-`mac-cleanup` binary and a direct `./mac-cleanup.sh` all parse the same
+`macleanup` binary and a direct `./macleanup.sh` all parse the same
 arguments.
 
 ```
-mac-cleanup [options]
+macleanup [options]
 ```
 
 With no options, macleanup prints a one-time welcome (first run on a machine)
@@ -51,8 +51,8 @@ Both `--flag value` and `--flag=value` forms are accepted (the `=` form since
 | `--large-file-size-gb N` | int | 1 | Minimum large-file size in GB (section 24) |
 | `--scan-roots "P1:P2"` | string | auto | Roots for sections 23 and 24 |
 | `--exclude-path PATH` | string, repeatable | — | Never touch PATH or its subtree in 23 / 24 |
-| `--logs-dir PATH` | string | `~/.mac-cleanup/logs` | Persistent logs directory |
-| `--reports-dir PATH` | string | `~/.mac-cleanup/reports` | Persistent reports directory |
+| `--logs-dir PATH` | string | `~/.macleanup/logs` | Persistent logs directory |
+| `--reports-dir PATH` | string | `~/.macleanup/reports` | Persistent reports directory |
 | `--no-reports` | switch | off | Skip writing per-section reports |
 | `--cleanup-logs-on-finish` | switch | off | Delete this run's log on exit |
 | `--list` | switch | off | List sections and exit |
@@ -60,9 +60,9 @@ Both `--flag value` and `--flag=value` forms are accepted (the `=` form since
 | `--contact` | switch | off | Print the author contact card |
 | `--feedback` | switch | off | Open mail client with a prefilled message |
 | `--report-issue`, `--report-bug` | switch | off | Open a pre-filled GitHub issue |
-| `--stats` | switch | off | Show run history under `~/.mac-cleanup` |
+| `--stats` | switch | off | Show run history under `~/.macleanup` |
 | `--prune-history [N]` | int | 90 | Delete logs and reports older than N days |
-| `--uninstall-data` | switch | off | Remove the entire `~/.mac-cleanup` directory |
+| `--uninstall-data` | switch | off | Remove the entire `~/.macleanup` directory |
 | `-h`, `--help` | switch | off | Show help and exit |
 
 ## Selection — what runs
@@ -82,9 +82,9 @@ sections 6, 10, 11, 14, 21 or 24 unattended, select them explicitly and pass
 both `--yes` and [`--i-understand-deep`](#i-understand-deep).
 
 ```bash
-mac-cleanup --all             # safe batch, batch mode
-mac-cleanup --all --yes       # unattended safe batch
-mac-cleanup --all --dry-run   # preview it
+macleanup --all             # safe batch, batch mode
+macleanup --all --yes       # unattended safe batch
+macleanup --all --dry-run   # preview it
 ```
 
 :::note[Section 13 left the safe batch in 4.5.0]
@@ -98,9 +98,9 @@ Run **only** the listed sections. `L` is a comma-separated list of numbers
 0–27. Whitespace is fine; out-of-range numbers are ignored.
 
 ```bash
-mac-cleanup --only 5                        # one section
-mac-cleanup --only "1,2,3,4"                # the dev-cache quartet
-mac-cleanup --only 23 --stale-build-days 90 --dry-run
+macleanup --only 5                        # one section
+macleanup --only "1,2,3,4"                # the dev-cache quartet
+macleanup --only 23 --stale-build-days 90 --dry-run
 ```
 
 ### `--exclude "L"` {#exclude}
@@ -109,8 +109,8 @@ Skip the listed sections. Applied **on top of** `--all`, `--only` or
 `--profile`.
 
 ```bash
-mac-cleanup --profile deep --exclude 14      # deep preset, minus the reboot one
-mac-cleanup --all --exclude "10,11"
+macleanup --profile deep --exclude 14      # deep preset, minus the reboot one
+macleanup --all --exclude "10,11"
 ```
 
 ### `--profile NAME` {#profile}
@@ -119,8 +119,8 @@ Run a named bundle: `dev`, `minimal`, `cache-only`, `deep` or `audit`. Combine
 with `--exclude` to subtract. Full detail: [Profiles](/reference/profiles).
 
 ```bash
-mac-cleanup --profile dev --dry-run
-mac-cleanup --profile deep --exclude 14,17 --yes
+macleanup --profile dev --dry-run
+macleanup --profile deep --exclude 14,17 --yes
 ```
 
 ## Confirmation and behaviour
@@ -135,9 +135,9 @@ gate is independent.
 in batch mode; the tool warns and skips.
 
 ```bash
-mac-cleanup --all --yes                          # unattended safe batch
-mac-cleanup --only 21 --yes --dry-run            # preview only
-mac-cleanup --only 21 --yes --i-understand-deep  # actually uninstalls idle apps
+macleanup --all --yes                          # unattended safe batch
+macleanup --only 21 --yes --dry-run            # preview only
+macleanup --only 21 --yes --i-understand-deep  # actually uninstalls idle apps
 ```
 
 ### `--i-understand-deep` {#i-understand-deep}
@@ -163,8 +163,8 @@ its stale launch-item candidates unattended, supply both `--yes` and
 `--i-understand-deep`; that selects every candidate.
 
 ```bash
-mac-cleanup --only 14 --yes --i-understand-deep
-mac-cleanup --profile deep --yes --i-understand-deep
+macleanup --only 14 --yes --i-understand-deep
+macleanup --profile deep --yes --i-understand-deep
 ```
 
 :::danger[`--only 21 --yes --i-understand-deep` uninstalls without asking]
@@ -184,8 +184,8 @@ it never attempts privilege elevation, so previewing a sudo section does not
 prompt for a password.
 
 ```bash
-mac-cleanup --dry-run --all
-mac-cleanup --only 23 --dry-run
+macleanup --dry-run --all
+macleanup --only 23 --dry-run
 ```
 
 See [Preview with `--dry-run`](/before-you-run/dry-run).
@@ -199,7 +199,7 @@ Sudo sections: 6, 7 (system logs), 9 (system updates), 11, 13, 14, 20, 25
 (system LaunchAgents), 27 (optional system font-cache clear only).
 
 ```bash
-mac-cleanup --all --no-sudo
+macleanup --all --no-sudo
 ```
 
 ### `--quiet` {#quiet}
@@ -215,15 +215,15 @@ object. Implies `--quiet`.
 
 ```json
 {
-  "tool": "mac-cleanup",
-  "version": "4.7.1",
+  "tool": "macleanup",
+  "version": "5.0.0",
   "dry_run": false,
   "freed_kb": 1048576,
   "disk_free_delta_kb": 1310720,
   "elapsed_s": 42,
   "sections_done": [3, 5, 7],
-  "reports": ["/Users/you/.mac-cleanup/reports/orphans-2026-06-08.txt"],
-  "log_file": "/Users/you/.mac-cleanup/logs/mac-cleanup-2026-06-08.log"
+  "reports": ["/Users/you/.macleanup/reports/orphans-2026-06-08.txt"],
+  "log_file": "/Users/you/.macleanup/logs/macleanup-2026-06-08.log"
 }
 ```
 
@@ -235,7 +235,7 @@ object. Implies `--quiet`.
 | `reports` | Report files written **by this run** (since 4.6.1 it no longer lists older files in the same directory) |
 
 ```bash
-mac-cleanup --all --yes --json | jq .freed_kb
+macleanup --all --yes --json | jq .freed_kb
 ```
 
 ### `--no-color` {#no-color}
@@ -287,8 +287,8 @@ only when **both** its atime and mtime are at least N days old. `0` disables
 the filter — a full wipe.
 
 ```bash
-mac-cleanup --only 3 --cache-age-days 30
-mac-cleanup --only 3 --cache-age-days 0     # full wipe
+macleanup --only 3 --cache-age-days 30
+macleanup --only 3 --cache-age-days 0     # full wipe
 ```
 
 ### `--idle-days N` {#idle-days}
@@ -334,7 +334,7 @@ for one**. It will not silently fall back to scanning all of `$HOME` — that wa
 the [v4.3.0 bug](/recovery).
 
 ```bash
-mac-cleanup --only 23 --scan-roots "$HOME/repos:$HOME/code" --dry-run
+macleanup --only 23 --scan-roots "$HOME/repos:$HOME/code" --dry-run
 ```
 
 ### `--exclude-path PATH` {#exclude-path}
@@ -344,7 +344,7 @@ Enforced as a literal-path plus subtree guard, on top of the always-on
 `CRITICAL_HOME_DIRS` protection.
 
 ```bash
-mac-cleanup --only 23 \
+macleanup --only 23 \
   --exclude-path "$HOME/Code/active-project" \
   --exclude-path "$HOME/Code/client-work" --dry-run
 ```
@@ -353,13 +353,13 @@ mac-cleanup --only 23 \
 
 ### `--logs-dir PATH` {#logs-dir}
 
-Persistent logs directory. Default `$HOME/.mac-cleanup/logs`. Today's log is
-`mac-cleanup-YYYY-MM-DD.log`. Env var: `MAC_CLEANUP_LOGS_DIR`.
+Persistent logs directory. Default `$HOME/.macleanup/logs`. Today's log is
+`macleanup-YYYY-MM-DD.log`. Env var: `MACLEANUP_LOGS_DIR`.
 
 ### `--reports-dir PATH` {#reports-dir}
 
-Persistent reports directory. Default `$HOME/.mac-cleanup/reports`. Env var:
-`MAC_CLEANUP_REPORTS_DIR`. See [Reports and logs](/reference/reports-and-logs).
+Persistent reports directory. Default `$HOME/.macleanup/reports`. Env var:
+`MACLEANUP_REPORTS_DIR`. See [Reports and logs](/reference/reports-and-logs).
 
 ### `--no-reports` {#no-reports}
 
@@ -404,22 +404,22 @@ last 50 log lines are copied to your clipboard.
 
 ### `--stats` {#stats}
 
-A read-only summary of `~/.mac-cleanup/`: directory location, log count and
+A read-only summary of `~/.macleanup/`: directory location, log count and
 size, oldest and newest log, report count and size, the 8 most recent reports.
 
 ### `--prune-history [N]` {#prune-history}
 
 Delete logs and reports older than N days from both subdirectories of
-`~/.mac-cleanup`. `N` defaults to `90`. Honours `--dry-run`.
+`~/.macleanup`. `N` defaults to `90`. Honours `--dry-run`.
 
 ```bash
-mac-cleanup --prune-history 30 --dry-run
-mac-cleanup --prune-history
+macleanup --prune-history 30 --dry-run
+macleanup --prune-history
 ```
 
 ### `--uninstall-data` {#uninstall-data}
 
-Remove the entire `~/.mac-cleanup` directory — logs, reports and the first-run
+Remove the entire `~/.macleanup` directory — logs, reports and the first-run
 marker — after a literal-`yes` confirmation. Honours `--dry-run`.
 
 ### `-h`, `--help` {#help}

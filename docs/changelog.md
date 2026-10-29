@@ -4,7 +4,7 @@ description: What changed in each macleanup release — the safety fixes, the tw
 tags: [changelog, releases, versions, history]
 sidebar_position: 6
 sidebar_label: Release history
-keywords: [macleanup changelog, macleanup versions, macleanup 4.7.1, macleanup 4.3.1 safety fix]
+keywords: [macleanup changelog, macleanup versions, macleanup 5.0.0, macleanup 4.7.1, macleanup 4.3.1 safety fix]
 ---
 
 # Release history
@@ -14,13 +14,30 @@ changelog lives with the source:
 [CHANGELOG.md](https://github.com/aoneahsan/macleanup/blob/main/CHANGELOG.md).
 Versions follow [semantic versioning](https://semver.org).
 
-This documentation describes **4.7.1**. Verify the published version with
-`mac-cleanup --check-update` before installing or updating.
+This documentation describes **5.0.0**. Verify the published version with
+`macleanup --check-update` before installing or updating.
 
 ```bash
-mac-cleanup --version        # what you have
-mac-cleanup --check-update   # what is published
+macleanup --version        # what you have
+macleanup --check-update   # what is published
 ```
+
+Entries before 5.0.0 use the names that were current at the time.
+
+## 5.0.0 — one name: macleanup
+
+- The command, script, data folder, config file and environment variables all
+  use one name: `macleanup`, `macleanup.sh`, `~/.macleanup/`, `~/.macleanuprc`
+  and `MACLEANUP_*`. Run it as `macleanup` or `npx macleanup`.
+- The second command name that earlier versions installed is gone. Scripts
+  and shell aliases that called it need to call `macleanup` instead.
+- The first 5.x run copies an existing 4.x data folder into `~/.macleanup/` and
+  leaves the original in place. The 4.x config file and environment variable
+  names are still read for 5.x, with a note asking you to rename them.
+- The package no longer declares a `main` entry, so importing `macleanup` from
+  Node fails instead of starting the cleanup tool.
+
+See [Upgrading to 5.0](./getting-started/upgrading-to-5.md) for the full table.
 
 ## 4.7.1 — launch-item audit correction
 

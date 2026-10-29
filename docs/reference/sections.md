@@ -4,7 +4,7 @@ description: Every macleanup section from 0 to 27 — what it removes, whether i
 tags: [reference, sections, macos, cleanup, sudo]
 sidebar_position: 2
 sidebar_label: The 28 sections
-keywords: [macleanup sections, mac-cleanup section 23, section 21 uninstall, macleanup section list]
+keywords: [macleanup sections, macleanup section 23, section 21 uninstall, macleanup section list]
 ---
 
 # The 28 sections
@@ -16,7 +16,7 @@ as part of `--all` / `--profile`.
 Print the live catalogue at any time:
 
 ```bash
-mac-cleanup --list
+macleanup --list
 ```
 
 ## Legend
@@ -66,7 +66,7 @@ mac-cleanup --list
 
 ## Read-only sections
 
-These write a dated `.txt` to `~/.mac-cleanup/reports/` and delete nothing.
+These write a dated `.txt` to `~/.macleanup/reports/` and delete nothing.
 `--profile audit` includes these and sections 12 and 21, which can move items
 to the Trash when confirmed, and section 25, which can remove launch items.
 

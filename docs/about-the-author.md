@@ -30,10 +30,10 @@ Three flags, all local-first. Nothing is auto-sent — you review every prefille
 message before submitting it.
 
 ```bash
-mac-cleanup --contact         # the author contact card
-mac-cleanup --feedback        # opens your mail client, prefilled
-mac-cleanup --report-issue    # opens a pre-filled GitHub issue
-mac-cleanup --stats           # your run history under ~/.mac-cleanup
+macleanup --contact         # the author contact card
+macleanup --feedback        # opens your mail client, prefilled
+macleanup --report-issue    # opens a pre-filled GitHub issue
+macleanup --stats           # your run history under ~/.macleanup
 ```
 
 `--report-issue` gathers the version, macOS version and chip, RAM, bash and
@@ -48,10 +48,10 @@ If a run exits with an error, the script prints a hint pointing at
 
 Open an issue at
 [github.com/aoneahsan/macleanup/issues](https://github.com/aoneahsan/macleanup/issues),
-ideally via `mac-cleanup --report-issue` so the environment details come along.
+ideally via `macleanup --report-issue` so the environment details come along.
 
 A good report names the version, the exact command, what you expected, what
-happened, and the relevant log lines from `~/.mac-cleanup/logs/`.
+happened, and the relevant log lines from `~/.macleanup/logs/`.
 
 ## Reporting a security issue
 
@@ -71,7 +71,7 @@ though acceptance is at the author's sole discretion. See
 and the
 [Code of Conduct](https://github.com/aoneahsan/macleanup/blob/main/CODE_OF_CONDUCT.md).
 
-The whole tool is two readable files — `mac-cleanup.sh` in plain bash and a
+The whole tool is two readable files — `macleanup.sh` in plain bash and a
 short Node launcher — so a first contribution does not require learning a build
 system.
 

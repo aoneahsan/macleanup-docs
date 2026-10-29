@@ -65,10 +65,10 @@ npx macleanup --profile audit --dry-run
 The `audit` profile is sections `0, 12, 18, 21, 25, 26`: system health,
 orphaned app data, large files, idle apps, the LaunchAgents audit and a
 disk-usage report. `--dry-run` guarantees this first pass deletes nothing.
-It can still write dated `.txt` files to `~/.mac-cleanup/reports/`.
+It can still write dated `.txt` files to `~/.macleanup/reports/`.
 
 ```bash
-open ~/.mac-cleanup/reports/
+open ~/.macleanup/reports/
 ```
 
 These reports tell you where your disk actually went, which is usually more
@@ -135,13 +135,13 @@ Once you know which sections suit your machine, pick a cadence:
 
 ```bash
 # Weekly, mostly safe. Preview it once before adding --yes.
-mac-cleanup --profile minimal --dry-run
+macleanup --profile minimal --dry-run
 
 # Developer caches plus stale build dirs
-mac-cleanup --profile dev --dry-run
+macleanup --profile dev --dry-run
 
 # Unattended, after you have validated the exact command
-mac-cleanup --all --yes --quiet --notify
+macleanup --all --yes --quiet --notify
 ```
 
 :::warning[Check a profile before automating it]
@@ -154,9 +154,9 @@ More ready-made commands: [Recipes](/recipes).
 ## What you now have on disk
 
 ```
-~/.mac-cleanup/
+~/.macleanup/
 ├── logs/
-│   └── mac-cleanup-YYYY-MM-DD.log
+│   └── macleanup-YYYY-MM-DD.log
 └── reports/
     ├── orphans-YYYY-MM-DD.txt
     ├── unused-apps-YYYY-MM-DD.txt
@@ -167,8 +167,8 @@ More ready-made commands: [Recipes](/recipes).
 Logs are kept indefinitely and are small. Prune them when you like:
 
 ```bash
-mac-cleanup --prune-history 30 --dry-run   # preview
-mac-cleanup --prune-history 30             # delete logs+reports older than 30 days
+macleanup --prune-history 30 --dry-run   # preview
+macleanup --prune-history 30             # delete logs+reports older than 30 days
 ```
 
 ## If something went wrong
@@ -177,7 +177,7 @@ mac-cleanup --prune-history 30             # delete logs+reports older than 30 d
 - A command errored or behaved unexpectedly → [Troubleshooting](/troubleshooting)
 - A section found nothing you expected it to find → [FAQ](/faq)
 
-`mac-cleanup --report-issue` opens a pre-filled GitHub issue with locally
+`macleanup --report-issue` opens a pre-filled GitHub issue with locally
 gathered environment info. Nothing is transmitted until you press Submit.
 
 ## Next

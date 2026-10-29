@@ -60,8 +60,8 @@ trigger an irreversible operation.
 
 ### 6. Every run is logged
 
-A dated log lands in `~/.mac-cleanup/logs/`, and the sections that produce
-lists write dated `.txt` reports to `~/.mac-cleanup/reports/`. Both live in
+A dated log lands in `~/.macleanup/logs/`, and the sections that produce
+lists write dated `.txt` reports to `~/.macleanup/reports/`. Both live in
 your home directory, outside any npx cache, and survive every invocation. See
 [Reports and logs](/reference/reports-and-logs).
 
@@ -140,7 +140,7 @@ npx macleanup --only 23 \
 
 The script makes **no network calls by default**. The Node launcher only spawns bash — no
 analytics, no crash reporting, no phone-home. Logs and reports never leave
-`~/.mac-cleanup/`.
+`~/.macleanup/`.
 
 The one exception is opt-in: `--check-update` makes a single unauthenticated
 `GET` to `https://registry.npmjs.org/macleanup/latest` to compare versions. It

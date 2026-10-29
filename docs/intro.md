@@ -47,7 +47,7 @@ npx macleanup
 
 No separate install step is required — `npx` fetches and runs the package. npm
 may retain its download cache. Your logs and reports are written to
-`~/.mac-cleanup/` and survive every invocation.
+`~/.macleanup/` and survive every invocation.
 
 ## What it is good at
 
@@ -87,10 +87,10 @@ flowchart LR
   A["You choose sections<br/>menu · --only · --profile · --all"] --> B{"--dry-run?"}
   B -- yes --> C["Print what would be removed<br/>estimate freed space<br/>delete nothing"]
   B -- no --> D{"Destructive section?"}
-  D -- no --> E["Run report<br/>write .txt to ~/.mac-cleanup/reports/"]
+  D -- no --> E["Run report<br/>write .txt to ~/.macleanup/reports/"]
   D -- yes --> F{"Confirmed?<br/>prompt · --yes · --i-understand-deep"}
   F -- no --> G["Skip the section"]
-  F -- yes --> H["Delete · or move to Trash<br/>log to ~/.mac-cleanup/logs/"]
+  F -- yes --> H["Delete · or move to Trash<br/>log to ~/.macleanup/logs/"]
 ```
 
 ## Where to go next
@@ -111,8 +111,8 @@ flowchart LR
 
 | | |
 |---|---|
-| Package | [`macleanup` on npm](https://www.npmjs.com/package/macleanup) — current documented version **4.7.1** |
-| Commands installed | `mac-cleanup` and `macleanup` (identical) |
+| Package | [`macleanup` on npm](https://www.npmjs.com/package/macleanup) — current documented version **5.0.0** |
+| Command installed | `macleanup` |
 | Source | [github.com/aoneahsan/macleanup](https://github.com/aoneahsan/macleanup) |
 | Requirements | macOS 11+, bash 3.2+; Node only if you use `npx` or a global npm install |
 | Licence | MIT — use, modify, redistribute, sell; no warranty, no liability |

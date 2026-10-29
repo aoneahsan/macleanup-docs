@@ -158,14 +158,14 @@ deletion in [What gets deleted](/before-you-run/what-gets-deleted).
 tmutil snapshot
 
 # Preview everything, always
-mac-cleanup --profile deep --dry-run
+macleanup --profile deep --dry-run
 
 # Be explicit about scan roots, and protect what is live
-mac-cleanup --only 23 \
+macleanup --only 23 \
   --scan-roots "$HOME/Code:$HOME/repos" \
   --exclude-path "$HOME/Code/active-client" --dry-run
 
-# Keep thresholds conservative in ~/.mac-cleanuprc
+# Keep thresholds conservative in ~/.macleanuprc
 ```
 
 ## Reporting a data-loss bug
@@ -175,7 +175,7 @@ the `CRITICAL_HOME_DIRS` allowlist exists because someone reported exactly
 that.
 
 ```bash
-mac-cleanup --report-issue
+macleanup --report-issue
 ```
 
 For anything with a security dimension — path traversal, an unintended

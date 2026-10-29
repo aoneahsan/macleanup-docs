@@ -39,7 +39,7 @@ const sidebars: SidebarsConfig = {
           'Install macleanup — or run it with no install at all — and walk through a first session end to end.',
         slug: '/getting-started',
       },
-      items: ['getting-started/installation', 'getting-started/first-run'],
+      items: ['getting-started/installation', 'getting-started/first-run', 'getting-started/upgrading-to-5'],
     },
     {
       type: 'category',

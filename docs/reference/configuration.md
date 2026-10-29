@@ -1,10 +1,10 @@
 ---
 title: Configuration
-description: Set macleanup defaults once in ~/.mac-cleanuprc, point logs and reports elsewhere with environment variables, and understand the precedence order between them.
+description: Set macleanup defaults once in ~/.macleanuprc, point logs and reports elsewhere with environment variables, and understand the precedence order between them.
 tags: [reference, configuration, config-file, environment]
 sidebar_position: 4
 sidebar_label: Configuration
-keywords: [mac-cleanuprc, macleanup config file, MAC_CLEANUP_LOGS_DIR, macleanup defaults]
+keywords: [macleanuprc, macleanup config file, MACLEANUP_LOGS_DIR, macleanup defaults]
 ---
 
 # Configuration
@@ -17,7 +17,7 @@ written.
 ## Precedence
 
 ```
-CLI flag  >  environment variable  >  ~/.mac-cleanuprc  >  built-in default
+CLI flag  >  environment variable  >  ~/.macleanuprc  >  built-in default
 ```
 
 The config file is read **before** the command line, so a flag you type always
@@ -25,10 +25,10 @@ overrides it.
 
 ## The config file
 
-Default location `~/.mac-cleanuprc`, or wherever `$MAC_CLEANUP_RC` points.
+Default location `~/.macleanuprc`, or wherever `$MACLEANUP_RC` points.
 
 ```ini
-# ~/.mac-cleanuprc
+# ~/.macleanuprc
 # Lines starting with # are comments. Blank lines are ignored.
 
 cache-age-days = 60
@@ -75,13 +75,13 @@ config file should never be able to turn a preview into a deletion.
 
 | Variable | Equivalent flag |
 |---|---|
-| `MAC_CLEANUP_LOGS_DIR` | [`--logs-dir`](/reference/cli#logs-dir) |
-| `MAC_CLEANUP_REPORTS_DIR` | [`--reports-dir`](/reference/cli#reports-dir) |
-| `MAC_CLEANUP_RC` | Path to the config file (default `~/.mac-cleanuprc`) |
+| `MACLEANUP_LOGS_DIR` | [`--logs-dir`](/reference/cli#logs-dir) |
+| `MACLEANUP_REPORTS_DIR` | [`--reports-dir`](/reference/cli#reports-dir) |
+| `MACLEANUP_RC` | Path to the config file (default `~/.macleanuprc`) |
 
 ```bash
-export MAC_CLEANUP_LOGS_DIR=/var/log/mac-cleanup
-export MAC_CLEANUP_REPORTS_DIR=/var/log/mac-cleanup/reports
+export MACLEANUP_LOGS_DIR=/var/log/macleanup
+export MACLEANUP_REPORTS_DIR=/var/log/macleanup/reports
 ```
 
 CLI flags take precedence when both are set.
@@ -94,7 +94,7 @@ Raise the thresholds so only genuinely ancient things qualify, and keep a
 project tree out of the scanning sections:
 
 ```ini
-# ~/.mac-cleanuprc
+# ~/.macleanuprc
 cache-age-days = 180
 idle-days = 365
 large-file-size-gb = 5
@@ -106,7 +106,7 @@ scan-roots = /Users/you/Code:/Users/you/Projects
 If you sweep weekly, the 100-day defaults rarely match anything:
 
 ```ini
-# ~/.mac-cleanuprc
+# ~/.macleanuprc
 cache-age-days = 30
 idle-days = 60
 stale-build-days = 45
@@ -115,11 +115,11 @@ notify = true
 
 ### A per-project config
 
-`MAC_CLEANUP_RC` lets a repo carry its own settings without touching your home
+`MACLEANUP_RC` lets a repo carry its own settings without touching your home
 directory:
 
 ```bash
-MAC_CLEANUP_RC=./tools/macleanup.rc mac-cleanup --only 23 --dry-run
+MACLEANUP_RC=./tools/macleanup.rc macleanup --only 23 --dry-run
 ```
 
 ## Verify what is in effect
@@ -128,14 +128,14 @@ MAC_CLEANUP_RC=./tools/macleanup.rc mac-cleanup --only 23 --dry-run
 baked in**, so it is the quickest way to confirm the file was read:
 
 ```bash
-mac-cleanup --help
+macleanup --help
 ```
 
-If a value looks wrong, check for a `MAC_CLEANUP_RC` in your shell environment
+If a value looks wrong, check for a `MACLEANUP_RC` in your shell environment
 pointing somewhere unexpected:
 
 ```bash
-echo "${MAC_CLEANUP_RC:-~/.mac-cleanuprc}"
+echo "${MACLEANUP_RC:-~/.macleanuprc}"
 ```
 
 ## Next

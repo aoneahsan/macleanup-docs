@@ -1,6 +1,6 @@
 # Story Bible — macleanup
 
-**Slug:** `macleanup` (main product repository; website primaryHue 169) · **Status:** approved at GATE 1 on 2026-10-26 · **Last updated:** 2026-10-26 · **Registry:** `~/.claude/story-system/registry/macleanup.md`.
+**Slug:** `macleanup` (main product repository; website primaryHue 169) · **Status:** approved at GATE 1 on 2026-10-26 · **Last updated:** 2026-10-29 · **Registry:** `~/.claude/story-system/registry/macleanup.md`.
 
 ## 1. Project nature and one-line premise
 
@@ -38,8 +38,7 @@ See `voice-fingerprint.md`; `calibrated: false`, approved provisionally at GATE 
 
 | Term | Use | Avoid |
 |---|---|---|
-| `macleanup` | Package and product name | Claiming it is a GUI app |
-| `mac-cleanup` | Installed CLI command | Mixing it with the package name in a command |
+| `macleanup` | The one name: product, brand, npm package, installed command (`macleanup`, `npx macleanup`), script `macleanup.sh`, data folder `~/.macleanup/` — always lowercase (owner, 2026-10-29) | Any other spelling or casing; claiming a GUI app before the desktop app ships |
 | Trash | macOS recovery location | Calling every deletion reversible |
 | `--dry-run` | A preview that deletes no files but may write logs and reports | Calling it a backup |
 

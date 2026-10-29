@@ -4,7 +4,7 @@ description: Where macleanup writes its dated session logs and per-section repor
 tags: [reference, logs, artefacts, output]
 sidebar_position: 5
 sidebar_label: Reports and logs
-keywords: [mac-cleanup logs, macleanup report files, dot mac-cleanup directory, prune-history]
+keywords: [macleanup logs, macleanup report files, dot macleanup directory, prune-history]
 ---
 
 # Reports and logs
@@ -17,9 +17,9 @@ that follows it.
 ## Where the files live
 
 ```
-~/.mac-cleanup/
+~/.macleanup/
 ├── logs/
-│   └── mac-cleanup-YYYY-MM-DD.log
+│   └── macleanup-YYYY-MM-DD.log
 └── reports/
     ├── orphans-YYYY-MM-DD.txt
     ├── unused-apps-YYYY-MM-DD.txt
@@ -31,7 +31,7 @@ that follows it.
 ```
 
 ```bash
-open ~/.mac-cleanup/reports/
+open ~/.macleanup/reports/
 ```
 
 ## What each file holds
@@ -51,8 +51,8 @@ comfortable way to review a long candidate list — far better than scrolling
 back through a terminal:
 
 ```bash
-mac-cleanup --only 23 --stale-build-days 90 --dry-run
-open ~/.mac-cleanup/reports/
+macleanup --only 23 --stale-build-days 90 --dry-run
+open ~/.macleanup/reports/
 ```
 
 ## The credits header
@@ -66,11 +66,11 @@ and nobody remembers what produced it.
 
 | Flag | Environment variable | Default |
 |---|---|---|
-| `--logs-dir PATH` | `MAC_CLEANUP_LOGS_DIR` | `~/.mac-cleanup/logs` |
-| `--reports-dir PATH` | `MAC_CLEANUP_REPORTS_DIR` | `~/.mac-cleanup/reports` |
+| `--logs-dir PATH` | `MACLEANUP_LOGS_DIR` | `~/.macleanup/logs` |
+| `--reports-dir PATH` | `MACLEANUP_REPORTS_DIR` | `~/.macleanup/reports` |
 
 ```bash
-mac-cleanup --logs-dir /tmp/mc --reports-dir /tmp/mc-out --only 18
+macleanup --logs-dir /tmp/mc --reports-dir /tmp/mc-out --only 18
 ```
 
 ## Turning them off
@@ -81,8 +81,8 @@ mac-cleanup --logs-dir /tmp/mc --reports-dir /tmp/mc-out --only 18
 | A `.txt` written for every relevant section | `--no-reports` skips them all; the session log is still written |
 
 ```bash
-mac-cleanup --only 18 --cleanup-logs-on-finish   # one-shot scan, nothing left behind
-mac-cleanup --all --yes --no-reports             # cron run, log only
+macleanup --only 18 --cleanup-logs-on-finish   # one-shot scan, nothing left behind
+macleanup --all --yes --no-reports             # cron run, log only
 ```
 
 A log is roughly 50 KB per day, so keeping them is close to free.
@@ -90,7 +90,7 @@ A log is roughly 50 KB per day, so keeping them is close to free.
 ## Reviewing your history
 
 ```bash
-mac-cleanup --stats
+macleanup --stats
 ```
 
 Prints the data-directory location, log count and total size, oldest and newest
@@ -99,9 +99,9 @@ log, `.txt` count and total size, and the eight most recent files.
 ## Pruning old artefacts
 
 ```bash
-mac-cleanup --prune-history 30 --dry-run   # preview a 30-day prune
-mac-cleanup --prune-history 30             # actually prune
-mac-cleanup --prune-history                # default: older than 90 days
+macleanup --prune-history 30 --dry-run   # preview a 30-day prune
+macleanup --prune-history 30             # actually prune
+macleanup --prune-history                # default: older than 90 days
 ```
 
 Deletes logs **and** `.txt` files older than N days from both subdirectories.
@@ -111,11 +111,11 @@ or runs a cleanup section.
 ## Removing the data directory
 
 ```bash
-mac-cleanup --uninstall-data --dry-run   # see what would go
-mac-cleanup --uninstall-data             # remove it, after a typed confirmation
+macleanup --uninstall-data --dry-run   # see what would go
+macleanup --uninstall-data             # remove it, after a typed confirmation
 ```
 
-Removes the whole `~/.mac-cleanup` directory — logs, `.txt` files and the
+Removes the whole `~/.macleanup` directory — logs, `.txt` files and the
 first-run marker. Deleting the marker makes the one-time welcome screen appear
 again on the next run.
 
@@ -127,7 +127,7 @@ Uninstalling the npm package does **not** remove this directory. Run
 For scripting, `--json` usually beats parsing a `.txt`:
 
 ```bash
-mac-cleanup --all --yes --json | jq '{freed: .freed_kb, sections: .sections_done}'
+macleanup --all --yes --json | jq '{freed: .freed_kb, sections: .sections_done}'
 ```
 
 The object's `reports` array lists the files written **by that run**; before

@@ -93,7 +93,7 @@ emits a single-line object on stdout — everything else goes to stderr — with
 [`--json`](/reference/cli#json-output) for the full shape.
 
 Several sections also write a dated `.txt` report to
-`~/.mac-cleanup/reports/` during a dry run, which is often the easiest list to
+`~/.macleanup/reports/` during a dry run, which is often the easiest list to
 work from. See [Reports and logs](/reference/reports-and-logs).
 
 ## The honest limits of a preview

@@ -14,8 +14,8 @@ flag instead of a list. `--profile NAME` selects one; `--exclude` subtracts
 from it.
 
 ```bash
-mac-cleanup --profile dev --dry-run
-mac-cleanup --profile deep --exclude 14,17 --yes
+macleanup --profile dev --dry-run
+macleanup --profile deep --exclude 14,17 --yes
 ```
 
 ## The five profiles
@@ -36,12 +36,12 @@ with `--dry-run` before you run it with `--yes`.
 ## `audit` — look, don't touch
 
 ```bash
-mac-cleanup --profile audit
+macleanup --profile audit
 ```
 
 Sections `0, 12, 18, 21, 25, 26`: system health, orphaned app data, large
 files, idle apps, the LaunchAgents audit and a disk-usage report. Writes dated
-`.txt` files to `~/.mac-cleanup/reports/`.
+`.txt` files to `~/.macleanup/reports/`.
 
 Sections 0, 18 and 26 are pure reports. Sections **12 and 21 can move data to
 the Trash** when confirmed. Section 25 can permanently remove selected launch
@@ -52,7 +52,7 @@ Section 21 also needs both flags to run unattended.
 Add `--dry-run` if you want a guaranteed look-only pass:
 
 ```bash
-mac-cleanup --profile audit --dry-run
+macleanup --profile audit --dry-run
 ```
 
 This is the best first command after installing.
@@ -60,7 +60,7 @@ This is the best first command after installing.
 ## `dev` — reclaim developer space
 
 ```bash
-mac-cleanup --profile dev --dry-run
+macleanup --profile dev --dry-run
 ```
 
 Sections `1, 2, 3, 4, 23`: Xcode, Gradle/Android, package managers, Docker, and
@@ -74,7 +74,7 @@ that have been untouched for `--stale-build-days` days. Combine with a tighter
 threshold and protected paths:
 
 ```bash
-mac-cleanup --profile dev --stale-build-days 120 \
+macleanup --profile dev --stale-build-days 120 \
   --exclude-path "$HOME/Code/active-client" --dry-run
 ```
 
@@ -83,13 +83,13 @@ directory deletion. In interactive mode, section 4 still offers an optional
 Docker volume prune; decline it if the volumes matter:
 
 ```bash
-mac-cleanup --profile dev --exclude 23 --yes
+macleanup --profile dev --exclude 23 --yes
 ```
 
 ## `minimal` — the weekly sweep
 
 ```bash
-mac-cleanup --profile minimal --dry-run
+macleanup --profile minimal --dry-run
 ```
 
 Sections `5, 7, 8, 9`: user caches, logs, old top-level temp files and update
@@ -99,7 +99,7 @@ selection and both `--yes` and `--i-understand-deep` when run unattended.
 ## `cache-only` — every cache layer
 
 ```bash
-mac-cleanup --profile cache-only --dry-run
+macleanup --profile cache-only --dry-run
 ```
 
 Sections `3, 5, 6, 7, 9, 19`: package managers, user caches, system caches
@@ -111,7 +111,7 @@ needs sudo and is deep-gated, so unattended runs need `--i-understand-deep`, or
 skip it:
 
 ```bash
-mac-cleanup --profile cache-only --no-sudo --yes
+macleanup --profile cache-only --no-sudo --yes
 ```
 
 Expect slower first page loads afterwards while browser caches rebuild.
@@ -119,7 +119,7 @@ Expect slower first page loads afterwards while browser caches rebuild.
 ## `deep` — the monthly clean
 
 ```bash
-mac-cleanup --profile deep --dry-run
+macleanup --profile deep --dry-run
 ```
 
 Sections `0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 17, 19, 23, 26` — the broadest bundle.
@@ -133,7 +133,7 @@ Two members delete permanently:
 A common shape is the deep sweep minus the two you want to keep control of:
 
 ```bash
-mac-cleanup --profile deep --exclude 17,23 --yes
+macleanup --profile deep --exclude 17,23 --yes
 ```
 
 Note that `deep` does **not** include section 14 (`/private/var/folders`), even
@@ -144,16 +144,16 @@ or by `--only`, and needs a typed `yes`.
 
 ```bash
 # Subtract sections
-mac-cleanup --profile deep --exclude 14,17
+macleanup --profile deep --exclude 14,17
 
 # Tune a threshold for the sections in the profile
-mac-cleanup --profile dev --cache-age-days 60 --yes
+macleanup --profile dev --cache-age-days 60 --yes
 
 # Unattended, including deep-gated members
-mac-cleanup --profile deep --yes --i-understand-deep
+macleanup --profile deep --yes --i-understand-deep
 
 # Skip everything that needs sudo
-mac-cleanup --profile cache-only --no-sudo --yes
+macleanup --profile cache-only --no-sudo --yes
 ```
 
 `--exclude` applies on top of the profile. There is no way to *add* a section

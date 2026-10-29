@@ -4,7 +4,7 @@ description: Three ways to run macleanup on macOS — zero-install with npx, a g
 tags: [installation, npx, npm, macos, setup]
 sidebar_position: 1
 sidebar_label: Installation
-keywords: [install macleanup, npx macleanup, mac-cleanup npm, macos cleanup install]
+keywords: [install macleanup, npx macleanup, macleanup npm, macos cleanup install]
 ---
 
 # Installation
@@ -46,7 +46,7 @@ npx macleanup@latest --version
 ```
 
 :::tip[Your logs and reports are never inside the npx cache]
-They are written to `~/.mac-cleanup/{logs,reports}/` in your home directory, so
+They are written to `~/.macleanup/{logs,reports}/` in your home directory, so
 they survive every `npx` invocation and the cache reclaim that follows it. See
 [Reports and logs](/reference/reports-and-logs).
 :::
@@ -63,12 +63,12 @@ npm install -g macleanup
 That puts **two identical commands** on your `PATH`:
 
 ```bash
-mac-cleanup --version
+macleanup --version
 macleanup --version      # same binary, same behaviour
 ```
 
-Throughout this documentation the examples use `mac-cleanup`. Substitute
-`npx macleanup` or `./mac-cleanup.sh` freely — the argument parsing is
+Throughout this documentation the examples use `macleanup`. Substitute
+`npx macleanup` or `./macleanup.sh` freely — the argument parsing is
 identical.
 
 Updating and removing:
@@ -78,8 +78,8 @@ npm update -g macleanup     # update
 npm uninstall -g macleanup  # remove the command
 ```
 
-Uninstalling the package does **not** remove `~/.mac-cleanup/`. To delete that
-data directory too, run [`mac-cleanup --uninstall-data`](/reference/cli#uninstall-data)
+Uninstalling the package does **not** remove `~/.macleanup/`. To delete that
+data directory too, run [`macleanup --uninstall-data`](/reference/cli#uninstall-data)
 before uninstalling, or remove the folder by hand afterwards.
 
 ## Method 3 — Direct git checkout, no Node required
@@ -90,16 +90,16 @@ is a reasonable thing to want from a tool that deletes files.
 ```bash
 git clone https://github.com/aoneahsan/macleanup.git
 cd macleanup
-chmod +x mac-cleanup.sh
-./mac-cleanup.sh
+chmod +x macleanup.sh
+./macleanup.sh
 ```
 
 The whole tool is two files:
 
 | File | What it is |
 |---|---|
-| `mac-cleanup.sh` | The entire tool — plain bash, no dependencies |
-| `bin/mac-cleanup.js` | A small Node launcher that only spawns `bash` on the script above; it exists so `npx` works |
+| `macleanup.sh` | The entire tool — plain bash, no dependencies |
+| `bin/macleanup.js` | A small Node launcher that only spawns `bash` on the script above; it exists so `npx` works |
 
 Open either in any editor. There is no build step, no minification and no
 bundled binary.
@@ -107,8 +107,8 @@ bundled binary.
 ## Verify the install
 
 ```bash
-mac-cleanup --version     # prints the version
-mac-cleanup --list        # prints all 28 sections and exits
+macleanup --version     # prints the version
+macleanup --list        # prints all 28 sections and exits
 ```
 
 Neither command deletes anything, and `--list` is the fastest way to learn what
@@ -119,7 +119,7 @@ the section numbers mean.
 Do not start with a real cleanup. Start with a preview:
 
 ```bash
-mac-cleanup --dry-run --all
+macleanup --dry-run --all
 ```
 
 Then read [Your first run](/getting-started/first-run) for a full walkthrough.
@@ -127,10 +127,10 @@ Then read [Your first run](/getting-started/first-run) for a full walkthrough.
 ## Optional: a config file
 
 If you find yourself repeating the same thresholds, put them in
-`~/.mac-cleanuprc` instead:
+`~/.macleanuprc` instead:
 
 ```ini
-# ~/.mac-cleanuprc
+# ~/.macleanuprc
 cache-age-days = 60
 idle-days = 120
 large-file-size-gb = 2
@@ -144,7 +144,7 @@ Explicit CLI flags always override the file. See
 | Symptom | Cause and fix |
 |---|---|
 | `npx: command not found` | Node is not installed. Install it from [nodejs.org](https://nodejs.org), or use method 3, which needs no Node |
-| `permission denied: ./mac-cleanup.sh` | The executable bit was lost. `chmod +x mac-cleanup.sh` |
+| `permission denied: ./macleanup.sh` | The executable bit was lost. `chmod +x macleanup.sh` |
 | `this tool only runs on macOS. Detected platform: linux` | There is no Linux port — the script uses macOS-only paths and commands |
 | `bash 3.2+ required` | An unusually old bash is being used to invoke the script |
 

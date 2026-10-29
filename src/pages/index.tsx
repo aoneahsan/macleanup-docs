@@ -34,7 +34,7 @@ const WHAT_IT_REMOVES: Card[] = [
   },
   {
     title: 'Reports, not deletions',
-    body: 'Several sections only look: system health, installer leftovers, large files, LaunchAgents audit and a disk-usage report write a dated .txt to ~/.mac-cleanup/reports/ and delete nothing.',
+    body: 'Several sections only look: system health, installer leftovers, large files, LaunchAgents audit and a disk-usage report write a dated .txt to ~/.macleanup/reports/ and delete nothing.',
   },
 ];
 

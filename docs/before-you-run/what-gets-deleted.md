@@ -113,7 +113,7 @@ for a typed `yes`, it is never part of `--all`, and it needs
 
 ## Sections that delete nothing
 
-These only read and write a report to `~/.mac-cleanup/reports/`. They are safe
+These only read and write a report to `~/.macleanup/reports/`. They are safe
 to run at any time, and `--profile audit` bundles them.
 
 | Section | Produces |

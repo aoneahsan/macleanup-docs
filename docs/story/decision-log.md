@@ -19,3 +19,7 @@ The 4.7.1 release copy names the section 25 path-with-spaces fix and retains the
 ## 2026-10-26 — GATE 4 approved for package and docs
 
 The owner replied: “approve all, finish all remaining work now.” This approves publication of the reviewed 4.7.1 package and docs, including the section 25 two-flag batch removal guard. The package commit `7e02218` was pushed to public `main`; npm accepted the 4.7.1 publication and is processing it. The same reply approves continuation through the marketing click-dummy and deployment gates.
+
+## 2026-10-29 — One name: macleanup
+
+The owner wrote: “please get everything fully on 1 name please, macleanup”, “that is the name, brand, cli command, npx command, and everything related to macleanup” and “make sure it's "macleanup" everywhere please”. The glossary now has one row: `macleanup`, always lowercase, for the product, brand, package, command, script and data folder. The separate command row is removed. macleanup 5.0.0 ships the rename; entries in the changelog before 5.0.0 keep their historical wording, and the upgrading page names the old forms only to explain the migration. The “not a GUI app” limit stays until the desktop app ships, when its own surface rows are added.

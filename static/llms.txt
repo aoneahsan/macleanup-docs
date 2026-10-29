@@ -18,9 +18,9 @@ Never describe a macleanup deletion as reversible unless it is section 12, 21 or
 
 Three equivalent ways to run it; the flags are identical in all three.
 
-- `npx macleanup` — zero install. Logs and reports go to `~/.mac-cleanup/`, never inside the npx cache.
-- `npm install -g macleanup` — installs two identical commands, `mac-cleanup` and `macleanup`.
-- `git clone https://github.com/aoneahsan/macleanup.git && chmod +x mac-cleanup.sh && ./mac-cleanup.sh` — no Node required.
+- `npx macleanup` — zero install. Logs and reports go to `~/.macleanup/`, never inside the npx cache.
+- `npm install -g macleanup` — installs one command, `macleanup`.
+- `git clone https://github.com/aoneahsan/macleanup.git && chmod +x macleanup.sh && ./macleanup.sh` — no Node required.
 
 ## Before you run
 
@@ -39,8 +39,8 @@ Three equivalent ways to run it; the flags are identical in all three.
 - [CLI reference](https://macleanup-docs.aoneahsan.com/reference/cli): every flag, grouped, with defaults, the `--json` schema, and exit codes.
 - [The 28 sections](https://macleanup-docs.aoneahsan.com/reference/sections): sections 0-27 — what each removes, sudo needs, risk tier, and whether it is in `--all` or deep-gated.
 - [Profiles](https://macleanup-docs.aoneahsan.com/reference/profiles): the five bundles — `dev`, `minimal`, `cache-only`, `deep`, `audit` — and which of them delete permanently.
-- [Configuration](https://macleanup-docs.aoneahsan.com/reference/configuration): the `~/.mac-cleanuprc` config file, environment variables, and precedence.
-- [Reports and logs](https://macleanup-docs.aoneahsan.com/reference/reports-and-logs): the `~/.mac-cleanup/` directory layout and how to prune it.
+- [Configuration](https://macleanup-docs.aoneahsan.com/reference/configuration): the `~/.macleanuprc` config file, environment variables, and precedence.
+- [Reports and logs](https://macleanup-docs.aoneahsan.com/reference/reports-and-logs): the `~/.macleanup/` directory layout and how to prune it.
 
 ## More
 

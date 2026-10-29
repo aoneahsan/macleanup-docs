@@ -2,13 +2,13 @@
 
 **Status:** approved at GATE 2 on 2026-10-26 · **Last updated:** 2026-10-26 · **Bible:** `story-bible.md` (GATE 1 approved 2026-10-26).
 
-Current-version claims are checked against the published package and `mac-cleanup.sh`. Historical changelog entries keep their historical wording. `docs/story/` is excluded from the public docs build.
+Current-version claims are checked against the published package and `macleanup.sh`. Historical changelog entries keep their historical wording. `docs/story/` is excluded from the public docs build.
 
 ## Surfaces
 
 | Surface | Awareness | Structure | Tone band | Length | CTA | Schema | Status | Source/draft |
 |---|---|---|---|---|---|---|---|---|
-| CLI prompts and reports | Most aware | Named action → scope → consequence → choice | Clarity and care; no humor | One decision per prompt | Preview or confirm the named section | None | planned | `macleanup/mac-cleanup.sh` |
+| CLI prompts and reports | Most aware | Named action → scope → consequence → choice | Clarity and care; no humor | One decision per prompt | Preview or confirm the named section | None | planned | `macleanup/macleanup.sh` |
 | Package README and npm listing | Solution aware | Brief PAS opener, then install, safety and reference | 70 clarity / 25 care / 5 reassurance | Existing scan-friendly reference | Run a dry run | None | planned | `macleanup/README.md` |
 | Docs introduction | Solution aware | Purpose → first safe command → navigation | 70 / 25 / 5 | One landing page | Preview first | Existing visible SoftwareApplication facts | planned | `docs/intro.md` |
 | Safety model | Product aware | Guarantee by section → exceptions → recovery limit | Clarity and care; no humor | Complete safety reference | Read deletion tiers | None | planned | `docs/before-you-run/safety-model.md` |

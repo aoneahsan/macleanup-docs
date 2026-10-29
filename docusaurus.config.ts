@@ -13,7 +13,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // ---------------------------------------------------------------------------
 
 const SITE_URL = 'https://macleanup-docs.aoneahsan.com';
-const PKG_VERSION = '4.7.1';
+const PKG_VERSION = '5.0.0';
 
 // Optional analytics. Absent ⇒ provider skipped entirely (no tag, no init).
 const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID || '';
@@ -124,7 +124,7 @@ const config: Config = {
           url: 'https://aoneahsan.com',
         },
         description:
-          'Single-file bash macOS cleanup and maintenance tool with 28 targeted sections, per-section confirmation, a real dry-run mode, named profiles, and dated logs and reports written to ~/.mac-cleanup/.',
+          'Single-file bash macOS cleanup and maintenance tool with 28 targeted sections, per-section confirmation, a real dry-run mode, named profiles, and dated logs and reports written to ~/.macleanup/.',
         keywords:
           'macos, cleanup, disk space, cache, uninstall, developer tools, node_modules, xcode, homebrew, docker, cli, bash, dry-run',
       }),

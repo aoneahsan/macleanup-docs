@@ -131,7 +131,7 @@ something unpredictable.
 
 None. The script makes **no network calls by default**. The Node launcher only spawns
 bash — no analytics, no crash reporting, no phone-home. Logs and reports stay
-on your machine in `~/.mac-cleanup/`.
+on your machine in `~/.macleanup/`.
 
 The single exception is opt-in: `--check-update` performs one unauthenticated
 `GET` to `https://registry.npmjs.org/macleanup/latest` to compare version
@@ -144,21 +144,21 @@ issue for **you** to review and submit. Nothing is sent automatically.
 ### What does `npx macleanup` actually run?
 
 npm downloads the published package into its cache and runs
-`bin/mac-cleanup.js`, a small Node launcher that spawns the bundled
-`mac-cleanup.sh` through `bash`. npm reclaims the cache afterwards.
+`bin/macleanup.js`, a small Node launcher that spawns the bundled
+`macleanup.sh` through `bash`. npm reclaims the cache afterwards.
 
-Your logs and reports are written to `~/.mac-cleanup/` and are **never inside
+Your logs and reports are written to `~/.macleanup/` and are **never inside
 the cache**, so they survive.
 
 ### Can I read the source before running it?
 
-Yes, and you should. The whole tool is two files: `mac-cleanup.sh` (plain bash)
-and `bin/mac-cleanup.js` (a short Node launcher). No build step, no
+Yes, and you should. The whole tool is two files: `macleanup.sh` (plain bash)
+and `bin/macleanup.js` (a short Node launcher). No build step, no
 minification, no bundled binary.
 
 ```bash
 git clone https://github.com/aoneahsan/macleanup.git
-cd macleanup && less mac-cleanup.sh
+cd macleanup && less macleanup.sh
 ```
 
 ### Why one file instead of `brew install`?
@@ -187,8 +187,8 @@ Unknowable in advance, and any specific number here would be invented. Find out
 for your machine:
 
 ```bash
-mac-cleanup --dry-run --all          # estimates the space it would free
-mac-cleanup --profile audit          # reports where the space actually went
+macleanup --dry-run --all          # estimates the space it would free
+macleanup --profile audit          # reports where the space actually went
 ```
 
 Machines with years of Xcode DerivedData or dozens of old `node_modules` tend
@@ -200,12 +200,12 @@ There is no schedule the tool needs. A pattern that works:
 
 | Cadence | Command |
 |---|---|
-| Weekly | `mac-cleanup --profile minimal --yes` |
-| Monthly | `mac-cleanup --profile dev --dry-run`, then run what looks right |
-| When low on space | `mac-cleanup --profile audit`, read the reports, then decide |
+| Weekly | `macleanup --profile minimal --yes` |
+| Monthly | `macleanup --profile dev --dry-run`, then run what looks right |
+| When low on space | `macleanup --profile audit`, read the reports, then decide |
 
 Running more often means the 100-day defaults rarely match. Lower them in
-`~/.mac-cleanuprc` — see [Configuration](/reference/configuration).
+`~/.macleanuprc` — see [Configuration](/reference/configuration).
 
 ### Can I run it from cron or launchd?
 
@@ -213,7 +213,7 @@ Yes. Validate the command with `--dry-run` first, then automate the verified
 form:
 
 ```bash
-mac-cleanup --all --yes --quiet --notify
+macleanup --all --yes --quiet --notify
 ```
 
 `--json` gives a machine-readable summary for CI. See [Recipes](/recipes).
@@ -221,7 +221,7 @@ mac-cleanup --all --yes --quiet --notify
 ### How do I remove macleanup completely?
 
 ```bash
-mac-cleanup --uninstall-data      # remove ~/.mac-cleanup (asks first)
+macleanup --uninstall-data      # remove ~/.macleanup (asks first)
 npm uninstall -g macleanup        # remove the command
 ```
 
@@ -230,15 +230,16 @@ behind, and you would have to delete it by hand.
 
 ### Which command name should I use?
 
-`mac-cleanup` and `macleanup` are installed by the npm package and are the same
-binary. `npx macleanup` and `./mac-cleanup.sh` run the identical script with
-identical flags. Use whichever fits.
+`macleanup`. The npm package installs one command, `macleanup`, and
+`npx macleanup` and `./macleanup.sh` run the identical script with identical
+flags. Before 5.0.0 the package also installed a second command name; 5.0.0
+removed it. See [Upgrading to 5.0](./getting-started/upgrading-to-5.md).
 
 ### How do I know I am on the latest version?
 
 ```bash
-mac-cleanup --version
-mac-cleanup --check-update
+macleanup --version
+macleanup --check-update
 ```
 
 ## Next

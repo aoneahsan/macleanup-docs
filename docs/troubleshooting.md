@@ -4,7 +4,7 @@ description: Symptom, cause and fix for the problems people actually hit with ma
 tags: [troubleshooting, errors, fixes, support]
 sidebar_position: 1
 sidebar_label: Troubleshooting
-keywords: [macleanup not working, mac-cleanup command not found, section 23 finds nothing, macleanup permission]
+keywords: [macleanup not working, macleanup command not found, section 23 finds nothing, macleanup permission]
 ---
 
 # Troubleshooting
@@ -16,7 +16,7 @@ section 23 bug, go to [Recovery](/recovery).
 If nothing here helps:
 
 ```bash
-mac-cleanup --report-issue
+macleanup --report-issue
 ```
 
 That opens a pre-filled GitHub issue with environment info gathered **locally**.
@@ -29,17 +29,17 @@ Nothing is transmitted until you press Submit.
 Node is not installed. Install it from [nodejs.org](https://nodejs.org), or use
 the [git checkout method](/getting-started/installation), which needs no Node.
 
-### `permission denied: ./mac-cleanup.sh`
+### `permission denied: ./macleanup.sh`
 
 The executable bit was lost — usually via a zip extraction or a copy between
 volumes.
 
 ```bash
-chmod +x mac-cleanup.sh
-./mac-cleanup.sh
+chmod +x macleanup.sh
+./macleanup.sh
 ```
 
-### `command not found: mac-cleanup` after `npm install -g`
+### `command not found: macleanup` after `npm install -g`
 
 Your shell's `PATH` does not include npm's global bin directory.
 
@@ -54,9 +54,9 @@ Add it to `~/.zshrc` (or `~/.bash_profile`) and re-source:
 export PATH="$(npm config get prefix)/bin:$PATH"
 ```
 
-`which mac-cleanup` should then resolve.
+`which macleanup` should then resolve.
 
-### `bundled script not found at …mac-cleanup.sh`
+### `bundled script not found at …macleanup.sh`
 
 The npm package is corrupt or was partially extracted.
 
@@ -81,7 +81,7 @@ An unusually old bash is being used. Run it through the system bash:
 
 ```bash
 /bin/bash --version
-/bin/bash mac-cleanup.sh
+/bin/bash macleanup.sh
 ```
 
 ### `Unknown option` on a flag that exists
@@ -90,8 +90,8 @@ Before 4.5.1 the `--flag=value` form was rejected with exit code 2. Either
 upgrade, or use the space-separated form:
 
 ```bash
-mac-cleanup --cache-age-days 30    # always works
-mac-cleanup --cache-age-days=30    # 4.5.1 and later
+macleanup --cache-age-days 30    # always works
+macleanup --cache-age-days=30    # 4.5.1 and later
 ```
 
 ## A section finds nothing
@@ -103,8 +103,8 @@ threshold. If you opened the file recently, its access time is fresh and it is
 not flagged. That is the safety rule working, not a bug.
 
 ```bash
-mac-cleanup --only 24 --large-file-days 30 --dry-run   # narrower window
-mac-cleanup --only 18                                  # by size only, no age filter
+macleanup --only 24 --large-file-days 30 --dry-run   # narrower window
+macleanup --only 18                                  # by size only, no age filter
 ```
 
 ### Section 23 reports zero stale builds, but the old `node_modules` is right there
@@ -115,7 +115,7 @@ Three possible causes:
 autocomplete counts as access. Lower the threshold:
 
 ```bash
-mac-cleanup --only 23 --stale-build-days 30 --dry-run
+macleanup --only 23 --stale-build-days 30 --dry-run
 ```
 
 **The directory is inside a protected toolchain path.** Section 23 will never
@@ -123,13 +123,13 @@ enter `~/.bun`, `~/.pnpm-store`, `~/.local/share/pnpm`, `~/.npm-packages`,
 `~/.volta` or their peers. Toolchain caches are section 3's job:
 
 ```bash
-mac-cleanup --only 3
+macleanup --only 3
 ```
 
 **Your scan roots do not cover it.** Say where your code lives:
 
 ```bash
-mac-cleanup --only 23 --scan-roots "$HOME/repos:$HOME/work:$HOME/code" --dry-run
+macleanup --only 23 --scan-roots "$HOME/repos:$HOME/work:$HOME/code" --dry-run
 ```
 
 ### Section 23 errors: "no scan roots found, pass `--scan-roots`"
@@ -141,7 +141,7 @@ was [the v4.3.0 bug](/recovery). It auto-detects the standard dev folders
 explicit:
 
 ```bash
-mac-cleanup --only 23 --scan-roots "$HOME/path/to/your/code"
+macleanup --only 23 --scan-roots "$HOME/path/to/your/code"
 ```
 
 ### Section 21 missed an app I have not used in years
@@ -162,7 +162,7 @@ Start Docker Desktop and wait for the whale icon to settle, then re-run
 section 4. Or skip it:
 
 ```bash
-mac-cleanup --all --exclude 4 --yes
+macleanup --all --exclude 4 --yes
 ```
 
 ### `xcrun simctl delete unavailable failed`
@@ -180,7 +180,7 @@ A file in it is locked, in use by a running app, or owned by another user.
 ls -la  ~/.Trash/       # what is still there
 ls -laO ~/.Trash/       # a 'uchg' flag means user-immutable
 chflags -R nouchg ~/.Trash/
-mac-cleanup --only 10
+macleanup --only 10
 ```
 
 ### Time Machine snapshots were deleted but free space did not change
@@ -189,7 +189,7 @@ Expected. APFS reclaims snapshot space **lazily**, when the disk actually needs
 it. Either trigger a purge or simply wait:
 
 ```bash
-mac-cleanup --only 22
+macleanup --only 22
 ```
 
 ### A section was skipped with a sudo message
@@ -205,9 +205,9 @@ Also expected. Sections 6, 10, 11, 14, 21 and 24 need `--i-understand-deep`
 **in addition to** `--yes` to run unattended:
 
 ```bash
-mac-cleanup --only 21 --yes                       # refused, warns and skips
-mac-cleanup --only 21 --yes --i-understand-deep   # runs
-mac-cleanup --only 21 --yes --dry-run             # preview always allowed
+macleanup --only 21 --yes                       # refused, warns and skips
+macleanup --only 21 --yes --i-understand-deep   # runs
+macleanup --only 21 --yes --dry-run             # preview always allowed
 ```
 
 ## Permissions
@@ -227,24 +227,24 @@ in place. Grant the permission before retrying those sections.
 
 ## Logs and reports
 
-### `~/.mac-cleanup/` does not exist
+### `~/.macleanup/` does not exist
 
 Nothing that writes has run yet — `--list` and `--version` do not create it.
 Run any section:
 
 ```bash
-mac-cleanup --only 0
+macleanup --only 0
 ```
 
 ### Report files stopped appearing
 
-Either `--no-reports` is in play, or `MAC_CLEANUP_REPORTS_DIR` points somewhere
+Either `--no-reports` is in play, or `MACLEANUP_REPORTS_DIR` points somewhere
 you cannot write.
 
 ```bash
-echo "$MAC_CLEANUP_REPORTS_DIR"
-mac-cleanup --reports-dir ~/.mac-cleanup/reports --only 23 --dry-run
-ls -la ~/.mac-cleanup/reports/
+echo "$MACLEANUP_REPORTS_DIR"
+macleanup --reports-dir ~/.macleanup/reports --only 23 --dry-run
+ls -la ~/.macleanup/reports/
 ```
 
 ### Logs are piling up
@@ -253,9 +253,9 @@ One file per day, kept forever, roughly 50 KB each. After a few years that adds
 up:
 
 ```bash
-mac-cleanup --prune-history 90            # built-in prune
-mac-cleanup --cleanup-logs-on-finish      # per-run: delete this run's log
-mac-cleanup --uninstall-data              # remove ~/.mac-cleanup entirely
+macleanup --prune-history 90            # built-in prune
+macleanup --cleanup-logs-on-finish      # per-run: delete this run's log
+macleanup --uninstall-data              # remove ~/.macleanup entirely
 ```
 
 ### A dry run reported `freed_kb: 0`
@@ -277,7 +277,7 @@ Section 18 is read-only — let it finish; a minute or so is typical. Section 24
 can be narrowed:
 
 ```bash
-mac-cleanup --only 24 --large-file-size-gb 5 --large-file-days 365 --dry-run
+macleanup --only 24 --large-file-size-gb 5 --large-file-days 365 --dry-run
 ```
 
 ### Section 23 is slow
@@ -285,7 +285,7 @@ mac-cleanup --only 24 --large-file-size-gb 5 --large-file-days 365 --dry-run
 Give it precise roots instead of letting it walk broad ones:
 
 ```bash
-mac-cleanup --only 23 --scan-roots "$HOME/Code" --dry-run
+macleanup --only 23 --scan-roots "$HOME/Code" --dry-run
 ```
 
 `~/Downloads` and `~/Documents` are auto-detected roots and are often the
@@ -294,9 +294,9 @@ largest and least interesting for build artefacts.
 ## Still stuck
 
 ```bash
-mac-cleanup --stats          # what has run, and where the logs are
-mac-cleanup --check-update   # is a newer version published?
-mac-cleanup --report-issue   # pre-filled GitHub issue, locally gathered info
+macleanup --stats          # what has run, and where the logs are
+macleanup --check-update   # is a newer version published?
+macleanup --report-issue   # pre-filled GitHub issue, locally gathered info
 ```
 
 The last 50 lines of your most recent log are copied to the clipboard (when

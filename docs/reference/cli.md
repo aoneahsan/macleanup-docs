@@ -39,6 +39,7 @@ Both `--flag value` and `--flag=value` forms are accepted (the `=` form since
 | `--no-sudo` | switch | off | Skip every sudo section |
 | `--quiet` | switch | off | Suppress info chatter |
 | `--json` | switch | off | One-line JSON run summary on stdout (implies `--quiet`) |
+| `--json-events` | switch | off | NDJSON event stream on stdout (implies `--quiet`; 5.1.0+) |
 | `--no-color` | switch | auto | Disable ANSI colour |
 | `--notify` | switch | off | macOS notification on completion |
 | `--check-update` | switch | off | Ask npm whether a newer version exists |
@@ -50,7 +51,8 @@ Both `--flag value` and `--flag=value` forms are accepted (the `=` form since
 | `--large-file-days N` | int | 100 | Large unused file age (section 24) |
 | `--large-file-size-gb N` | int | 1 | Minimum large-file size in GB (section 24) |
 | `--scan-roots "P1:P2"` | string | auto | Roots for sections 23 and 24 |
-| `--exclude-path PATH` | string, repeatable | — | Never touch PATH or its subtree in 23 / 24 |
+| `--exclude-path PATH` | string, repeatable | — | Never touch PATH or its subtree, in any section (5.1.0+; sections 23 / 24 before) |
+| `--archive-path PATH` | string, repeatable | — | Archive PATH to `~/.macleanup/archives/` before it is removed (5.1.0+) |
 | `--logs-dir PATH` | string | `~/.macleanup/logs` | Persistent logs directory |
 | `--reports-dir PATH` | string | `~/.macleanup/reports` | Persistent reports directory |
 | `--no-reports` | switch | off | Skip writing per-section reports |
@@ -238,6 +240,18 @@ object. Implies `--quiet`.
 macleanup --all --yes --json | jq .freed_kb
 ```
 
+### `--json-events` {#json-events}
+
+Streams one JSON object per line on stdout while the run happens: `plan`,
+`disk`, `section_start`, `item`, `progress`, `section_result`, `error`, and
+`summary` last. Human output goes to stderr. It needs `--only`, `--profile` or
+`--all`, and it cannot be combined with `--json`. Implies `--quiet`. Since
+5.1.0. The full schema and its exit codes: [JSON event stream](/reference/json-events).
+
+```bash
+macleanup --dry-run --all --json-events | jq -c 'select(.type=="section_result")'
+```
+
 ### `--no-color` {#no-color}
 
 Disable ANSI colour. Auto-disabled on non-TTYs, so you mostly need it when
@@ -339,14 +353,30 @@ macleanup --only 23 --scan-roots "$HOME/repos:$HOME/code" --dry-run
 
 ### `--exclude-path PATH` {#exclude-path}
 
-Never touch `PATH` **or anything under it** in sections 23 and 24. Repeatable.
-Enforced as a literal-path plus subtree guard, on top of the always-on
-`CRITICAL_HOME_DIRS` protection.
+Never touch `PATH` **or anything under it**. From 5.1.0 every section's delete
+and Trash move honours it; before 5.1.0 only the scanning sections 23 and 24
+did. Repeatable — pass it once per tree you want to protect. Enforced as a
+literal-path plus subtree guard, on top of the always-on `CRITICAL_HOME_DIRS`
+protection.
 
 ```bash
 macleanup --only 23 \
   --exclude-path "$HOME/Code/active-project" \
   --exclude-path "$HOME/Code/client-work" --dry-run
+```
+
+### `--archive-path PATH` {#archive-path}
+
+Before `PATH` (or anything under it) is deleted or moved to the Trash,
+macleanup writes it to a gzip archive in `~/.macleanup/archives/`, named
+`<date>-<name>.tar.gz`. The folder is mode 700 and each archive mode 600,
+because an archive can hold settings, sessions or keys. If the archive cannot
+be written, `PATH` is left in place. Repeatable. In a dry run it only reports
+what it would archive. Since 5.1.0.
+
+```bash
+macleanup --only 12 \
+  --archive-path "$HOME/Library/Application Support/SomeApp" --dry-run
 ```
 
 ## Output and persistence
@@ -436,6 +466,9 @@ Print the inline help, with the defaults from your runtime config baked in.
 | `127` | The Node launcher could not spawn `bash` |
 | signal | The same signal it received, re-raised (Ctrl+C, SIGTERM, …) |
 
+`--json-events` uses its own codes — `0`, `1` when a section failed, `2`, and
+`130` when interrupted. See [JSON event stream](/reference/json-events#exit-codes).
+
 `SIGINT`, `SIGTERM`, `SIGHUP` and `SIGQUIT` propagate from the Node launcher to
 the bash child, so Ctrl+C inside `npx` cleanly kills the underlying script.
 
@@ -457,4 +490,5 @@ the bash child, so Ctrl+C inside `npx` cleanly kills the underlying script.
 - [The 28 sections](/reference/sections) — what each number does.
 - [Profiles](/reference/profiles) — the five bundles in detail.
 - [Configuration](/reference/configuration) — the config file and env vars.
+- [JSON event stream](/reference/json-events) — the `--json-events` schema.
 - [Recipes](/recipes) — ready-made commands by goal.

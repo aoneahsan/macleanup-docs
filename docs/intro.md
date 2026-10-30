@@ -21,6 +21,10 @@ its normal run log unless you choose a different log location.
 It is MIT-licensed, makes no network calls beyond an opt-in version check, and
 requires nothing but macOS 11+ and bash 3.2+.
 
+The [macleanup desktop app](/desktop-app/overview), being released alongside
+5.1.0, runs the same script in a window. The command line works with or
+without it.
+
 :::danger[This tool deletes files]
 Deletion is the point of the tool, and most of it is **not reversible**.
 Many caches can regenerate, but logs may be needed for diagnosis. A deleted
@@ -105,13 +109,14 @@ flowchart LR
 | Look up a flag | [CLI reference](/reference/cli) |
 | Look up a section number | [The 28 sections](/reference/sections) |
 | Copy a working command | [Recipes](/recipes) |
+| Use the desktop app | [Desktop app](/desktop-app/overview) |
 | Fix something that went wrong | [Troubleshooting](/troubleshooting) · [Recovery](/recovery) |
 
 ## Project facts
 
 | | |
 |---|---|
-| Package | [`macleanup` on npm](https://www.npmjs.com/package/macleanup) — current documented version **5.0.0** |
+| Package | [`macleanup` on npm](https://www.npmjs.com/package/macleanup) — current documented version **5.1.0** |
 | Command installed | `macleanup` |
 | Source | [github.com/aoneahsan/macleanup](https://github.com/aoneahsan/macleanup) |
 | Requirements | macOS 11+, bash 3.2+; Node only if you use `npx` or a global npm install |

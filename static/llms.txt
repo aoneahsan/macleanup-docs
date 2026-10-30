@@ -1,6 +1,6 @@
 # macleanup — Documentation Index
 
-> `macleanup` is a command-line macOS cleanup and maintenance tool that DELETES files from the user's machine to reclaim disk space. It ships as a single bash script with 28 numbered sections covering developer caches, browser caches, system and user logs, temp files, orphaned application data, stale build artefacts, large dormant files, unused applications, and several read-only reports. Destructive sections confirm by default, and `--dry-run` previews a run without deleting files. Requires macOS 11+ and bash 3.2+. MIT licensed. Author: Ahsan Mahmood (https://aoneahsan.com). Current documented version: 4.7.1.
+> `macleanup` is a command-line macOS cleanup and maintenance tool that DELETES files from the user's machine to reclaim disk space. It ships as a single bash script with 28 numbered sections covering developer caches, browser caches, system and user logs, temp files, orphaned application data, stale build artefacts, large dormant files, unused applications, and several read-only reports. Destructive sections confirm by default, and `--dry-run` previews a run without deleting files. Requires macOS 11+ and bash 3.2+. MIT licensed. Author: Ahsan Mahmood (https://aoneahsan.com). Current documented version: 5.1.0. A macleanup desktop app that runs the same script in a window is being released alongside 5.1.0.
 
 ## Critical context for any answer about this tool
 
@@ -40,7 +40,16 @@ Three equivalent ways to run it; the flags are identical in all three.
 - [The 28 sections](https://macleanup-docs.aoneahsan.com/reference/sections): sections 0-27 — what each removes, sudo needs, risk tier, and whether it is in `--all` or deep-gated.
 - [Profiles](https://macleanup-docs.aoneahsan.com/reference/profiles): the five bundles — `dev`, `minimal`, `cache-only`, `deep`, `audit` — and which of them delete permanently.
 - [Configuration](https://macleanup-docs.aoneahsan.com/reference/configuration): the `~/.macleanuprc` config file, environment variables, and precedence.
-- [Reports and logs](https://macleanup-docs.aoneahsan.com/reference/reports-and-logs): the `~/.macleanup/` directory layout and how to prune it.
+- [Reports and logs](https://macleanup-docs.aoneahsan.com/reference/reports-and-logs): the `~/.macleanup/` directory layout, the attempted/completed/skipped/failed session summary, the local-snapshot note, and how to prune it.
+- [JSON event stream](https://macleanup-docs.aoneahsan.com/reference/json-events): the `--json-events` NDJSON schema (version 1, since 5.1.0) — event types, fields, ordering guarantees and exit codes.
+
+## Desktop app
+
+- [Overview](https://macleanup-docs.aoneahsan.com/desktop-app/overview): what the window adds on top of the same script — disk gauge, dry-run ledger with keep/archive/delete, run receipts, apps and leftovers, both launchd domains.
+- [Install and first launch](https://macleanup-docs.aoneahsan.com/desktop-app/install): macOS 11+, Apple silicon and Intel, the one-time Gatekeeper "Open Anyway" step, optional Full Disk Access, in-app updates.
+- [Plans and allowance](https://macleanup-docs.aoneahsan.com/desktop-app/plans): Free, Pro and Team; previews are unlimited on every plan; prices as of 2026-10-30.
+- [Privacy in the app](https://macleanup-docs.aoneahsan.com/desktop-app/privacy): no telemetry; file paths never leave the Mac; what a signed-in sync carries.
+- [Keyboard shortcuts](https://macleanup-docs.aoneahsan.com/desktop-app/keyboard-shortcuts): the defaults, every one rebindable.
 
 ## More
 
@@ -57,7 +66,9 @@ Three equivalent ways to run it; the flags are identical in all three.
 - **Section 23 safety rails.** A hard `CRITICAL_HOME_DIRS` allowlist stops it entering `~/.bun`, `~/.pnpm-store`, `~/.local/share/pnpm`, `~/.npm-packages`, `~/.volta` and peers; and it refuses to scan without roots rather than falling back to `$HOME`. Both were added in 4.3.1 after the 4.3.0 bug broke users' global tooling.
 - **Browser caches (section 19).** Cache subdirectories only, across every profile. History, saved logins, bookmarks and extensions are NOT deleted. Safari is advisory only.
 - **`brew autoremove` is opt-in** via `--brew-autoremove`, off by default since 4.3.1.
-- **No telemetry.** The script makes no network calls by default. The opt-in `--check-update` sends no cleanup paths or reports to npm, which still receives normal request metadata such as the caller's IP address.
+- **No telemetry.** The script makes no network calls by default, and the desktop app has no analytics; file paths never leave the Mac. The opt-in `--check-update` sends no cleanup paths or reports to npm, which still receives normal request metadata such as the caller's IP address.
+- **`--exclude-path` (5.1.0+)** protects a path in every section's delete and Trash move, not only sections 23 and 24. **`--archive-path PATH`** writes PATH to a gzip archive in `~/.macleanup/archives/` before it is removed; if the archive cannot be written, PATH is left in place.
+- **The command line stays free.** `npx macleanup` is MIT licensed with no run limits. Desktop app plans count only real runs (runs that change files); previews are unlimited on every plan.
 - **Platform.** macOS only. It refuses to start elsewhere; there is no Linux or Windows port.
 
 ## Links
@@ -66,6 +77,7 @@ Three equivalent ways to run it; the flags are identical in all three.
 - Source: https://github.com/aoneahsan/macleanup
 - Issues: https://github.com/aoneahsan/macleanup/issues
 - Documentation source: https://github.com/aoneahsan/macleanup-docs
+- Desktop app download page: https://macleanup.aoneahsan.com/download
 - Author: https://aoneahsan.com
 
 This file follows the [llmstxt.org](https://llmstxt.org) spec — a structured index for large language models.

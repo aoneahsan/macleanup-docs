@@ -4,7 +4,7 @@
 **Live:** https://macleanup-docs.aoneahsan.com (GitHub Pages)
 **Source package:** `../macleanup` (READ-ONLY from here) · https://github.com/aoneahsan/macleanup
 **Repo visibility:** 🔴 **PUBLIC**
-**Last Updated:** 2026-10-29
+**Last Updated:** 2026-10-30
 
 > Mirror of `AGENTS.md` in this folder — byte-identical except the header. Change one, change both.
 
@@ -79,6 +79,6 @@ yarn typecheck
 
 ## Version drift
 
-The site documents **macleanup 5.0.0**. When the package publishes a new version, update
+The site documents **macleanup 5.1.0**. When the package publishes a new version, update
 `PKG_VERSION` in `docusaurus.config.ts`, the version line in `docs/intro.md`, `docs/changelog.md`, and
 `static/llms.txt` in the same change.

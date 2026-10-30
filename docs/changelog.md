@@ -4,7 +4,7 @@ description: What changed in each macleanup release — the safety fixes, the tw
 tags: [changelog, releases, versions, history]
 sidebar_position: 6
 sidebar_label: Release history
-keywords: [macleanup changelog, macleanup versions, macleanup 5.0.0, macleanup 4.7.1, macleanup 4.3.1 safety fix]
+keywords: [macleanup changelog, macleanup versions, macleanup 5.1.0, macleanup 5.0.0, macleanup 4.7.1, macleanup 4.3.1 safety fix]
 ---
 
 # Release history
@@ -14,7 +14,7 @@ changelog lives with the source:
 [CHANGELOG.md](https://github.com/aoneahsan/macleanup/blob/main/CHANGELOG.md).
 Versions follow [semantic versioning](https://semver.org).
 
-This documentation describes **5.0.0**. Verify the published version with
+This documentation describes **5.1.0**. Verify the published version with
 `macleanup --check-update` before installing or updating.
 
 ```bash
@@ -23,6 +23,36 @@ macleanup --check-update   # what is published
 ```
 
 Entries before 5.0.0 use the names that were current at the time.
+
+## 5.1.0 — event stream, archives and run accounting
+
+- `--json-events` prints a newline-delimited JSON event stream on stdout while
+  the run happens: `plan`, `disk`, `section_start`, `item`, `progress`,
+  `section_result`, `error` and `summary`. Schema version 1 is on the
+  [JSON event stream](./reference/json-events.md) page. The macleanup desktop
+  app reads this stream.
+- `--archive-path PATH` (repeatable) writes PATH to a gzip archive in
+  `~/.macleanup/archives/` before it is deleted or moved to the Trash. The
+  folder is mode 700 and each archive mode 600. If the archive cannot be
+  written, PATH is left in place.
+- `--exclude-path` now protects a path in every section's delete and Trash
+  move, not only in sections 23 and 24.
+- `--all` runs its safe-batch sections through the same dispatcher as
+  `--only`, so every run uses one accounting path.
+- The session summary counts attempted, skipped and failed sections beside the
+  completed ones. It also shows the local-snapshot count, with a note that
+  deleted files may not free space until macOS releases those snapshots.
+- Section 12 lists the orphan-shaped entries it skipped because they were
+  touched recently, in its report, for review. A skipped entry is not proof
+  that nothing is left behind.
+- Section 25 lists loaded Homebrew and third-party services in both launchd
+  domains, your user's and the system's. `brew services list` in one domain can
+  say `none` while a root service is running.
+- The launcher is verified on Node 14.21.3, so the declared `engines.node`
+  floor of `>=14` holds.
+
+The [macleanup desktop app](./desktop-app/overview.md) is being released
+alongside 5.1.0. It runs this same script.
 
 ## 5.0.0 — one name: macleanup
 

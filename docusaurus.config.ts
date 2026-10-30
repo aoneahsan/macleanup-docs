@@ -13,7 +13,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // ---------------------------------------------------------------------------
 
 const SITE_URL = 'https://macleanup-docs.aoneahsan.com';
-const PKG_VERSION = '5.0.0';
+const PKG_VERSION = '5.1.0';
 
 // Optional analytics. Absent ⇒ provider skipped entirely (no tag, no init).
 const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID || '';

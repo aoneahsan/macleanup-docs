@@ -49,7 +49,7 @@ const sidebars: SidebarsConfig = {
         type: 'generated-index',
         title: 'Reference',
         description:
-          'Every flag, every section, every profile, the config file, and where logs and reports are written.',
+          'Every flag, every section, every profile, the config file, where logs and reports are written, and the JSON event stream.',
         slug: '/reference',
       },
       items: [
@@ -58,6 +58,26 @@ const sidebars: SidebarsConfig = {
         'reference/profiles',
         'reference/configuration',
         'reference/reports-and-logs',
+        'reference/json-events',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Desktop app',
+      collapsed: false,
+      link: {
+        type: 'generated-index',
+        title: 'The macleanup desktop app',
+        description:
+          'The macleanup desktop app runs the same script in a window: installing it, what the plans include, what stays on your Mac, and the keyboard shortcuts.',
+        slug: '/desktop-app',
+      },
+      items: [
+        'desktop-app/overview',
+        'desktop-app/install',
+        'desktop-app/plans',
+        'desktop-app/privacy',
+        'desktop-app/keyboard-shortcuts',
       ],
     },
     'recipes',

@@ -18,6 +18,8 @@ that follows it.
 
 ```
 ~/.macleanup/
+├── archives/          (5.1.0+, only with --archive-path)
+│   └── <date>-<name>.tar.gz
 ├── logs/
 │   └── macleanup-YYYY-MM-DD.log
 └── reports/
@@ -38,12 +40,12 @@ open ~/.macleanup/reports/
 
 | File | Written by | Contains |
 |---|---|---|
-| `orphans-*.txt` | Section 12 | Application data with no installed parent app |
+| `orphans-*.txt` | Section 12 | Application data with no installed parent app; from 5.1.0 also the orphan-shaped entries it skipped because they were touched recently, for review |
 | `unused-apps-*.txt` | Section 21 | Applications idle past `--threshold` days |
 | `large-files-*.txt` | Section 18 | Everything ≥ 500 MB under `$HOME`, no age filter |
 | `stale-build-*.txt` | Section 23 | Build directories untouched past `--stale-build-days` |
 | `large-stale-*.txt` | Section 24 | Files ≥ `--large-file-size-gb` GB, idle past `--large-file-days` |
-| `launch-audit-*.txt` | Section 25 | Orphaned LaunchAgents and LaunchDaemons |
+| `launch-audit-*.txt` | Section 25 | Orphaned LaunchAgents and LaunchDaemons; from 5.1.0 also the loaded Homebrew and third-party services in both launchd domains, your user's and the system's |
 | `disk-usage-*.txt` | Section 26 | Per-directory usage for `$HOME` and `~/Library` |
 
 These files are written **during a dry run too**, which makes them the most
@@ -54,6 +56,33 @@ back through a terminal:
 macleanup --only 23 --stale-build-days 90 --dry-run
 open ~/.macleanup/reports/
 ```
+
+A skipped entry in the section 12 report is not proof that nothing is left
+behind; review the list yourself. Section 25 reads both launchd domains because
+`brew services list` in one domain can say `none` while a root service is
+running.
+
+Archives written by [`--archive-path`](/reference/cli#archive-path) can hold
+settings, sessions or keys, so the folder is mode 700 and each file mode 600.
+
+## The session summary {#session-summary}
+
+From 5.1.0 the summary at the end of a run counts sections four ways:
+
+| Count | Meaning |
+|---|---|
+| Attempted | Every section the run selected |
+| Completed | Sections that finished their work |
+| Skipped | Sections that did not run, each with a reason, such as a deep section refused without `--i-understand-deep` |
+| Failed | Sections that stopped on an error |
+
+A skipped or failed section is never counted as completed.
+
+The summary also shows the number of local APFS snapshots. **Deleted files may
+not free disk space until macOS releases those snapshots**, so free space can
+rise by less than the freed estimate. Section 11 is the section that deals
+with local Time Machine snapshots; read [its entry](/reference/sections#section-11--time-machine-local-snapshots) before
+selecting it.
 
 ## The credits header
 
@@ -133,6 +162,11 @@ macleanup --all --yes --json | jq '{freed: .freed_kb, sections: .sections_done}'
 The object's `reports` array lists the files written **by that run**; before
 4.6.1 it listed everything in the directory, including leftovers from earlier
 runs the same day. Full shape: [`--json`](/reference/cli#json-output).
+
+To follow a run while it happens — every section, item and result — use
+[`--json-events`](/reference/json-events) instead. Its `summary` event carries
+the attempted, completed, skipped and failed section ids, and its `disk` events
+carry the snapshot count.
 
 ## Next
 

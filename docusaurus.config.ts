@@ -14,7 +14,7 @@ import { createSitemapItems } from './plugins/site-pages';
 // ---------------------------------------------------------------------------
 
 const SITE_URL = 'https://macleanup-docs.aoneahsan.com';
-const PKG_VERSION = '5.2.2';
+const PKG_VERSION = '5.3.0';
 // Update flow, layer 2: this docs build's own version and where its release record is read.
 // The URL and publishable key are public by design (the desktop app ships them too).
 const DOCS_VERSION: string = require('./package.json').version;

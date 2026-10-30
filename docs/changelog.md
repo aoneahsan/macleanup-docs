@@ -24,6 +24,18 @@ macleanup --check-update   # what is published
 
 Entries before 5.0.0 use the names that were current at the time.
 
+## 5.3.0 — an assistant, receipt backups and required updates
+
+*Released 2026-10-30.*
+
+- Section 26 (disk usage report) no longer measures `~/Music`, `~/Movies` or
+  `~/Pictures`, so the desktop app no longer asks for Apple Music, media or
+  Photos access on a first preview. The report says they were not measured.
+- In the desktop app: an [assistant](/desktop-app/assistant) that explains a
+  preview, typed or spoken; receipt backups on Pro and Team; and
+  [required updates](/desktop-app/install#required-updates). Automatic updates
+  now relaunch at a quiet moment, never during a run.
+
 ## 5.2.2 — keep means keep, a faster large-file scan
 
 *Released 2026-10-30.*

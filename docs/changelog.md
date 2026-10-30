@@ -4,7 +4,7 @@ description: What changed in each macleanup release — the safety fixes, the tw
 tags: [changelog, releases, versions, history]
 sidebar_position: 6
 sidebar_label: Release history
-keywords: [macleanup changelog, macleanup versions, macleanup 5.2.1, macleanup 5.2.0, macleanup 5.1.0, macleanup 5.0.0, macleanup 4.7.1, macleanup 4.3.1 safety fix]
+keywords: [macleanup changelog, macleanup versions, macleanup 5.2.2, macleanup 5.2.1, macleanup 5.2.0, macleanup 5.1.0, macleanup 5.0.0, macleanup 4.7.1, macleanup 4.3.1 safety fix]
 ---
 
 # Release history
@@ -23,6 +23,18 @@ macleanup --check-update   # what is published
 ```
 
 Entries before 5.0.0 use the names that were current at the time.
+
+## 5.2.2 — keep means keep, a faster large-file scan
+
+*Released 2026-10-30.*
+
+- `--exclude-path` now keeps a path in every bulk wipe and age-based prune, not
+  only in the per-item deletes; a folder that holds a kept path is left whole.
+- Section 18 skips photo libraries, iCloud folders, Movies, Music, virtual
+  machines and the Trash instead of walking them, so the scan takes seconds.
+- The script is split into an entry file and short modules in `lib/`; what it
+  does is unchanged. Output names the macleanup team instead of a person.
+- In the desktop app, scheduled runs now report back with a receipt.
 
 ## 5.2.1 — package page refresh
 

@@ -14,7 +14,7 @@ import { createSitemapItems } from './plugins/site-pages';
 // ---------------------------------------------------------------------------
 
 const SITE_URL = 'https://macleanup-docs.aoneahsan.com';
-const PKG_VERSION = '5.2.1';
+const PKG_VERSION = '5.2.2';
 
 // Optional analytics. Absent ⇒ provider skipped entirely (no tag, no init).
 const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID || '';

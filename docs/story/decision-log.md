@@ -23,3 +23,11 @@ The owner replied: “approve all, finish all remaining work now.” This approv
 ## 2026-10-29 — One name: macleanup
 
 The owner wrote: “please get everything fully on 1 name please, macleanup”, “that is the name, brand, cli command, npx command, and everything related to macleanup” and “make sure it's "macleanup" everywhere please”. The glossary now has one row: `macleanup`, always lowercase, for the product, brand, package, command, script and data folder. The separate command row is removed. macleanup 5.0.0 ships the rename; entries in the changelog before 5.0.0 keep their historical wording, and the upgrading page names the old forms only to explain the migration. The “not a GUI app” limit stays until the desktop app ships, when its own surface rows are added.
+
+## 2026-10-30 — Desktop app, team voice, analytics, backups
+
+- **Desktop app approved and shipped.** The owner approved the desktop dummy (“approve desktop app click-dummy, please plan and get it all developed as best as possible now 100%”); macleanup 5.2.0 ships the app beside the CLI. The glossary's desktop-app surface is live.
+- **The product speaks as the macleanup team.** Docs, CLI output, logs and reports name “the macleanup team” with the website, docs and issues page; personal phone, address and profile links are removed. The MIT copyright line keeps the copyright holder's name, because that is a legal fact, not a voice.
+- **Analytics (owner's choice of option: “Follow the fleet rule”).** The desktop app and website follow the fleet analytics standard: on by default, told once in the legal bar, no opt-out, never a path, file name or email. The command line stays free of telemetry. Until the analytics IDs exist, nothing is collected, and every surface keeps saying so; the privacy text, the bar line and the “no analytics” claims change in the same release that turns analytics on.
+- **The CLI is split into modules** (owner: “Split the CLI too”). Copy says “plain bash in short files” where it said “a single script” or “two readable files”.
+- **Backups (owner: “Platform backups only”).** Account data sits in the database host's daily backups for up to 7 days; a deleted account is never restored from them.

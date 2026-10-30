@@ -242,6 +242,14 @@ export default function sitePages(context: LoadContext): Plugin<Release[]> {
         .replace(/<meta[^>]*property=["']?og:url["']?[^>]*>/g, '')
         .replace(/(<meta[^>]*name=["']?robots["']?[^>]*content=)("[^"]*"|[^\s>]+)/g, '$1"noindex, follow"');
       writeFileSync(notFound, html);
+      // The local-search results page is a utility screen, not content: keep it out
+      // of the index while its links stay followable.
+      const search = path.join(outDir, 'search.html');
+      if (existsSync(search)) {
+        const page = readFileSync(search, 'utf8')
+          .replace(/(<meta[^>]*name=["']?robots["']?[^>]*content=)("[^"]*"|[^\s>]+)/g, '$1"noindex, follow"');
+        writeFileSync(search, page);
+      }
     },
   };
 }

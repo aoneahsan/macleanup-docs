@@ -116,9 +116,9 @@ flowchart LR
 
 | | |
 |---|---|
-| Package | [`macleanup` on npm](https://www.npmjs.com/package/macleanup) — current documented version **5.2.0** |
+| Package | [`macleanup` on npm](https://www.npmjs.com/package/macleanup) — current documented version **5.2.1** |
 | Command installed | `macleanup` |
 | Source | [github.com/aoneahsan/macleanup](https://github.com/aoneahsan/macleanup) |
 | Requirements | macOS 11+, bash 3.2+; Node only if you use `npx` or a global npm install |
 | Licence | MIT — use, modify, redistribute, sell; no warranty, no liability |
-| Author | [Ahsan Mahmood](/about-the-author) |
+| Maintained by | [The macleanup team](/about-the-author) |

@@ -14,7 +14,7 @@ import { createSitemapItems } from './plugins/site-pages';
 // ---------------------------------------------------------------------------
 
 const SITE_URL = 'https://macleanup-docs.aoneahsan.com';
-const PKG_VERSION = '5.2.0';
+const PKG_VERSION = '5.2.1';
 
 // Optional analytics. Absent ⇒ provider skipped entirely (no tag, no init).
 const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID || '';
@@ -254,7 +254,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/social-card.svg',
+    image: 'img/social-card.png',
     metadata: [
       {
         name: 'description',
@@ -363,7 +363,7 @@ const config: Config = {
             { label: 'Source (GitHub)', href: 'https://github.com/aoneahsan/macleanup' },
             { label: 'npm package', href: 'https://www.npmjs.com/package/macleanup' },
             { label: 'Report an issue', href: 'https://github.com/aoneahsan/macleanup/issues' },
-            { label: 'Author', to: '/about-the-author' },
+            { label: 'About and contact', to: '/about-the-author' },
           ],
         },
         {

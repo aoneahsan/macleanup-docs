@@ -1,26 +1,25 @@
 ---
-title: About the author
-description: macleanup is built and maintained by Ahsan Mahmood — how to get in touch, report an issue, contribute, or report a security problem privately.
-tags: [about, author, contact, contributing, security]
+title: About and contact
+description: How to reach the macleanup team — get in touch, report an issue, contribute, or report a security problem privately.
+tags: [about, contact, contributing, security]
 sidebar_position: 1
-sidebar_label: About the author
-keywords: [ahsan mahmood, aoneahsan, macleanup author, macleanup support]
+sidebar_label: About and contact
+keywords: [macleanup contact, macleanup support, macleanup security, macleanup contributing]
 ---
 
-# About the author
+# About and contact
 
-macleanup is built and maintained by **Ahsan Mahmood** — a senior software
-engineer, macOS power user, and maker of small sharp tools.
+macleanup is built and maintained by **the macleanup team**. The command line
+is MIT-licensed open source; the desktop app runs that same script.
 
 <div className="ml-author-card">
 
-**Ahsan Mahmood**
+**The macleanup team**
 
-- Portfolio — [aoneahsan.com](https://aoneahsan.com)
 - Email — [aoneahsan@gmail.com](mailto:aoneahsan@gmail.com)
-- GitHub — [github.com/aoneahsan](https://github.com/aoneahsan)
-- LinkedIn — [linkedin.com/in/aoneahsan](https://linkedin.com/in/aoneahsan)
-- npm — [npmjs.com/~aoneahsan](https://www.npmjs.com/~aoneahsan)
+- Issues — [github.com/aoneahsan/macleanup/issues](https://github.com/aoneahsan/macleanup/issues)
+- Website — [macleanup.aoneahsan.com](https://macleanup.aoneahsan.com)
+- More from the team — [aoneahsan.com](https://aoneahsan.com)
 
 </div>
 
@@ -30,7 +29,7 @@ Three flags, all local-first. Nothing is auto-sent — you review every prefille
 message before submitting it.
 
 ```bash
-macleanup --contact         # the author contact card
+macleanup --contact         # the contact card
 macleanup --feedback        # opens your mail client, prefilled
 macleanup --report-issue    # opens a pre-filled GitHub issue
 macleanup --stats           # your run history under ~/.macleanup
@@ -66,7 +65,7 @@ report. Both are welcome, and both are taken seriously.
 ## Contributing
 
 macleanup is MIT-licensed open source. Issues and pull requests are welcome,
-though acceptance is at the author's sole discretion. See
+though acceptance is at the maintainers' discretion. See
 [CONTRIBUTING.md](https://github.com/aoneahsan/macleanup/blob/main/CONTRIBUTING.md)
 and the
 [Code of Conduct](https://github.com/aoneahsan/macleanup/blob/main/CODE_OF_CONDUCT.md).
@@ -90,7 +89,7 @@ a bug worth reporting.
 
 **MIT.** Use, copy, modify, merge, publish, distribute, sublicense and sell
 macleanup, provided the copyright and licence notice are kept in all copies.
-The software is offered **as-is, with no warranty**, and the author is **not
+The software is offered **as-is, with no warranty**, and the macleanup team is **not
 liable** for any data loss or damage arising from its use. Full text:
 [LICENSE.md](https://github.com/aoneahsan/macleanup/blob/main/LICENSE.md).
 

@@ -4,7 +4,7 @@ description: What changed in each macleanup release — the safety fixes, the tw
 tags: [changelog, releases, versions, history]
 sidebar_position: 6
 sidebar_label: Release history
-keywords: [macleanup changelog, macleanup versions, macleanup 5.2.0, macleanup 5.1.0, macleanup 5.0.0, macleanup 4.7.1, macleanup 4.3.1 safety fix]
+keywords: [macleanup changelog, macleanup versions, macleanup 5.2.1, macleanup 5.2.0, macleanup 5.1.0, macleanup 5.0.0, macleanup 4.7.1, macleanup 4.3.1 safety fix]
 ---
 
 # Release history
@@ -23,6 +23,13 @@ macleanup --check-update   # what is published
 ```
 
 Entries before 5.0.0 use the names that were current at the time.
+
+## 5.2.1 — package page refresh
+
+*Released 2026-10-30.*
+
+- README and package metadata only: the npm page shows the current version and
+  size and links the website as the homepage. The script is unchanged.
 
 ## 5.2.0 — the desktop app and a toolchain inventory
 

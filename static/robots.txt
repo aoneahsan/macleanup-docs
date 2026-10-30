@@ -1,5 +1,5 @@
 # macleanup Docs — robots.txt
-# Maintained by Ahsan Mahmood (https://aoneahsan.com)
+# Maintained by the macleanup team (https://macleanup.aoneahsan.com)
 # Last updated: 2026-07-25
 #
 # Public crawl policy for https://macleanup-docs.aoneahsan.com.

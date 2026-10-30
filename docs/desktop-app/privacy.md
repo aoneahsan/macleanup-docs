@@ -2,7 +2,7 @@
 title: Privacy in the desktop app
 description: What the macleanup desktop app keeps on your Mac and what it syncs — no telemetry, file paths never leave the Mac, and a signed-in sync of section ids, byte counts, statuses and the macOS version only.
 tags: [desktop-app, privacy, sync]
-sidebar_position: 4
+sidebar_position: 5
 sidebar_label: Privacy in the app
 keywords: [macleanup privacy, macleanup telemetry, macleanup sync, macleanup data, macleanup account]
 ---
@@ -43,12 +43,21 @@ The same rule is a guarantee of the [JSON event stream](/reference/json-events#g
 - **Update check** — contacts GitHub Releases.
 - **Sign-in and sync** — only when you sign in.
 - **Checkout** — opens in your browser.
+- **Release notice** — the app reads the newest release notice from the backend
+  provider at start, every 15 minutes and when you return. It sends the
+  product's version and nothing about you.
+- **Assistant** — only when you ask. It sends your question and per-section
+  numbers, sizes and counts, never paths. Answers come from Anthropic's Claude
+  models through FilesHub; a spoken question is transcribed by Groq and the
+  recording is not stored. See [Assistant and backups](/desktop-app/assistant).
+- **Receipt backups** — only on Pro or Team, when you back up or restore. The
+  summary is stored privately with FilesHub and holds no paths.
 
 Each service receives normal request details such as an IP address.
 
 You can download your account data or delete your account from the Account
-screen. Deleting it removes the account, plan record and synced run numbers
-from the servers; everything on your Mac stays until you remove it. The full
+screen. Deleting it removes the account, plan record, synced run numbers and receipt
+backups from the servers; everything on your Mac stays until you remove it. The full
 policy is the
 [Privacy Policy](https://macleanup.aoneahsan.com/privacy).
 

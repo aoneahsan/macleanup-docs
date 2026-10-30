@@ -2,7 +2,7 @@
 title: Desktop app keyboard shortcuts
 description: The macleanup desktop app's default keyboard shortcuts — ⌘K command palette, ⌘N new preview, ⌘Y history, ⌘, settings — and the rule that every shortcut is rebindable.
 tags: [desktop-app, keyboard, shortcuts]
-sidebar_position: 5
+sidebar_position: 6
 sidebar_label: Keyboard shortcuts
 keywords: [macleanup shortcuts, macleanup keyboard, macleanup command palette, rebind shortcuts]
 ---

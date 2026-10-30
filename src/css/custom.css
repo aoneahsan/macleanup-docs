@@ -111,3 +111,25 @@
 .ml-author-card a {
   font-weight: 600;
 }
+
+/* Update flow, layer 2: the block (urgent, or a normal release from the next visit) and the notice. */
+.release-block { position: fixed; inset: 0; z-index: 400; display: grid; place-items: center; padding: 1rem;
+  background: var(--ifm-background-color); color: var(--ifm-font-color-base); }
+.release-block-card { max-width: 32rem; padding: 2rem; border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 1.25rem; background: var(--ifm-background-surface-color); box-shadow: var(--ifm-global-shadow-tl); }
+.release-block-card h2 { margin: 0 0 .75rem; }
+.release-block-card p { margin: 0 0 .75rem; }
+.release-block-version, .release-block-note { color: var(--ifm-color-emphasis-700); font-size: .9rem; }
+.release-block-update, .release-notice-update { min-height: 2.75rem; padding: 0 1.25rem; border: 0; border-radius: .7rem;
+  background: var(--ifm-color-primary); color: var(--ifm-color-primary-contrast-foreground, #fff); font: inherit;
+  font-weight: 650; cursor: pointer; }
+.release-notice { position: fixed; inset-inline-start: 1rem; bottom: 1rem; z-index: 300; max-width: 26rem; display: flex;
+  flex-wrap: wrap; align-items: center; gap: .5rem .75rem; padding: .85rem 1rem; border: 1px solid var(--ifm-color-emphasis-300);
+  border-inline-start: 4px solid var(--ifm-color-primary); border-radius: 1rem; background: var(--ifm-background-surface-color);
+  box-shadow: var(--ifm-global-shadow-tl); font-size: .9rem; }
+.release-notice p { flex-basis: 100%; margin: 0; }
+.release-notice-later { min-height: 2.75rem; padding: 0 1rem; border: 1px solid var(--ifm-color-emphasis-300); border-radius: .7rem;
+  background: transparent; color: inherit; font: inherit; font-weight: 650; cursor: pointer; }
+.release-block-update:focus-visible, .release-notice-update:focus-visible, .release-notice-later:focus-visible {
+  outline: 3px solid var(--ifm-color-primary); outline-offset: 2px; }
+@media (max-width: 480px) { .release-notice { inset-inline: 1rem; max-width: none; } }

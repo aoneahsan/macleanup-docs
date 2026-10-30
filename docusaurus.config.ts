@@ -15,6 +15,16 @@ import { createSitemapItems } from './plugins/site-pages';
 
 const SITE_URL = 'https://macleanup-docs.aoneahsan.com';
 const PKG_VERSION = '5.2.2';
+// Update flow, layer 2: this docs build's own version and where its release record is read.
+// The URL and publishable key are public by design (the desktop app ships them too).
+const DOCS_VERSION: string = require('./package.json').version;
+const RELEASE = {
+  platform: 'docs',
+  channel: process.env.MACLEANUP_RELEASE_CHANNEL === 'test' ? 'test' : 'production',
+  version: DOCS_VERSION,
+  api: 'https://epcuzfzldixtftnbudba.supabase.co',
+  key: 'sb_publishable_WGrkaVhhrzJE8_8XcF_svQ_KCm3XNLM',
+};
 
 // Optional analytics. Absent ⇒ provider skipped entirely (no tag, no init).
 const GA_MEASUREMENT_ID = process.env.GA_MEASUREMENT_ID || '';
@@ -28,6 +38,7 @@ console.log(
 );
 
 const config: Config = {
+  customFields: { release: RELEASE },
   title: 'macleanup',
   tagline:
     'A safe-by-default macOS cleanup CLI with 28 targeted sections, confirmation by default, and a dry run that deletes no files.',
@@ -233,6 +244,7 @@ const config: Config = {
 
   // /sitemap, /feed, /feed.xml and the 404 head fix.
   plugins: ['./plugins/site-pages.ts'],
+  clientModules: ['./src/clientModules/releaseGate.ts'],
 
   themes: [
     '@docusaurus/theme-mermaid',

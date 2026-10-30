@@ -9720,6 +9720,7 @@ __metadata:
     prism-react-renderer: "npm:^2.4.1"
     react: "npm:^19.2.7"
     react-dom: "npm:^19.2.7"
+    strata-storage: "npm:^3.1.1"
     typescript: "npm:~6.0.3"
   languageName: unknown
   linkType: soft
@@ -13465,6 +13466,35 @@ __metadata:
   version: 3.10.0
   resolution: "std-env@npm:3.10.0"
   checksum: 10c0/1814927a45004d36dde6707eaf17552a546769bc79a6421be2c16ce77d238158dfe5de30910b78ec30d95135cc1c59ea73ee22d2ca170f8b9753f84da34c427f
+  languageName: node
+  linkType: hard
+
+"strata-storage@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "strata-storage@npm:3.1.1"
+  peerDependencies:
+    "@angular/core": ">=21.0.6"
+    "@angular/forms": ">=21.0.6"
+    "@capacitor/core": ">=8.0.0"
+    firebase: ">=10.0.0"
+    react: ">=19.2.3"
+    vue: ">=3.5.26"
+  peerDependenciesMeta:
+    "@angular/core":
+      optional: true
+    "@angular/forms":
+      optional: true
+    "@capacitor/core":
+      optional: true
+    firebase:
+      optional: true
+    react:
+      optional: true
+    vue:
+      optional: true
+  bin:
+    strata-storage: scripts/cli.js
+  checksum: 10c0/cd455c2eced4ffd6f5755f0737d002766a07c303810ce7cbf9292117aebff2d68bf17536257d5e6bad2b91ad2e30a2fc4b537ce284867f6f99c02da06c9aefac
   languageName: node
   linkType: hard
 

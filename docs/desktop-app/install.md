@@ -52,9 +52,27 @@ To grant it:
 
 ## Updates {#updates}
 
-The app checks for updates itself. The check contacts GitHub Releases, which
-receives normal request details such as an IP address. See
+The app checks for updates itself when it starts and every 6 hours. With
+**Install updates automatically** on, it downloads the signed update and
+relaunches at a quiet moment — never during a run. The check contacts GitHub
+Releases, which receives normal request details such as an IP address. See
 [Privacy in the app](/desktop-app/privacy).
+
+### Required updates {#required-updates}
+
+Sometimes an update must be installed before you continue, for example when it
+fixes a safety rule. The app checks for a release notice when it starts, every
+15 minutes and when you come back to it:
+
+- **Urgent:** the app stops and shows the reason with one **Update now**
+  button. It installs the update and relaunches; your receipts and settings
+  stay.
+- **Normal:** the app tells you a new version is out and that it is required
+  from the next start. From the next start it asks you to update first.
+
+If the notice cannot be read, for example offline, the app keeps working. This
+website and the documentation use the same notices; there **Update now**
+reloads the page.
 
 ## Next
 

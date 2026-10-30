@@ -28,6 +28,8 @@ Prices as of 2026-10-30.
 | Synced history | — | Up to 5 Macs | Up to 5 Macs a seat |
 | Scheduled previews and safe-batch runs | — | Yes | Yes |
 | Multi-Mac reports and CSV exports | — | Yes | Yes |
+| [Assistant](/desktop-app/assistant) questions a month | 30 (Spark) | 300 (Pulse) | 1,000 (Surge) |
+| [Receipt backups](/desktop-app/assistant#receipt-backups) | — | Up to 100 | Up to 500 |
 | Shared fleet report | — | — | Yes, across the team's Macs |
 | Invite and remove members | — | — | Yes |
 

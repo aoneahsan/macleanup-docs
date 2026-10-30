@@ -15,9 +15,9 @@ uses. The app makes each step visible: what a run would touch before it starts,
 and what it did after it ends.
 
 :::info[Release status]
-The desktop app is being released alongside macleanup 5.1.0. Check the
-[download page](https://macleanup.aoneahsan.com/download) for the current
-build. The command line works with or without it.
+The desktop app shipped with macleanup 5.2.0 on 30 October 2026. Get it from the
+[download page](https://macleanup.aoneahsan.com/download). The command line works
+with or without it.
 :::
 
 ## What the window adds {#what-it-adds}

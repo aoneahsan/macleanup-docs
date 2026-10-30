@@ -41,7 +41,7 @@ Three equivalent ways to run it; the flags are identical in all three.
 - [Profiles](https://macleanup-docs.aoneahsan.com/reference/profiles): the five bundles — `dev`, `minimal`, `cache-only`, `deep`, `audit` — and which of them delete permanently.
 - [Configuration](https://macleanup-docs.aoneahsan.com/reference/configuration): the `~/.macleanuprc` config file, environment variables, and precedence.
 - [Reports and logs](https://macleanup-docs.aoneahsan.com/reference/reports-and-logs): the `~/.macleanup/` directory layout, the attempted/completed/skipped/failed session summary, the local-snapshot note, and how to prune it.
-- [JSON event stream](https://macleanup-docs.aoneahsan.com/reference/json-events): the `--json-events` NDJSON schema (version 1, since 5.1.0) — event types, fields, ordering guarantees and exit codes.
+- [JSON event stream](https://macleanup-docs.aoneahsan.com/reference/json-events): the `--json-events` NDJSON schema (version 1, since 5.1.0; `age_days`, `tool` and `version` item fields since 5.2.0) — event types, fields, ordering guarantees and exit codes.
 
 ## Desktop app
 

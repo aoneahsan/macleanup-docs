@@ -4,7 +4,7 @@ description: What changed in each macleanup release — the safety fixes, the tw
 tags: [changelog, releases, versions, history]
 sidebar_position: 6
 sidebar_label: Release history
-keywords: [macleanup changelog, macleanup versions, macleanup 5.1.0, macleanup 5.0.0, macleanup 4.7.1, macleanup 4.3.1 safety fix]
+keywords: [macleanup changelog, macleanup versions, macleanup 5.2.0, macleanup 5.1.0, macleanup 5.0.0, macleanup 4.7.1, macleanup 4.3.1 safety fix]
 ---
 
 # Release history
@@ -23,6 +23,21 @@ macleanup --check-update   # what is published
 ```
 
 Entries before 5.0.0 use the names that were current at the time.
+
+## 5.2.0 — the desktop app and a toolchain inventory
+
+*Released 2026-10-30.*
+
+- The [macleanup desktop app](/desktop-app/overview) for macOS ships with this
+  release: one disk image for Apple silicon and Intel Macs, running this same
+  script with a disk gauge, a dry-run ledger and a receipt for every run.
+- Section 0 (system health, read-only) lists installed developer toolchains —
+  Node versions under nvm, pyenv Pythons, rbenv Rubies, rustup toolchains, Java
+  VMs, Xcode, the Android SDK and Studio, Docker Desktop, Flutter and Homebrew —
+  with the space each takes. It changes nothing.
+- In the [JSON event stream](./reference/json-events.md), each `item` carries
+  `age_days`, toolchain items carry `tool` and `version`, and section 5 names
+  each cache folder it would clear. The schema stays at version 1.
 
 ## 5.1.0 — event stream, archives and run accounting
 

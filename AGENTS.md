@@ -79,6 +79,6 @@ yarn typecheck
 
 ## Version drift
 
-The site documents **macleanup 5.1.0**. When the package publishes a new version, update
+The site documents **macleanup 5.2.0**. When the package publishes a new version, update
 `PKG_VERSION` in `docusaurus.config.ts`, the version line in `docs/intro.md`, `docs/changelog.md`, and
 `static/llms.txt` in the same change.

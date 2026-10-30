@@ -21,8 +21,8 @@ its normal run log unless you choose a different log location.
 It is MIT-licensed, makes no network calls beyond an opt-in version check, and
 requires nothing but macOS 11+ and bash 3.2+.
 
-The [macleanup desktop app](/desktop-app/overview), being released alongside
-5.1.0, runs the same script in a window. The command line works with or
+The [macleanup desktop app](/desktop-app/overview), released with 5.2.0, runs
+the same script in a window. The command line works with or
 without it.
 
 :::danger[This tool deletes files]
@@ -116,7 +116,7 @@ flowchart LR
 
 | | |
 |---|---|
-| Package | [`macleanup` on npm](https://www.npmjs.com/package/macleanup) — current documented version **5.1.0** |
+| Package | [`macleanup` on npm](https://www.npmjs.com/package/macleanup) — current documented version **5.2.0** |
 | Command installed | `macleanup` |
 | Source | [github.com/aoneahsan/macleanup](https://github.com/aoneahsan/macleanup) |
 | Requirements | macOS 11+, bash 3.2+; Node only if you use `npx` or a global npm install |

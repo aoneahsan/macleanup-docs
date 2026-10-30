@@ -10,8 +10,9 @@ keywords: [install macleanup app, macleanup gatekeeper, open anyway macos, macle
 # Install the desktop app
 
 **The desktop app is one disk image for Apple silicon and Intel Macs, on
-macOS 11 or later.** It is being released alongside macleanup 5.1.0; get the
-current build from the [download page](https://macleanup.aoneahsan.com/download).
+macOS 11 or later.** It shipped with macleanup 5.2.0 on 30 October 2026. Get it
+from the [download page](https://macleanup.aoneahsan.com/download) or the
+[GitHub release](https://github.com/aoneahsan/macleanup/releases/latest).
 
 | | |
 |---|---|

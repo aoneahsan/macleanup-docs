@@ -1,6 +1,7 @@
 import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import { createSitemapItems } from './plugins/site-pages';
 
 // ---------------------------------------------------------------------------
 // macleanup — Documentation site config
@@ -211,11 +212,15 @@ const config: Config = {
         theme: {
           customCss: './src/css/custom.css',
         },
+        // Google ignores changefreq and priority, so neither is emitted.
+        // lastmod is the day each page's words last changed, and /search stays
+        // out — see createSitemapItems in plugins/site-pages.ts.
         sitemap: {
-          changefreq: 'weekly',
-          priority: 0.7,
+          changefreq: null,
+          priority: null,
           lastmod: 'date',
-          ignorePatterns: ['/tags/**'],
+          ignorePatterns: ['/tags/**', '/search'],
+          createSitemapItems,
         },
         // GA4 — the key is spread in only when it exists, so an unset env var
         // means the plugin is never registered at all.
@@ -225,6 +230,9 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
+
+  // /sitemap, /feed, /feed.xml and the 404 head fix.
+  plugins: ['./plugins/site-pages.ts'],
 
   themes: [
     '@docusaurus/theme-mermaid',
@@ -356,6 +364,17 @@ const config: Config = {
             { label: 'npm package', href: 'https://www.npmjs.com/package/macleanup' },
             { label: 'Report an issue', href: 'https://github.com/aoneahsan/macleanup/issues' },
             { label: 'Author', to: '/about-the-author' },
+          ],
+        },
+        {
+          title: 'Find everything',
+          items: [
+            { label: 'Sitemap', to: '/sitemap' },
+            { label: 'Release feed', to: '/feed' },
+            // feed.xml is written after the build, where the link checker
+            // cannot see it, so it is linked by its absolute URL.
+            { label: 'RSS (feed.xml)', href: `${SITE_URL}/feed.xml` },
+            { label: 'llms.txt', href: `${SITE_URL}/llms.txt` },
           ],
         },
       ],

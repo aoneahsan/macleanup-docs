@@ -26,6 +26,8 @@ Entries before 5.0.0 use the names that were current at the time.
 
 ## 5.1.0 — event stream, archives and run accounting
 
+*Released 2026-10-30.*
+
 - `--json-events` prints a newline-delimited JSON event stream on stdout while
   the run happens: `plan`, `disk`, `section_start`, `item`, `progress`,
   `section_result`, `error` and `summary`. Schema version 1 is on the
@@ -56,6 +58,8 @@ alongside 5.1.0. It runs this same script.
 
 ## 5.0.0 — one name: macleanup
 
+*Released 2026-10-29.*
+
 - The command, script, data folder, config file and environment variables all
   use one name: `macleanup`, `macleanup.sh`, `~/.macleanup/`, `~/.macleanuprc`
   and `MACLEANUP_*`. Run it as `macleanup` or `npx macleanup`.
@@ -71,6 +75,8 @@ See [Upgrading to 5.0](./getting-started/upgrading-to-5.md) for the full table.
 
 ## 4.7.1 — launch-item audit correction
 
+*Released 2026-10-26.*
+
 - Section 25 preserves spaces in structured LaunchAgent program paths. It no
   longer reports an existing target such as one under `Application Support` as
   missing. Ambiguous raw plist strings are skipped; genuinely missing targets
@@ -82,6 +88,8 @@ See [Upgrading to 5.0](./getting-started/upgrading-to-5.md) for the full table.
 
 ## 4.7.0 — safety release
 
+*Released 2026-10-23.*
+
 - The `minimal` profile no longer selects Empty Trash. Section 10 now needs
   both `--yes` and `--i-understand-deep` when run unattended.
 - A refused deep section no longer appears as completed in the run summary.
@@ -92,15 +100,21 @@ See [Upgrading to 5.0](./getting-started/upgrading-to-5.md) for the full table.
 
 ## 4.6.3 — patch
 
+*Released 2026-07-25.*
+
 - Corrected the README version row to match the published package version.
 
 ## 4.6.2 — licensing and documentation
+
+*Released 2026-07-25.*
 
 - Changed the package license to MIT.
 - Reworked the README to make destructive behavior, recovery limits, and the
   package's public interface clearer.
 
 ## 4.6.1 — patch
+
+*Released 2026-06-08.*
 
 - **A dry run now estimates the space it would free.** Previously `--dry-run`
   reported `freed_kb: 0`: it printed per-folder "would clear …" notes but never
@@ -112,6 +126,8 @@ See [Upgrading to 5.0](./getting-started/upgrading-to-5.md) for the full table.
 
 ## 4.6.0 — GUI privileged operations and UX
 
+*Released 2026-06-08.*
+
 - **One admin prompt per run for the desktop GUI.** When launched by the
   companion macOS app, the CLI routes `sudo` through a graphical askpass, so
   privileged sections (6, 7, 9, 11, 13, 14, 20) actually run from the GUI and
@@ -122,12 +138,16 @@ See [Upgrading to 5.0](./getting-started/upgrading-to-5.md) for the full table.
 
 ## 4.5.1 — patch
 
+*Released 2026-06-08.*
+
 - **`--flag=value` is accepted**, alongside `--flag value`. A token like
   `--cache-age-days=30` was previously rejected with exit code 2.
 - **Clearer unknown-option errors** — the offending option plus a one-line
   hint, instead of dumping the whole help text.
 
 ## 4.5.0 — safety, correctness, features
+
+*Released 2026-06-08.*
 
 A broad audit-driven release, with two behaviour changes that matter to
 unattended users.
@@ -149,16 +169,22 @@ unattended users.
 
 ## 4.4.2 — safety patch
 
+*Released 2026-05-13.*
+
 Defensive hardening of the `CRITICAL_HOME_DIRS` allowlist, making the pnpm and
 corepack protections explicit so a future change cannot silently regress them.
 No behaviour change for anyone whose section 23 had been working correctly.
 
 ## 4.4.1 — documentation release
 
+*Released 2026-05-10.*
+
 A complete end-user documentation set under `docs/` in the source repository.
 No script behaviour changed.
 
 ## 4.4.0 — user-facing polish
+
+*Released 2026-05-10.*
 
 Feedback channels became first-class, with the no-telemetry promise unchanged —
 nothing is ever auto-sent.
@@ -172,6 +198,8 @@ nothing is ever auto-sent.
 
 ## 4.3.3 — the two-condition rule
 
+*Released 2026-05-10.*
+
 Anything that is not pure cache must now satisfy **both** conditions before it
 is deleted automatically: not in use by any installed software, **and**
 untouched (atime *and* mtime) for at least `--idle-days` days, default 100.
@@ -183,12 +211,16 @@ bundle id, but which something was still touching. Applies to sections 12, 21,
 
 ## 4.3.2 — age-aware cache pruning
 
+*Released 2026-05-10.*
+
 **Sections 1, 2 and 3 stopped wiping entire caches.** They previously deleted
 every file regardless of recent use, which is what produced reports like "my
 Gradle distribution disappeared". They now keep anything whose atime or mtime
 is inside `--cache-age-days`.
 
 ## 4.3.1 — safety fix
+
+*Released 2026-05-10.*
 
 **Anyone still on 4.3.0 should upgrade.**
 
@@ -206,10 +238,14 @@ Recovery instructions for machines affected by the 4.3.0 behaviour:
 
 ## 4.3.0
 
+*Released 2026-05-10.*
+
 The release that introduced the section 23 bug fixed in 4.3.1. Added profiles
 and several flags. **Do not run this version.**
 
 ## 4.2.0 — zero-install distribution
+
+*Released 2026-05-09.*
 
 - **Published to npm as [`macleanup`](https://www.npmjs.com/package/macleanup)**,
   so `npx macleanup` works with no install. A dependency-free
@@ -223,6 +259,8 @@ and several flags. **Do not run this version.**
 
 ## 4.1.0 — four new sections
 
+*Released 2026-05-09.*
+
 - **Section 23** — stale build artefacts (`node_modules`, `vendor`, `dist`,
   `build`, `.next`, `.nuxt`, `.turbo`, `.vite`, `.parcel-cache`, `.svelte-kit`,
   `.astro`, `.cache`, `target`, `Pods`, `coverage`, `.nyc_output`), sorted by
@@ -234,6 +272,8 @@ and several flags. **Do not run this version.**
   section 21; hardened path quoting and a bash-version and macOS preflight.
 
 ## 4.0.0 — single-file rewrite
+
+*Released 2026-04-17.*
 
 A complete rewrite into one self-contained `mac-cleanup.sh`, replacing the
 previous modular split and four standalone legacy scripts. Identical feature

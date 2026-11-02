@@ -24,7 +24,7 @@ Reassess this as part of the next package release:
 ## 🔐 Optional — analytics secrets
 
 Both are optional; the build succeeds without them and each provider is skipped when its key is absent.
-If you want analytics, add these as repo **Actions secrets** (never as committed files):
+If you want analytics, add these IDs to the FilesHub vault project `macleanup` (never as committed files); the agent exports them for the local build (`macleanup-desktop/docs/MANUAL-TASKS.md` row 7):
 
 | Secret | Provider |
 |---|---|

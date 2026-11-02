@@ -12,8 +12,7 @@
 
 ## 🔴 PUBLIC REPO — no secret ever enters it
 
-Only `.env.example` with placeholder values. Real values live in `~/.secrets/` and the repo's GitHub
-Actions secrets. **Every analytics provider is gated on its own key, so an absent key skips it and the
+Only `.env.example` with placeholder values. Real values live in `~/.secrets/` and the local build environment. **Every analytics provider is gated on its own key, so an absent key skips it and the
 build still succeeds** — a docs build must never require a secret.
 
 Sweep before every commit; it must return nothing:
@@ -28,7 +27,7 @@ git ls-files | grep -iE '(^|/)\.env$|\.env\.(local|production)|secret|credential
 |---|---|
 | Domain | `macleanup-docs.aoneahsan.com` — derived per `~/.claude/rules/docs-sites.md`: an npm package with no marketing site gets `<npm-package-name>-docs.aoneahsan.com` |
 | Pinned in | `static/CNAME` · `docusaurus.config.ts` `url` |
-| Host | **GitHub Pages only** — `.github/workflows/deploy-pages.yml` on push to `main` |
+| Host | **GitHub Pages only**, published by hand: build and verify locally, then commit `build/` to the `gh-pages` branch and push it (fast-forward, never force). Pages source = `gh-pages` `/`. **No GitHub Actions workflow, ever** (house rule 2026-10-31) |
 | Firebase | ❌ **None.** No `firebase.json`, no `.firebaserc`, no `firebase:deploy` script. A docs site is not a Firebase app |
 | Config | `baseUrl: '/'` · `organizationName: 'aoneahsan'` · `projectName: 'macleanup-docs'` |
 

@@ -5,7 +5,7 @@ safe-by-default macOS cleanup and maintenance CLI.
 
 **Live site:** [macleanup-docs.aoneahsan.com](https://macleanup-docs.aoneahsan.com)
 
-Built with [Docusaurus](https://docusaurus.io), deployed to **GitHub Pages** on every push to `main`.
+Built with [Docusaurus](https://docusaurus.io), deployed to **GitHub Pages** from the `gh-pages` branch, published by hand.
 
 ## Contents
 
@@ -73,10 +73,10 @@ find build -iname '*MANUAL*'    # must return nothing
 
 **GitHub Pages only.** This site has no Firebase project and no `firebase.json`.
 
-`.github/workflows/deploy-pages.yml` builds and deploys on every push to `main`, using the official
-Pages flow (`upload-pages-artifact` + `deploy-pages`) — there is no `gh-pages` branch to maintain.
-`static/CNAME` pins the custom domain and Docusaurus copies it verbatim into `build/`, so it ships
-inside the artifact automatically.
+Deployed by hand, never by GitHub Actions: build and check the site locally (`yarn build`, then
+`yarn serve`), copy `build/` into a worktree of the `gh-pages` branch, commit and push it as an ordinary
+fast-forward. GitHub Pages serves `gh-pages` at `/`. `static/CNAME` pins the custom domain and
+`static/.nojekyll` keeps underscore folders; Docusaurus copies both into `build/`.
 
 Owner-only setup steps (DNS, Pages custom domain, HTTPS) are tracked in
 [`docs/MANUAL-TASKS.md`](docs/MANUAL-TASKS.md).
@@ -93,8 +93,8 @@ Owner-only setup steps (DNS, Pages custom domain, HTTPS) are tracked in
 | `CLARITY_PROJECT_ID` | Optional | Microsoft Clarity. Absent ⇒ no session recording |
 
 Every provider is gated on its own key, so an absent key skips it entirely — no script tag, no init,
-no error. **`yarn build` succeeds with no environment configured.** Real values live in the repo's
-GitHub Actions secrets, never in a committed file.
+no error. **`yarn build` succeeds with no environment configured.** Real values come from the FilesHub vault
+(project `macleanup`) into the local build environment, never a committed file.
 
 <a id="contributing"></a>
 ## 🤝 Contributing&nbsp;[#](#contributing)

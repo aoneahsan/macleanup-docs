@@ -1,0 +1,29 @@
+/* TEAM */
+
+Maintainer + Author: Ahsan Mahmood
+Site: https://aoneahsan.com
+Email: aoneahsan@gmail.com
+LinkedIn: https://linkedin.com/in/aoneahsan
+GitHub: https://github.com/aoneahsan
+npm: https://www.npmjs.com/~aoneahsan
+Location: Pakistan
+
+/* PROJECT */
+
+macleanup — a safe-by-default macOS cleanup and maintenance CLI.
+Source: https://github.com/aoneahsan/macleanup
+Package: https://www.npmjs.com/package/macleanup
+Licence: MIT
+
+/* THANKS */
+
+To everyone who filed an issue — particularly whoever reported the v4.3.0
+section 23 behaviour that produced the CRITICAL_HOME_DIRS allowlist. A bug
+report that prevents the next person's data loss is the best kind.
+
+/* SITE */
+
+Last update: 2026-07-25
+Standards: HTML5, CSS3, Markdown, JSON-LD
+Built with: Docusaurus
+Hosting: GitHub Pages

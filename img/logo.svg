@@ -1,0 +1,33 @@
+<svg width="128" height="128" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="macleanup">
+  <title>macleanup</title>
+  <defs>
+    <linearGradient id="ml-bg" x1="96" y1="64" x2="928" y2="960" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6E56F7"/>
+      <stop offset="0.5" stop-color="#4F8DF0"/>
+      <stop offset="1" stop-color="#19D3C5"/>
+    </linearGradient>
+    <linearGradient id="ml-spark" x1="512" y1="212" x2="512" y2="812" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#E6F4FF"/>
+    </linearGradient>
+    <radialGradient id="ml-glow" cx="512" cy="512" r="320" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ml-gloss" x1="512" y1="40" x2="512" y2="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="64" y="64" width="896" height="896" rx="232" fill="url(#ml-bg)"/>
+  <rect x="64" y="64" width="896" height="896" rx="232" fill="url(#ml-gloss)"/>
+  <circle cx="512" cy="512" r="320" fill="url(#ml-glow)"/>
+
+  <path fill="url(#ml-spark)"
+        d="M512 212 C548 428 596 476 812 512 C596 548 548 596 512 812 C476 596 428 548 212 512 C428 476 476 428 512 212 Z"/>
+  <path fill="#FFFFFF" fill-opacity="0.95"
+        d="M760 230 C768.4 280.4 779.6 291.6 830 300 C779.6 308.4 768.4 319.6 760 370 C751.6 319.6 740.4 308.4 690 300 C740.4 291.6 751.6 280.4 760 230 Z"/>
+  <path fill="#FFFFFF" fill-opacity="0.9"
+        d="M270 678 C276.24 715.44 284.56 723.76 322 730 C284.56 736.24 276.24 744.56 270 782 C263.76 744.56 255.44 736.24 218 730 C255.44 723.76 263.76 715.44 270 678 Z"/>
+</svg>

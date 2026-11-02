@@ -1,6 +1,6 @@
 ---
 title: Privacy in the desktop app
-description: What the macleanup desktop app keeps on your Mac and what it syncs — no telemetry, file paths never leave the Mac, and a signed-in sync of section ids, byte counts, statuses and the macOS version only.
+description: What the macleanup desktop app keeps on your Mac and what it syncs — usage counts with no paths, file paths never leave the Mac, and a signed-in sync of section ids, byte counts, statuses and the macOS version only.
 tags: [desktop-app, privacy, sync]
 sidebar_position: 5
 sidebar_label: Privacy in the app
@@ -9,9 +9,11 @@ keywords: [macleanup privacy, macleanup telemetry, macleanup sync, macleanup dat
 
 # Privacy in the desktop app
 
-**File paths never leave your Mac.** The app has no telemetry: no analytics,
-advertising or tracking tools. It reads folders on your Mac to measure them,
-shows you the result, and sends that information nowhere.
+**File paths never leave your Mac.** The app reads folders on your Mac to
+measure them, shows you the result, and sends that information nowhere. It
+counts which screens open and which actions run, with Google Analytics; a count
+never carries a path, a file name or your email. There is no advertising. The
+command line counts nothing.
 
 ## On your Mac {#on-your-mac}
 
@@ -52,6 +54,9 @@ The same rule is a guarantee of the [JSON event stream](/reference/json-events#g
   recording is not stored. See [Assistant and backups](/desktop-app/assistant).
 - **Receipt backups** — only on Pro or Team, when you back up or restore. The
   summary is stored privately with FilesHub and holds no paths.
+- **Usage counts** — a screen or action name and simple numbers, such as how
+  many sections a preview covered, sent to Google Analytics with a random
+  counting ID for the install (and your account's random ID when signed in).
 - **Release emails** — only when you turn on **Account → Emails** (app 5.3.2 or
   later). Your Google address joins the optional release list on FilesHub; the
   switch or the unsubscribe link in any email takes it off again.

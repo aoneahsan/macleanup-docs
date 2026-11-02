@@ -41,6 +41,14 @@ A Team fleet report carries run numbers only; paths stay on each Mac. See
 A real run uses one of 15 a month on that Mac. Signing in with Google adds 15
 more and keeps your run numbers across your Macs. Signing in is optional.
 
+## Joining a team {#team-invites}
+
+A team owner invites you by email. Sign in to the desktop app with the Google
+account that has that email, open **Team**, and choose **Accept the invite**
+(app 5.3.1 or later). Your seat includes Pro. Joining adds this Mac's run
+numbers to the team's fleet report; file paths stay on this Mac. An invite
+expires after 14 days, and it cannot be accepted when every seat is in use.
+
 ## Paying and cancelling {#billing}
 
 Checkout opens in your browser through Polar, the payment provider. You can

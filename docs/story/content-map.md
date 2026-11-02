@@ -26,6 +26,8 @@ Current-version claims are checked against the published package and `macleanup.
 | Docs metadata and `llms.txt` | Solution aware | Answer first → source links → version | Procedural clarity | Concise | Open docs or source | Visible facts only | planned | `docusaurus.config.ts`, `static/llms.txt` |
 | Marketing home | Problem to solution aware | StoryBrand: disk pressure → guide → preview plan → exact sections → limits → action | 70 / 25 / 5; no humor near deletion | One page with 12–15 distinct sections, header and footer | Preview via docs | SoftwareApplication; FAQ only if visible | planned | `drafts/marketing-home.md` |
 | Marketing metadata and `llms.txt` | Solution aware | Name → verified purpose → docs and source | Procedural clarity | Concise | Open docs | Visible facts only | planned | `drafts/marketing-metadata.md` |
+| Release-emails sign-up (download page, Account → Emails, Privacy Policy email section) | Product aware | Promise → what arrives → consent and unsubscribe | Clarity and care | One section; one switch row | Email me about releases | None | live 2026-11-02 on the owner's instruction ("update privacy accordingly"; important product updates to every account, optional updates opt-in) | dummy `download.html#updates`, `app-account.html` § 05, `privacy.html#p-email` |
+| Release newsletter, 5.3 (FilesHub marketing, list "macleanup news") | Product aware | Hook → what it is → button → screen → new in 5.3 → problem → how it works → why → callout → button → P.S. | 70 / 25 / 5; no humor near deletion | Ten blocks, about 310 words | Download macleanup 5.3 | None | drafted; `[TEST]` and owner approval before any send | FilesHub template `macleanup-news-5-3`, sequence `01M6ECSNN9VAH9TXR950B0HYY6` (draft) |
 
 ## Question map
 

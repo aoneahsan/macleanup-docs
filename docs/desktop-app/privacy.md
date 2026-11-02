@@ -52,8 +52,22 @@ The same rule is a guarantee of the [JSON event stream](/reference/json-events#g
   recording is not stored. See [Assistant and backups](/desktop-app/assistant).
 - **Receipt backups** — only on Pro or Team, when you back up or restore. The
   summary is stored privately with FilesHub and holds no paths.
+- **Release emails** — only when you turn on **Account → Emails** (app 5.3.2 or
+  later). Your Google address joins the optional release list on FilesHub; the
+  switch or the unsubscribe link in any email takes it off again.
 
 Each service receives normal request details such as an IP address.
+
+## Emails {#emails}
+
+Account emails (receipts, invites, a scheduled run's result) and rare important
+product updates, such as a required update or a change to the plans or terms,
+go to every account. Release news and other optional updates go only to people
+who ask for them, on the Account screen or the website's
+[download page](https://macleanup.aoneahsan.com/download#updates). The full
+wording is in the [Privacy Policy](https://macleanup.aoneahsan.com/privacy#p-email).
+
+## Download or delete your data {#your-data}
 
 You can download your account data or delete your account from the Account
 screen. Deleting it removes the account, plan record, synced run numbers and receipt

@@ -81,3 +81,8 @@ yarn typecheck
 The site documents **macleanup 5.3.0**. When the package publishes a new version, update
 `PKG_VERSION` in `docusaurus.config.ts`, the version line in `docs/intro.md`, `docs/changelog.md`, and
 `static/llms.txt` in the same change.
+
+<!-- cloudflare-pages-v1 -->
+## Hosting: Cloudflare Pages
+
+This site deploys on Cloudflare Pages, project `macleanup-docs`, domain `macleanup-docs.aoneahsan.com` (rule: docs sites deploy on Cloudflare Pages, owner, 2026-11-05). Build and check it locally, then run `yarn deploy`. This replaces every GitHub Pages instruction elsewhere in this repo; no GitHub Actions and no `docusaurus deploy`.

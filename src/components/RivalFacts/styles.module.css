@@ -1,0 +1,13 @@
+.facts table td,
+.facts table th {
+  vertical-align: top;
+}
+.note {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.82rem;
+  color: var(--ifm-color-emphasis-700);
+}
+.checked {
+  font-weight: 600;
+}

@@ -83,6 +83,26 @@ const sidebars: SidebarsConfig = {
     'recipes',
     {
       type: 'category',
+      label: 'Moving to macleanup',
+      collapsed: true,
+      link: { type: 'doc', id: 'compare/index' },
+      items: [
+        'compare/cleanmymac',
+        'compare/daisydisk',
+        'compare/onyx',
+        'compare/appcleaner',
+        'compare/ccleaner-mac',
+        'compare/pearcleaner',
+        'compare/sensei',
+        'compare/mackeeper',
+        'compare/grandperspective',
+        'compare/maccleaner-pro',
+        'compare/buhocleaner',
+        'compare/mac-cleanup-py',
+      ],
+    },
+    {
+      type: 'category',
       label: 'When something goes wrong',
       collapsed: false,
       link: {

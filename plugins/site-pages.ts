@@ -142,7 +142,7 @@ function renderFeedXml(siteUrl: string, releases: Release[]): string {
 
 type SidebarItem =
   | string
-  | { type: string; label?: string; link?: { slug?: string; title?: string; description?: string }; items?: SidebarItem[] };
+  | { type: string; label?: string; link?: { slug?: string; id?: string; title?: string; description?: string }; items?: SidebarItem[] };
 type Group = { key: string; label: string; slug?: string; indexTitle?: string; indexDescription?: string; ids: string[] };
 
 /** Sidebar walk: category groups in order, plus the top-level docs. */
@@ -156,12 +156,12 @@ function sidebarGroups(): Group[] {
       (item === 'intro' ? groups[0] : more).ids.push(item);
     } else if (item.type === 'category') {
       groups.push({
-        key: (item.link?.slug ?? item.label ?? '').replace(/^\//, '') || 'about',
+        key: (item.link?.slug ?? item.link?.id?.split('/')[0] ?? item.label ?? '').replace(/^\//, '') || 'about',
         label: item.label ?? '',
         slug: item.link?.slug,
         indexTitle: item.link?.title,
         indexDescription: item.link?.description,
-        ids: (item.items ?? []).filter((i): i is string => typeof i === 'string'),
+        ids: [...(item.link?.id ? [item.link.id] : []), ...(item.items ?? []).filter((i): i is string => typeof i === 'string')],
       });
     }
   }
@@ -177,6 +177,34 @@ type DocLike = {
   tags: { label: string }[];
   frontMatter: { keywords?: string[] };
 };
+
+/** Facts about other Mac cleaners; a copy of the marketing site's file, which refuses to build if the two differ. */
+const compareData = JSON.parse(readFileSync(path.join(SITE_DIR, 'src/data/competitors.json'), 'utf8')) as {
+  lastChecked: string;
+  competitors: { slug: string; lastChecked: string }[];
+};
+
+/** Every third-party link on a compare guide is a new tab with nofollow, checked in the built HTML. */
+function checkCompareLinks(outDir: string, siteUrl: string): void {
+  const ours = [siteUrl, 'https://macleanup.aoneahsan.com', 'https://aoneahsan.com', 'https://github.com/aoneahsan/', 'https://www.npmjs.com/package/macleanup'];
+  const files = ['compare.html', ...compareData.competitors.map((c) => `compare/${c.slug}.html`)];
+  const faults: string[] = [];
+  let links = 0;
+  for (const file of files) {
+    const html = readFileSync(path.join(outDir, file), 'utf8');
+    const canonicals = [...html.matchAll(/<link[^>]*rel=["']?canonical["']?[^>]*>/g)];
+    const self = `${siteUrl}/${file.replace(/\.html$/, '')}`;
+    // The built HTML is minified, so an attribute may have no quotes.
+    if (canonicals.length !== 1 || !new RegExp(`href=["']?${self.replace(/[.]/g, '\\.')}["'\\s/>]`).test(canonicals[0][0])) faults.push(`${file}: canonical is not ${self}`);
+    for (const a of html.matchAll(/<a\s[^>]*href=["']?(https?:\/\/[^"'\s>]+)[^>]*>/g)) {
+      links += 1;
+      if (ours.some((o) => a[1].startsWith(o))) continue;
+      if (!/rel="noopener noreferrer nofollow"/.test(a[0]) || !/target=["']?_blank/.test(a[0])) faults.push(`${file}: ${a[1]}`);
+    }
+  }
+  if (!links) faults.push('no absolute links found: the check matched nothing, so it proves nothing');
+  if (faults.length) throw new Error(`[site-pages] compare guides refused:\n  ${faults.join('\n  ')}`);
+}
 
 /** The local plugin. */
 export default function sitePages(context: LoadContext): Plugin<Release[]> {
@@ -233,6 +261,7 @@ export default function sitePages(context: LoadContext): Plugin<Release[]> {
     }),
     async postBuild({ outDir, content }) {
       writeFileSync(path.join(outDir, 'feed.xml'), renderFeedXml(siteUrl, content));
+      checkCompareLinks(outDir, siteUrl);
       // GitHub Pages serves 404.html for every unknown path. It must not be
       // indexable and must not name itself as a canonical page.
       const notFound = path.join(outDir, '404.html');
@@ -303,6 +332,9 @@ export async function createSitemapItems<T extends SitemapItem>(params: {
   for (const group of sidebarGroups()) {
     if (group.slug) byPath.set(group.slug, newest(group.ids.map((id) => byPath.get(docPath(id)))) ?? '');
   }
+  // A compare guide is dated by when its facts were last read, the date it shows.
+  byPath.set('/compare', compareData.lastChecked);
+  for (const c of compareData.competitors) byPath.set(`/compare/${c.slug}`, c.lastChecked);
   byPath.set('/feed', fileDate(CHANGELOG));
   byPath.set('/sitemap', newest([...byPath.values()]) ?? '');
   const undated: string[] = [];

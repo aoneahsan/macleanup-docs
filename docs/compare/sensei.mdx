@@ -1,0 +1,52 @@
+---
+title: Moving from Sensei to macleanup
+description: What to use in macleanup for Sensei's cleaning tab and uninstaller, why the monitoring stays with Sensei, and a dated table of Sensei's prices and features.
+tags: [compare, migration]
+keywords: [sensei mac alternative, sensei vs macleanup, mac cache and log cleaner]
+---
+
+import RivalFacts from '@site/src/components/RivalFacts';
+
+# Moving from Sensei
+
+**If you bought Sensei for its monitors, keep it.** macleanup has no menu bar
+gauges, no S.M.A.R.T. health and no benchmarks. It replaces the cleaning tab and
+the uninstaller, and it tells you what each run moved or removed.
+
+## What maps to what
+
+| In Sensei | In macleanup |
+|---|---|
+| Old caches and system logs | Sections [5](/reference/sections#section-5--user-caches), [6](/reference/sections#section-6) and [7](/reference/sections#section-7--logs) |
+| Large downloads | [Section 18](/reference/sections#section-18--large-files-report), as a report |
+| Leftover installation files | [Section 15](/reference/sections#section-15--installer-leftovers-report), as a report |
+| Uninstaller | [Section 21](/reference/sections#section-21) |
+| CPU, GPU, battery and thermal monitors | [Section 0](/reference/sections#section-0--system-health-and-process-monitor) is a one-time text snapshot, not a monitor |
+
+## Move across
+
+1. Get the reports first. They delete nothing.
+
+   ```bash
+   npx macleanup --only "0,15,18"
+   ```
+
+2. Preview the safe batch. It never selects a deep section.
+
+   ```bash
+   npx macleanup --dry-run --all
+   ```
+
+3. Run logs alone. Sudo is needed for the system-log part; with `--no-sudo`, that
+   part is skipped and never half-run.
+
+   ```bash
+   npx macleanup --only 7 --no-sudo
+   ```
+
+4. Read the session summary. It counts attempted, completed, skipped and failed
+   separately: [Reports and logs](/reference/reports-and-logs).
+
+## The facts, dated
+
+<RivalFacts slug="sensei" />

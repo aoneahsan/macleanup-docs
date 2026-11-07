@@ -56,6 +56,7 @@ find build -iname '*MANUAL*'    # must return nothing
 - **No invented numbers.** Do not claim how much space the tool frees. Source every factual claim from
   the package's README, `CHANGELOG.md` or `docs/` — never from memory.
 - Sidebars update in the **same change** as a new page. Moved URLs get redirects, never 404s.
+- `docs/compare/` holds the moving guides. Their facts render from `src/data/competitors.json`, a copy of the marketing site's `docs/comparison-hub/competitors.json`; that build refuses a copy that differs. `yarn build` refuses a third-party link on a guide without `nofollow`.
 - `yarn build` IS the link checker (`onBrokenLinks` + `onBrokenAnchors` both `throw`).
 
 ## Commands

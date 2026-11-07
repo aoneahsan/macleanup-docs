@@ -383,6 +383,7 @@ const config: Config = {
           title: 'Find everything',
           items: [
             { label: 'Sitemap', to: '/sitemap' },
+            { label: 'Moving to macleanup', to: '/compare' },
             { label: 'Release feed', to: '/feed' },
             // feed.xml is written after the build, where the link checker
             // cannot see it, so it is linked by its absolute URL.

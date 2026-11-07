@@ -1,0 +1,55 @@
+---
+title: Moving from mac-cleanup-py to macleanup
+description: How macleanup's numbered sections compare with mac-cleanup-py's modules, running with no Python or Node from a checkout, the orphan and apps sections it adds, and a dated fact table.
+tags: [compare, migration]
+keywords: [mac-cleanup-py alternative, mac cleanup script, bash mac cleanup]
+---
+
+import RivalFacts from '@site/src/components/RivalFacts';
+
+# Moving from mac-cleanup-py
+
+**This is the closest neighbour on the list:** a command-line cleaner you can read.
+The move is mostly vocabulary. Named modules become numbered sections, and `--only`
+is how you pick them.
+
+## What maps to what
+
+| In mac-cleanup-py | In macleanup |
+|---|---|
+| `pip3 install` or `brew install` | `npx macleanup`, or a [git checkout with no Node](/getting-started/installation#method-3--direct-git-checkout-no-node-required) |
+| Clear cache | Sections [3](/reference/sections#section-3--package-manager-caches) and [5](/reference/sections#section-5--user-caches) |
+| Delete logs | [Section 7](/reference/sections#section-7--logs) |
+| A module per tool | `--only` with [section numbers](/reference/sections) |
+| A saved set of modules | [Profiles](/reference/profiles) and [`~/.macleanuprc`](/reference/configuration) |
+
+Sections 12 (orphaned app data) and 21 (unused apps) are the additions. Neither
+is in `--all`.
+
+## Move across
+
+1. Run it from a checkout with bash alone.
+
+   ```bash
+   git clone https://github.com/aoneahsan/macleanup.git
+   cd macleanup
+   chmod +x macleanup.sh
+   ./macleanup.sh --list
+   ```
+
+2. Preview the sections that replace your module list.
+
+   ```bash
+   ./macleanup.sh --only "3,5,7" --dry-run
+   ```
+
+3. Scripting it? The event stream is NDJSON.
+   [`--json-events`](/reference/json-events) has a stated schema.
+
+   ```bash
+   ./macleanup.sh --only "3,5,7" --dry-run --json-events
+   ```
+
+## The facts, dated
+
+<RivalFacts slug="mac-cleanup-py" />

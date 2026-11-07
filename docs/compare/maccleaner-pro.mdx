@@ -1,0 +1,54 @@
+---
+title: Moving from MacCleaner Pro to macleanup
+description: Which macleanup sections line up with MacCleaner Pro's bundled tools, what has no match such as duplicates and memory cleaning, and a dated table of MacCleaner Pro's features.
+tags: [compare, migration]
+keywords: [maccleaner pro alternative, nektony alternative, mac cache log cleaner free]
+---
+
+import RivalFacts from '@site/src/components/RivalFacts';
+
+# Moving from MacCleaner Pro
+
+**MacCleaner Pro is six apps; macleanup is one script with 28 sections.** Most of
+the cleanup lines up by number. The duplicate finder, the memory cleaner and the
+visual analyser do not.
+
+## What maps to what
+
+| In MacCleaner Pro | In macleanup |
+|---|---|
+| Clear caches and logs | `--profile cache-only` |
+| App Cleaner & Uninstaller | [Section 21](/reference/sections#section-21) |
+| Apps' leftovers | [Section 12](/reference/sections#section-12--orphaned-app-data) |
+| Disk space analyser | [Section 26](/reference/sections#section-26--disk-usage-report), as text |
+| Duplicate finder, memory cleaner | Nothing |
+
+## Move across
+
+1. Preview the cache profile: `3, 5, 6, 7, 9, 19`.
+
+   ```bash
+   npx macleanup --profile cache-only --dry-run
+   ```
+
+2. Run the audit profile as a preview to see leftovers, idle apps and folder sizes
+   in one go.
+
+   ```bash
+   npx macleanup --profile audit --dry-run
+   ```
+
+3. Run section 26 for real. It only reports.
+
+   ```bash
+   npx macleanup --only 26
+   ```
+
+4. Read the script before you let it delete anything. It is
+   [public](https://github.com/aoneahsan/macleanup), and the
+   [no-Node checkout](/getting-started/installation#method-3--direct-git-checkout-no-node-required)
+   runs it straight from the clone.
+
+## The facts, dated
+
+<RivalFacts slug="maccleaner-pro" />

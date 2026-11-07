@@ -13,6 +13,7 @@ const ICONS: Record<string, ReactNode> = {
   'before-you-run': <path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3zM9 12l2 2 4-4" />,
   'getting-started': <path d="M12 3v12M7 10l5 5 5-5M5 19h14" />,
   reference: <path d="M5 4h10l4 4v12H5zM14 4v5h5M8 13h8M8 17h6" />,
+  compare: <path d="M4 5h6v14H4zM14 5h6v14h-6zM10 12h4" />,
   'desktop-app': <path d="M3 5h18v11H3zM8 20h8M12 16v4" />,
   help: <path d="M12 3a9 9 0 100 18 9 9 0 000-18zM9.5 9a2.5 2.5 0 114 2c-1 .6-1.5 1.2-1.5 2.5M12 17h.01" />,
   about: <path d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 21c0-4 3.6-6 8-6s8 2 8 6" />,

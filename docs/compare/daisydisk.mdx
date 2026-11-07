@@ -1,0 +1,50 @@
+---
+title: Moving from DaisyDisk to macleanup
+description: How to get a text answer to where your disk went with macleanup's report sections, what you give up without DaisyDisk's map, and a dated table of DaisyDisk's price and features.
+tags: [compare, migration]
+keywords: [daisydisk alternative, mac disk usage report, daisydisk vs macleanup]
+---
+
+import RivalFacts from '@site/src/components/RivalFacts';
+
+# Moving from DaisyDisk
+
+**macleanup has no map.** If you like seeing the whole disk as a sunburst, keep
+DaisyDisk: the two do different jobs and run happily on one Mac. macleanup's
+reports are text, and its cleanup sections go after the caches, logs and leftovers
+you would otherwise hunt down by eye.
+
+## What maps to what
+
+| In DaisyDisk | In macleanup |
+|---|---|
+| The sunburst disk map | [Section 26](/reference/sections#section-26--disk-usage-report), folder sizes as text |
+| Spotting the largest files | [Section 18](/reference/sections#section-18--large-files-report), everything from 500 MB up in `$HOME` |
+| Deleting a big file you chose | [Section 24](/reference/sections#section-24--large-stale-files), large and untouched, moved to the Trash |
+
+## Move across
+
+1. Ask where the disk went. Both sections are reports and delete nothing.
+
+   ```bash
+   npx macleanup --only "18,26"
+   ```
+
+2. Read the dated `.txt` files in `~/.macleanup/reports/`.
+
+3. Preview the big, old files. Both the access and the change date must be old, so
+   a large file you opened recently will not appear. Section 18 shows those.
+
+   ```bash
+   npx macleanup --only 24 --large-file-size-gb 2 --large-file-days 180 --dry-run
+   ```
+
+4. Preview what a map never labels for you: caches, logs and temp files.
+
+   ```bash
+   npx macleanup --profile minimal --dry-run
+   ```
+
+## The facts, dated
+
+<RivalFacts slug="daisydisk" />

@@ -1,0 +1,51 @@
+---
+title: Moving from GrandPerspective to macleanup
+description: What macleanup's reports give you in place of GrandPerspective's tree map, how to clear what the map only shows, and a dated table of GrandPerspective's prices and features.
+tags: [compare, migration]
+keywords: [grandperspective alternative, mac disk tree map, mac large files report]
+---
+
+import RivalFacts from '@site/src/components/RivalFacts';
+
+# Moving from GrandPerspective
+
+**Keep the tree map if you enjoy it; it is free and macleanup has nothing like it.**
+What macleanup adds is the second half of the job. GrandPerspective shows you a big
+block and leaves you to work out whether it is safe to remove. A numbered section
+already knows what the block is and what removing it costs.
+
+## What maps to what
+
+| In GrandPerspective | In macleanup |
+|---|---|
+| Tree map of disk usage | [Section 26](/reference/sections#section-26--disk-usage-report), text only |
+| Finding big files | [Section 18](/reference/sections#section-18--large-files-report), no age filter |
+| Delete from the view | [Section 24](/reference/sections#section-24--large-stale-files), to the Trash, with confirmation |
+| That huge `node_modules` block | [Section 23](/reference/sections#section-23), deleted permanently |
+
+## Move across
+
+1. Scan in GrandPerspective, note the three biggest blocks, then ask macleanup.
+
+   ```bash
+   npx macleanup --profile audit --dry-run
+   ```
+
+2. If a block is a build folder, preview that section with your own threshold.
+
+   ```bash
+   npx macleanup --only 23 --stale-build-days 90 --dry-run
+   ```
+
+3. If it is in `~/Library/Caches`, preview user caches.
+
+   ```bash
+   npx macleanup --only 5 --dry-run
+   ```
+
+4. Protect a project you would hate to rebuild before you run section 23: see
+   `--exclude-path` in [Stale build artefacts](/reference/sections#section-23).
+
+## The facts, dated
+
+<RivalFacts slug="grandperspective" />

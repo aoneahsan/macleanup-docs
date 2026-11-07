@@ -1,0 +1,51 @@
+---
+title: Moving from AppCleaner to macleanup
+description: How macleanup's sections 12 and 21 cover uninstalling apps and the data left by apps already gone, what the drag-and-drop window has that macleanup does not, and a dated AppCleaner fact table.
+tags: [compare, migration]
+keywords: [appcleaner alternative, orphaned app data mac, remove app leftovers mac]
+---
+
+import RivalFacts from '@site/src/components/RivalFacts';
+
+# Moving from AppCleaner
+
+**AppCleaner works on the app you drop on it. macleanup looks for what you forgot.**
+Section 21 finds apps you have not opened for a while, and section 12 finds data
+from apps that are already gone, which a drop window cannot be handed.
+
+## What maps to what
+
+| In AppCleaner | In macleanup |
+|---|---|
+| Drop one app on the window | No command line equivalent. The [desktop app](/desktop-app/overview#what-it-adds) has an apps view |
+| Delete an app with its related files | [Section 21](/reference/sections#section-21), which also takes its containers and support files |
+| Files from an app you trashed by hand | [Section 12](/reference/sections#section-12--orphaned-app-data) |
+
+## Move across
+
+1. See what section 12 would offer. "Orphaned" is a heuristic, so read the list.
+
+   ```bash
+   npx macleanup --only 12 --dry-run
+   ```
+
+2. See which apps count as idle after 60 days. Apps with no usable signal are
+   skipped on purpose, so a short list does not mean the rest are in use.
+
+   ```bash
+   npx macleanup --only 21 --threshold 60 --dry-run
+   ```
+
+3. Run section 21 interactively and select by number. Uninstalling also removes
+   the app's local data, so export anything you need from its container first.
+
+   ```bash
+   npx macleanup --only 21
+   ```
+
+Both sections move to the Trash, and a failed Finder move leaves the item where it
+was. Once Trash is emptied, they are gone.
+
+## The facts, dated
+
+<RivalFacts slug="appcleaner" />

@@ -1,0 +1,61 @@
+---
+title: Moving from CleanMyMac to macleanup
+description: Which macleanup sections cover what CleanMyMac cleans, the preview commands to run first, what macleanup does not do, and a dated table of CleanMyMac's prices and features.
+tags: [compare, migration]
+keywords: [cleanmymac alternative, move from cleanmymac, cleanmymac free alternative]
+---
+
+import RivalFacts from '@site/src/components/RivalFacts';
+
+# Moving from CleanMyMac
+
+**CleanMyMac does the deciding in one window; macleanup shows you the paths and
+asks section by section.** Keep CleanMyMac installed while you try this. Nothing
+below touches it.
+
+## What maps to what
+
+| In CleanMyMac | In macleanup |
+|---|---|
+| Old caches and logs | [Sections 5 and 7](/reference/sections#section-5--user-caches), or `--profile minimal` |
+| Xcode junk | [Section 1](/reference/sections#section-1--xcode-caches-deriveddata-simulators) |
+| Uninstalling an app with its leftovers | [Section 21](/reference/sections#section-21) for idle apps |
+| Leftovers from apps already gone | [Section 12](/reference/sections#section-12--orphaned-app-data) |
+| Malware scanning, software updates, performance tools | Nothing. macleanup only cleans |
+
+## Move across
+
+1. See the sections and pick by number.
+
+   ```bash
+   npx macleanup --list
+   ```
+
+2. Preview the weekly sweep. This one leaves Trash alone.
+
+   ```bash
+   npx macleanup --profile minimal --dry-run
+   ```
+
+3. Read the paths, then see what apps left behind.
+
+   ```bash
+   npx macleanup --only 12 --dry-run
+   ```
+
+4. Run one section for real and read the report in `~/.macleanup/reports/`.
+
+   ```bash
+   npx macleanup --only 5
+   ```
+
+5. Want a window? [The desktop app](/desktop-app/overview) runs the same script. Its
+   [plans](/desktop-app/plans) count real runs only; previews stay free.
+
+Section 5 sweeps `~/Library/Caches`, which macOS and your apps refill. Read
+[the limits of a preview](/before-you-run/dry-run#the-honest-limits-of-a-preview)
+before step 4.
+
+## The facts, dated
+
+<RivalFacts slug="cleanmymac" />

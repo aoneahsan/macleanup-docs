@@ -1,0 +1,53 @@
+---
+title: Moving from Pearcleaner to macleanup
+description: How macleanup's orphan scan and unused-apps section compare with Pearcleaner's, what macleanup adds in caches and logs, what it lacks such as a Finder extension, and a dated fact table.
+tags: [compare, migration]
+keywords: [pearcleaner alternative, orphaned files mac, homebrew cache cleanup mac]
+---
+
+import RivalFacts from '@site/src/components/RivalFacts';
+
+# Moving from Pearcleaner
+
+**Pearcleaner is built around apps; macleanup is built around numbered kinds of
+file.** Its orphan search has a direct match here. Its Finder extension and its
+Homebrew manager do not.
+
+## What maps to what
+
+| In Pearcleaner | In macleanup |
+|---|---|
+| Orphaned file search | [Section 12](/reference/sections#section-12--orphaned-app-data) |
+| App uninstall | [Section 21](/reference/sections#section-21) |
+| Homebrew manager | [Section 3](/reference/sections#section-3--package-manager-caches) clears the cache only |
+| Development environment manager | Sections [1](/reference/sections#section-1--xcode-caches-deriveddata-simulators), [2](/reference/sections#section-2--android--gradle-caches), [3](/reference/sections#section-3--package-manager-caches), [4](/reference/sections#section-4--docker-prune) as `--profile dev` |
+| Right-click in Finder | Nothing |
+
+## Move across
+
+1. Compare the orphan lists. Run this and look at the same folders in Pearcleaner.
+   An item must be unmatched by any installed app and untouched for `--idle-days`.
+
+   ```bash
+   npx macleanup --only 12 --dry-run
+   ```
+
+2. Preview the part Pearcleaner does not list: caches, logs and temp files.
+
+   ```bash
+   npx macleanup --profile minimal --dry-run
+   ```
+
+3. Preview the developer profile. Section 23 inside it deletes build folders
+   permanently, and Docker volumes are only touched if you say so.
+
+   ```bash
+   npx macleanup --profile dev --dry-run
+   ```
+
+Leave `--brew-autoremove` off unless you have read
+[what it can break](/reference/cli#brew-autoremove).
+
+## The facts, dated
+
+<RivalFacts slug="pearcleaner" />

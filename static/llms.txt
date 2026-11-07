@@ -43,6 +43,22 @@ Three equivalent ways to run it; the flags are identical in all three.
 - [Reports and logs](https://macleanup-docs.aoneahsan.com/reference/reports-and-logs): the `~/.macleanup/` directory layout, the attempted/completed/skipped/failed session summary, the local-snapshot note, and how to prune it.
 - [JSON event stream](https://macleanup-docs.aoneahsan.com/reference/json-events): the `--json-events` NDJSON schema (version 1, since 5.1.0; `age_days`, `tool` and `version` item fields since 5.2.0) — event types, fields, ordering guarantees and exit codes.
 
+## Moving to macleanup
+
+- [Moving to macleanup](https://macleanup-docs.aoneahsan.com/compare): guides for moving from other Mac cleaners, each with real commands and a dated table of what that maker states.
+- [Moving from CleanMyMac](https://macleanup-docs.aoneahsan.com/compare/cleanmymac): which sections cover what you use there, what has no match, and the dated facts.
+- [Moving from DaisyDisk](https://macleanup-docs.aoneahsan.com/compare/daisydisk): which sections cover what you use there, what has no match, and the dated facts.
+- [Moving from OnyX](https://macleanup-docs.aoneahsan.com/compare/onyx): which sections cover what you use there, what has no match, and the dated facts.
+- [Moving from AppCleaner](https://macleanup-docs.aoneahsan.com/compare/appcleaner): which sections cover what you use there, what has no match, and the dated facts.
+- [Moving from CCleaner for Mac](https://macleanup-docs.aoneahsan.com/compare/ccleaner-mac): which sections cover what you use there, what has no match, and the dated facts.
+- [Moving from Pearcleaner](https://macleanup-docs.aoneahsan.com/compare/pearcleaner): which sections cover what you use there, what has no match, and the dated facts.
+- [Moving from Sensei](https://macleanup-docs.aoneahsan.com/compare/sensei): which sections cover what you use there, what has no match, and the dated facts.
+- [Moving from MacKeeper](https://macleanup-docs.aoneahsan.com/compare/mackeeper): which sections cover what you use there, what has no match, and the dated facts.
+- [Moving from GrandPerspective](https://macleanup-docs.aoneahsan.com/compare/grandperspective): which sections cover what you use there, what has no match, and the dated facts.
+- [Moving from MacCleaner Pro](https://macleanup-docs.aoneahsan.com/compare/maccleaner-pro): which sections cover what you use there, what has no match, and the dated facts.
+- [Moving from BuhoCleaner](https://macleanup-docs.aoneahsan.com/compare/buhocleaner): which sections cover what you use there, what has no match, and the dated facts.
+- [Moving from mac-cleanup-py](https://macleanup-docs.aoneahsan.com/compare/mac-cleanup-py): which sections cover what you use there, what has no match, and the dated facts.
+
 ## Desktop app
 
 - [Overview](https://macleanup-docs.aoneahsan.com/desktop-app/overview): what the window adds on top of the same script — disk gauge, dry-run ledger with keep/archive/delete, run receipts, apps and leftovers, both launchd domains.

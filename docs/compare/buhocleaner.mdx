@@ -1,0 +1,51 @@
+---
+title: Moving from BuhoCleaner to macleanup
+description: What replaces BuhoCleaner's Flash Clean in macleanup, which sections cover its uninstaller and DNS flush, what you lose, and a dated table of BuhoCleaner's prices and features.
+tags: [compare, migration]
+keywords: [buhocleaner alternative, buhocleaner vs macleanup, flush dns mac command]
+---
+
+import RivalFacts from '@site/src/components/RivalFacts';
+
+# Moving from BuhoCleaner
+
+**There is no one-tap clean here, on purpose.** Flash Clean's place is taken by a
+preview you read and a confirmation you give. That is slower, and it tells you what
+is about to go.
+
+## What maps to what
+
+| In BuhoCleaner | In macleanup |
+|---|---|
+| Flash Clean | `--all`, the safe batch of sections 0, 3, 5, 7, 8, 9, 15, 18, 22, 26 |
+| Xcode cache cleaner | [Section 1](/reference/sections#section-1--xcode-caches-deriveddata-simulators) |
+| Flush DNS cache | [Section 20](/reference/sections#section-20--dns--mdns-reset), which also renews DHCP on `en0` |
+| Uninstall with leftovers | Sections [21](/reference/sections#section-21) and [12](/reference/sections#section-12--orphaned-app-data) |
+| Disk space analyser | [Section 26](/reference/sections#section-26--disk-usage-report), as text |
+| Menu bar RAM, CPU and fan monitor | Nothing |
+
+## Move across
+
+1. Preview what the safe batch would do.
+
+   ```bash
+   npx macleanup --dry-run --all
+   ```
+
+2. Read [the honest limits of a preview](/before-you-run/dry-run#the-honest-limits-of-a-preview).
+
+3. Run the batch and answer each prompt.
+
+   ```bash
+   npx macleanup --all
+   ```
+
+4. Writing software? Preview the Xcode section separately. It is not in `--all`.
+
+   ```bash
+   npx macleanup --only 1 --dry-run
+   ```
+
+## The facts, dated
+
+<RivalFacts slug="buhocleaner" />

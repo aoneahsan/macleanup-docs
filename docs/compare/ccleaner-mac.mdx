@@ -9,11 +9,13 @@ import RivalFacts from '@site/src/components/RivalFacts';
 
 # Moving from CCleaner for Mac
 
-**Browser cleaning works differently here.** macleanup clears HTTP and code caches
-in every profile and leaves history, logins, bookmarks and extensions alone. If you
-use CCleaner to wipe browsing history, macleanup will not do that.
+Read this before anything else if you use CCleaner to wipe browsing history:
+macleanup will not. Its browser section clears HTTP and code caches in every
+profile and leaves history, logins, bookmarks and extensions where they are.
+Duplicate photo cleanup has no counterpart either. People who mostly want caches,
+temp files and unused apps gone will find each one under a number.
 
-## What maps to what
+## Where CCleaner's checkboxes went
 
 | In CCleaner for Mac | In macleanup |
 |---|---|
@@ -23,34 +25,39 @@ use CCleaner to wipe browsing history, macleanup will not do that.
 | Duplicate photo cleanup | Nothing |
 | Scheduling | Pro and Team in the [desktop app](/desktop-app/plans) schedule previews and safe-batch runs |
 
-## Move across
+## Switching your cleaning over
 
-1. Preview the browser caches. Expect slower page loads afterwards, and you may
-   be signed out of some sites.
+1. Start with the browsers, since that is the part that behaves differently.
+   Afterwards pages load slower for a while, and some sites may sign you out.
 
    ```bash
    npx macleanup --only 19 --dry-run
    ```
 
-2. Preview caches, logs, temp files and update caches. Trash stays as it is.
+2. Now the rest of a CCleaner pass: caches, logs, temp files and update caches.
+   The Trash is not touched.
 
    ```bash
    npx macleanup --profile minimal --dry-run
    ```
 
-3. Writing software? Preview the developer profile as well. It includes section
-   23, which deletes permanently.
+3. If you write software, preview the developer profile too. Section 23 is part
+   of it, and it deletes permanently.
 
    ```bash
    npx macleanup --profile dev --dry-run
    ```
 
-4. Run one section and read its report.
+4. Run the browser section for real, then open its report.
 
    ```bash
    npx macleanup --only 19
    ```
 
-## The facts, dated
+## CCleaner's plans and rows, dated
 
-<RivalFacts slug="ccleaner-mac" />
+CCleaner's Mac pages did not mention logs, data from removed apps, a disk map,
+notarisation or the Mac App Store, or source code. Those rows are dropped from the
+table; dropped means unstated, not missing.
+
+<RivalFacts slug="ccleaner-mac" hideNotStated />

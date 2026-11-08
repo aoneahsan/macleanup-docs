@@ -9,11 +9,12 @@ import RivalFacts from '@site/src/components/RivalFacts';
 
 # Moving from MacKeeper
 
-**macleanup replaces one part of MacKeeper: the cleanup.** Antivirus, the VPN,
-adware blocking and breach monitoring have no counterpart here. Sort those out
-first if you rely on them, and only then change your subscription.
+MacKeeper is a subscription with antivirus, a VPN, adware blocking and breach
+monitoring around the cleanup. macleanup is only the cleanup. If you rely on any of
+the others, line up a replacement for them before you touch your subscription;
+nothing here stands in for them.
 
-## What maps to what
+## Which part of the subscription this covers
 
 | In MacKeeper | In macleanup |
 |---|---|
@@ -22,35 +23,35 @@ first if you rely on them, and only then change your subscription.
 | Antivirus, VPN, adware blocking, identity monitoring | Nothing |
 | 24/7 chat support | [GitHub issues](https://github.com/aoneahsan/macleanup/issues) |
 
-## Move across
+## Trying it before you cancel anything
 
-1. Run the safe batch as a preview. The command line needs no account.
+1. Preview the safe batch. The command line asks for no account.
 
    ```bash
    npx macleanup --dry-run --all
    ```
 
-2. Save the preview so you can read it slowly.
+2. Write that preview to a file on your Desktop and read it at your own pace.
 
    ```bash
    npx macleanup --dry-run --all --no-color > ~/Desktop/macleanup-preview.txt
    ```
 
-3. Preview apps you have not opened in 100 days, the default.
+3. See which apps you have left unopened for 100 days, the default threshold.
 
    ```bash
    npx macleanup --only 21 --dry-run
    ```
 
-4. Run one section for real, not the whole batch.
+4. Make the first real run a single small section, not the batch.
 
    ```bash
    npx macleanup --only 8
    ```
 
-Section 8 takes only your own top-level temp files at least two days old, and it
-deletes them directly. A backup is the way back.
+Section 8 removes only your own top-level temp files that are at least two days
+old, and it deletes them directly. Only a backup brings them back.
 
-## The facts, dated
+## MacKeeper's plans and rows, dated
 
 <RivalFacts slug="mackeeper" />

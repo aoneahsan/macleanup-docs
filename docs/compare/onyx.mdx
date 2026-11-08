@@ -9,11 +9,12 @@ import RivalFacts from '@site/src/components/RivalFacts';
 
 # Moving from OnyX
 
-**OnyX has one build per macOS version; macleanup is one script for macOS 11 and
-later.** You lose its hidden settings and system-file checks, so keep OnyX if you
-use those. Its cleaning tasks have numbered sections here.
+OnyX ships a separate build for each macOS version. macleanup is one script for
+macOS 11 and later. If you open OnyX for its hidden
+Finder, Dock and Safari settings, or to verify system files, keep it: none of that is
+here. Its cleaning tasks are the part that moves, and each has a section number.
 
-## What maps to what
+## OnyX's tabs, against the section list
 
 | In OnyX | In macleanup |
 |---|---|
@@ -23,32 +24,34 @@ use those. Its cleaning tasks have numbered sections here.
 | Hidden Finder, Dock and Safari settings | Nothing |
 | Verifying system files, rebuilding databases | Nothing |
 
-## Move across
+## Rebuilding your OnyX routine
 
-1. Preview the cache layers as one profile. It includes logs too.
+1. Preview every cache layer as one profile. Logs come along with it.
 
    ```bash
    npx macleanup --profile cache-only --dry-run
    ```
 
-2. Section 6 needs sudo. With `--no-sudo` it is skipped, never half-run.
+2. No admin password at hand? Section 6 needs sudo, and with `--no-sudo` it is
+   skipped whole rather than half-run.
 
    ```bash
    npx macleanup --profile cache-only --no-sudo --dry-run
    ```
 
-3. Look for what OnyX does not list: data from apps you removed.
+3. Look for something OnyX never lists: data from apps you have removed.
 
    ```bash
    npx macleanup --only 12 --dry-run
    ```
 
-4. Run the single section you trust first, on its own, and read the prompt.
+4. Pick the one section you trust most, run it by itself, and read its prompt
+   before answering.
 
    ```bash
    npx macleanup --only 7
    ```
 
-## The facts, dated
+## OnyX, as its pages described it
 
 <RivalFacts slug="onyx" />

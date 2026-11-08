@@ -9,11 +9,12 @@ import RivalFacts from '@site/src/components/RivalFacts';
 
 # Moving from BuhoCleaner
 
-**There is no one-tap clean here, on purpose.** Flash Clean's place is taken by a
-preview you read and a confirmation you give. That is slower, and it tells you what
-is about to go.
+If one tap is the reason you bought BuhoCleaner, this will feel slower, on
+purpose. Flash Clean's place is taken by a preview you read and a confirmation
+you give, so you know what is about to go before it goes. The menu bar monitor for
+RAM, CPU and fans has no counterpart; keep BuhoCleaner if you watch it.
 
-## What maps to what
+## Flash Clean and the rest, translated
 
 | In BuhoCleaner | In macleanup |
 |---|---|
@@ -24,28 +25,30 @@ is about to go.
 | Disk space analyser | [Section 26](/reference/sections#section-26--disk-usage-report), as text |
 | Menu bar RAM, CPU and fan monitor | Nothing |
 
-## Move across
+## Your first batch, slowly
 
-1. Preview what the safe batch would do.
+1. See what the batch that stands in for Flash Clean would do.
 
    ```bash
    npx macleanup --dry-run --all
    ```
 
-2. Read [the honest limits of a preview](/before-you-run/dry-run#the-honest-limits-of-a-preview).
+2. Learn what a preview cannot promise:
+   [the honest limits of a preview](/before-you-run/dry-run#the-honest-limits-of-a-preview).
 
-3. Run the batch and answer each prompt.
+3. Run the batch for real and answer each prompt as it comes.
 
    ```bash
    npx macleanup --all
    ```
 
-4. Writing software? Preview the Xcode section separately. It is not in `--all`.
+4. Used BuhoCleaner's Xcode cleaner? Section 1 is outside `--all`, so preview it
+   on its own.
 
    ```bash
    npx macleanup --only 1 --dry-run
    ```
 
-## The facts, dated
+## BuhoCleaner's prices and rows, dated
 
 <RivalFacts slug="buhocleaner" />

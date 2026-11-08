@@ -9,11 +9,13 @@ import RivalFacts from '@site/src/components/RivalFacts';
 
 # Moving from AppCleaner
 
-**AppCleaner works on the app you drop on it. macleanup looks for what you forgot.**
-Section 21 finds apps you have not opened for a while, and section 12 finds data
-from apps that are already gone, which a drop window cannot be handed.
+If removing an app means dropping it on a small window, AppCleaner already does
+that well, and you can keep it. macleanup is for the other case: the app went to
+the Trash months ago and its data is still on your Mac. Section 12 looks for
+that data, and section 21 finds apps you have not opened for a while. Neither can
+be handed to a drop window, because you no longer know what to drop.
 
-## What maps to what
+## Dropping an app versus searching for leftovers
 
 | In AppCleaner | In macleanup |
 |---|---|
@@ -21,31 +23,36 @@ from apps that are already gone, which a drop window cannot be handed.
 | Delete an app with its related files | [Section 21](/reference/sections#section-21), which also takes its containers and support files |
 | Files from an app you trashed by hand | [Section 12](/reference/sections#section-12--orphaned-app-data) |
 
-## Move across
+## Clearing out what is already gone
 
-1. See what section 12 would offer. "Orphaned" is a heuristic, so read the list.
+1. List what section 12 calls orphaned. The word is a heuristic, so read every
+   line before trusting it.
 
    ```bash
    npx macleanup --only 12 --dry-run
    ```
 
-2. See which apps count as idle after 60 days. Apps with no usable signal are
-   skipped on purpose, so a short list does not mean the rest are in use.
+2. Ask which apps have sat unopened for 60 days. Apps that give no usable signal
+   are skipped on purpose; a short list does not mean the rest are in use.
 
    ```bash
    npx macleanup --only 21 --threshold 60 --dry-run
    ```
 
-3. Run section 21 interactively and select by number. Uninstalling also removes
-   the app's local data, so export anything you need from its container first.
+3. Export anything you need from an app's container, then run section 21 and pick
+   apps by number. Uninstalling takes the app's local data with it.
 
    ```bash
    npx macleanup --only 21
    ```
 
-Both sections move to the Trash, and a failed Finder move leaves the item where it
-was. Once Trash is emptied, they are gone.
+Both sections move items to the Trash, and if Finder fails to move one, it stays
+where it was. Empty the Trash and they are gone for good.
 
-## The facts, dated
+## AppCleaner's listing, dated
 
-<RivalFacts slug="appcleaner" />
+AppCleaner's pages said nothing about caches, logs, a disk map, whether it is free
+to use, notarisation or the Mac App Store, or its source licence. Those rows are
+left out below, which is not a claim that it lacks them.
+
+<RivalFacts slug="appcleaner" hideNotStated />

@@ -9,12 +9,12 @@ import RivalFacts from '@site/src/components/RivalFacts';
 
 # Moving from DaisyDisk
 
-**macleanup has no map.** If you like seeing the whole disk as a sunburst, keep
-DaisyDisk: the two do different jobs and run happily on one Mac. macleanup's
-reports are text, and its cleanup sections go after the caches, logs and leftovers
-you would otherwise hunt down by eye.
+People who think in pictures should keep DaisyDisk. macleanup has no map, and its
+reports are plain text. What it does have is cleanup sections that already know
+where caches, logs and app leftovers live, so you are not hunting for them by eye.
+The two do different jobs and sit happily on one Mac.
 
-## What maps to what
+## The sunburst, said in text
 
 | In DaisyDisk | In macleanup |
 |---|---|
@@ -22,29 +22,35 @@ you would otherwise hunt down by eye.
 | Spotting the largest files | [Section 18](/reference/sections#section-18--large-files-report), everything from 500 MB up in `$HOME` |
 | Deleting a big file you chose | [Section 24](/reference/sections#section-24--large-stale-files), large and untouched, moved to the Trash |
 
-## Move across
+## Asking where the space went
 
-1. Ask where the disk went. Both sections are reports and delete nothing.
+1. Run the two report sections. Neither deletes anything.
 
    ```bash
    npx macleanup --only "18,26"
    ```
 
-2. Read the dated `.txt` files in `~/.macleanup/reports/`.
+2. Open the dated `.txt` files in `~/.macleanup/reports/`. That is your map,
+   written down.
 
-3. Preview the big, old files. Both the access and the change date must be old, so
-   a large file you opened recently will not appear. Section 18 shows those.
+3. Preview the large files you have not touched in six months. A file counts only
+   when both its access and change dates are old, so something big you opened last
+   week stays off this list; section 18 is where it shows.
 
    ```bash
    npx macleanup --only 24 --large-file-size-gb 2 --large-file-days 180 --dry-run
    ```
 
-4. Preview what a map never labels for you: caches, logs and temp files.
+4. Then preview the space a map never puts a name on: caches, logs and temp files.
 
    ```bash
    npx macleanup --profile minimal --dry-run
    ```
 
-## The facts, dated
+## DaisyDisk's price and rows, dated
 
-<RivalFacts slug="daisydisk" />
+DaisyDisk's pages are about the map. They did not say whether it clears caches or
+logs, finds data from removed apps, uninstalls apps, or publishes its source, so
+those rows are not in the table. That is silence on their pages, not a "no".
+
+<RivalFacts slug="daisydisk" hideNotStated />

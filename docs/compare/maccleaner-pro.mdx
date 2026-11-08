@@ -9,11 +9,12 @@ import RivalFacts from '@site/src/components/RivalFacts';
 
 # Moving from MacCleaner Pro
 
-**MacCleaner Pro is six apps; macleanup is one script with 28 sections.** Most of
-the cleanup lines up by number. The duplicate finder, the memory cleaner and the
-visual analyser do not.
+MacCleaner Pro is six apps in one bundle; macleanup is one script with 28 sections.
+If you use the duplicate finder, the memory cleaner or the visual disk analyser,
+those stay with MacCleaner Pro. The cache, log, uninstall and leftover cleaning
+lines up with a section number each.
 
-## What maps to what
+## The six apps, mapped to sections
 
 | In MacCleaner Pro | In macleanup |
 |---|---|
@@ -23,32 +24,32 @@ visual analyser do not.
 | Disk space analyser | [Section 26](/reference/sections#section-26--disk-usage-report), as text |
 | Duplicate finder, memory cleaner | Nothing |
 
-## Move across
+## Reading before running
 
-1. Preview the cache profile: `3, 5, 6, 7, 9, 19`.
+1. Read the script before you let it delete a thing. It is
+   [public](https://github.com/aoneahsan/macleanup), and the
+   [no-Node checkout](/getting-started/installation#method-3--direct-git-checkout-no-node-required)
+   runs it straight from the clone.
+
+2. Preview the cache profile, which is sections `3, 5, 6, 7, 9, 19`.
 
    ```bash
    npx macleanup --profile cache-only --dry-run
    ```
 
-2. Run the audit profile as a preview to see leftovers, idle apps and folder sizes
-   in one go.
+3. Preview the audit profile to see leftovers, idle apps and folder sizes in one
+   listing.
 
    ```bash
    npx macleanup --profile audit --dry-run
    ```
 
-3. Run section 26 for real. It only reports.
+4. Section 26 only reports, so it is safe to run for real straight away.
 
    ```bash
    npx macleanup --only 26
    ```
 
-4. Read the script before you let it delete anything. It is
-   [public](https://github.com/aoneahsan/macleanup), and the
-   [no-Node checkout](/getting-started/installation#method-3--direct-git-checkout-no-node-required)
-   runs it straight from the clone.
-
-## The facts, dated
+## MacCleaner Pro's rows, dated
 
 <RivalFacts slug="maccleaner-pro" />

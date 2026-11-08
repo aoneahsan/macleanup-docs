@@ -9,11 +9,14 @@ import RivalFacts from '@site/src/components/RivalFacts';
 
 # Moving from CleanMyMac
 
-**CleanMyMac does the deciding in one window; macleanup shows you the paths and
-asks section by section.** Keep CleanMyMac installed while you try this. Nothing
-below touches it.
+CleanMyMac decides for you in one window, and it also scans for malware, updates
+your software and tunes performance. If you use those, stay with it. macleanup only
+cleans: it lists the paths and asks you section by section.
 
-## What maps to what
+You don't have to choose today. Keep CleanMyMac installed while you try this;
+nothing below touches it.
+
+## CleanMyMac's modules, by section number
 
 | In CleanMyMac | In macleanup |
 |---|---|
@@ -23,39 +26,39 @@ below touches it.
 | Leftovers from apps already gone | [Section 12](/reference/sections#section-12--orphaned-app-data) |
 | Malware scanning, software updates, performance tools | Nothing. macleanup only cleans |
 
-## Move across
+## A first week with both installed
 
-1. See the sections and pick by number.
+1. Print the section list. You pick by number from here on.
 
    ```bash
    npx macleanup --list
    ```
 
-2. Preview the weekly sweep. This one leaves Trash alone.
+2. Preview the weekly sweep, the profile the caches and logs row points to.
+   Trash is left alone by it.
 
    ```bash
    npx macleanup --profile minimal --dry-run
    ```
 
-3. Read the paths, then see what apps left behind.
+3. With those paths read, ask what deleted apps left behind.
 
    ```bash
    npx macleanup --only 12 --dry-run
    ```
 
-4. Run one section for real and read the report in `~/.macleanup/reports/`.
+4. Before the first real run, read
+   [the limits of a preview](/before-you-run/dry-run#the-honest-limits-of-a-preview).
+   Section 5 sweeps `~/Library/Caches`, which macOS and your apps refill. Then run
+   it alone; the report lands in `~/.macleanup/reports/`.
 
    ```bash
    npx macleanup --only 5
    ```
 
-5. Want a window? [The desktop app](/desktop-app/overview) runs the same script. Its
-   [plans](/desktop-app/plans) count real runs only; previews stay free.
+5. Miss having a window? [The desktop app](/desktop-app/overview) runs the same
+   script. Its [plans](/desktop-app/plans) count real runs only; previews stay free.
 
-Section 5 sweeps `~/Library/Caches`, which macOS and your apps refill. Read
-[the limits of a preview](/before-you-run/dry-run#the-honest-limits-of-a-preview)
-before step 4.
-
-## The facts, dated
+## CleanMyMac's prices and rows, as we found them
 
 <RivalFacts slug="cleanmymac" />

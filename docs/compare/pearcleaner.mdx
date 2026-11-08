@@ -9,11 +9,13 @@ import RivalFacts from '@site/src/components/RivalFacts';
 
 # Moving from Pearcleaner
 
-**Pearcleaner is built around apps; macleanup is built around numbered kinds of
-file.** Its orphan search has a direct match here. Its Finder extension and its
-Homebrew manager do not.
+Pearcleaner starts from an app; macleanup starts from a kind of file, and gives each
+kind a number. If you right-click apps in Finder to remove them, or manage Homebrew
+packages from Pearcleaner, keep it for that. Its orphan search is the piece with a
+direct match here, and macleanup adds the caches, logs and build folders Pearcleaner
+does not list.
 
-## What maps to what
+## Pearcleaner's sidebar, matched up
 
 | In Pearcleaner | In macleanup |
 |---|---|
@@ -23,31 +25,32 @@ Homebrew manager do not.
 | Development environment manager | Sections [1](/reference/sections#section-1--xcode-caches-deriveddata-simulators), [2](/reference/sections#section-2--android--gradle-caches), [3](/reference/sections#section-3--package-manager-caches), [4](/reference/sections#section-4--docker-prune) as `--profile dev` |
 | Right-click in Finder | Nothing |
 
-## Move across
+## Checking the two orphan lists against each other
 
-1. Compare the orphan lists. Run this and look at the same folders in Pearcleaner.
-   An item must be unmatched by any installed app and untouched for `--idle-days`.
+1. Run the orphan preview and open the same folders in Pearcleaner beside it. An
+   item makes macleanup's list only when no installed app claims it and it has
+   gone untouched for `--idle-days`.
 
    ```bash
    npx macleanup --only 12 --dry-run
    ```
 
-2. Preview the part Pearcleaner does not list: caches, logs and temp files.
+2. Then the files Pearcleaner leaves out of its view: caches, logs and temp files.
 
    ```bash
    npx macleanup --profile minimal --dry-run
    ```
 
-3. Preview the developer profile. Section 23 inside it deletes build folders
-   permanently, and Docker volumes are only touched if you say so.
+3. For a development machine, preview `--profile dev`. Section 23 inside it removes
+   build folders permanently, and Docker volumes stay untouched unless you ask.
 
    ```bash
    npx macleanup --profile dev --dry-run
    ```
 
-Leave `--brew-autoremove` off unless you have read
+Keep `--brew-autoremove` off until you have read
 [what it can break](/reference/cli#brew-autoremove).
 
-## The facts, dated
+## Pearcleaner's rows, with sources
 
 <RivalFacts slug="pearcleaner" />

@@ -9,11 +9,12 @@ import RivalFacts from '@site/src/components/RivalFacts';
 
 # Moving from mac-cleanup-py
 
-**This is the closest neighbour on the list:** a command-line cleaner you can read.
-The move is mostly vocabulary. Named modules become numbered sections, and `--only`
-is how you pick them.
+Of everything on this list, mac-cleanup-py is the closest neighbour: a command-line
+cleaner whose code you can read. If you already run Python and like installing with
+pip or Homebrew, it does the job. Moving is mostly vocabulary. Named modules become
+numbered sections, and `--only` is how you pick them.
 
-## What maps to what
+## Modules become section numbers
 
 | In mac-cleanup-py | In macleanup |
 |---|---|
@@ -23,12 +24,12 @@ is how you pick them.
 | A module per tool | `--only` with [section numbers](/reference/sections) |
 | A saved set of modules | [Profiles](/reference/profiles) and [`~/.macleanuprc`](/reference/configuration) |
 
-Sections 12 (orphaned app data) and 21 (unused apps) are the additions. Neither
-is in `--all`.
+What you gain is section 12 (orphaned app data) and section 21 (unused apps).
+Neither one runs as part of `--all`.
 
-## Move across
+## From a clone, with bash and nothing else
 
-1. Run it from a checkout with bash alone.
+1. Clone it and list the sections. No Python, no Node.
 
    ```bash
    git clone https://github.com/aoneahsan/macleanup.git
@@ -37,19 +38,19 @@ is in `--all`.
    ./macleanup.sh --list
    ```
 
-2. Preview the sections that replace your module list.
+2. Preview the three sections that stand in for your module list.
 
    ```bash
    ./macleanup.sh --only "3,5,7" --dry-run
    ```
 
-3. Scripting it? The event stream is NDJSON.
-   [`--json-events`](/reference/json-events) has a stated schema.
+3. Wrapping it in your own scripts? The event stream is NDJSON, and
+   [`--json-events`](/reference/json-events) documents its schema.
 
    ```bash
    ./macleanup.sh --only "3,5,7" --dry-run --json-events
    ```
 
-## The facts, dated
+## mac-cleanup-py's rows, dated
 
 <RivalFacts slug="mac-cleanup-py" />

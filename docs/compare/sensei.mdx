@@ -9,11 +9,12 @@ import RivalFacts from '@site/src/components/RivalFacts';
 
 # Moving from Sensei
 
-**If you bought Sensei for its monitors, keep it.** macleanup has no menu bar
-gauges, no S.M.A.R.T. health and no benchmarks. It replaces the cleaning tab and
-the uninstaller, and it tells you what each run moved or removed.
+Did you buy Sensei for the menu bar gauges, drive health or benchmarks? Then keep
+it; macleanup has no monitors, no S.M.A.R.T. readings and no benchmarks. What it can
+take over is Sensei's cleaning tab and its uninstaller, and after every run it tells
+you what it moved or removed.
 
-## What maps to what
+## The cleaning tab, section by section
 
 | In Sensei | In macleanup |
 |---|---|
@@ -23,30 +24,34 @@ the uninstaller, and it tells you what each run moved or removed.
 | Uninstaller | [Section 21](/reference/sections#section-21) |
 | CPU, GPU, battery and thermal monitors | [Section 0](/reference/sections#section-0--system-health-and-process-monitor) is a one-time text snapshot, not a monitor |
 
-## Move across
+## Handing over the cleaning, keeping the gauges
 
-1. Get the reports first. They delete nothing.
+1. Begin with the three reports. They write files and delete nothing.
 
    ```bash
    npx macleanup --only "0,15,18"
    ```
 
-2. Preview the safe batch. It never selects a deep section.
+2. Preview the safe batch. No deep section is ever chosen by it.
 
    ```bash
    npx macleanup --dry-run --all
    ```
 
-3. Run logs alone. Sudo is needed for the system-log part; with `--no-sudo`, that
-   part is skipped and never half-run.
+3. Clear logs on their own. The system-log half needs sudo; pass `--no-sudo` and
+   that half is skipped entirely instead of half-run.
 
    ```bash
    npx macleanup --only 7 --no-sudo
    ```
 
-4. Read the session summary. It counts attempted, completed, skipped and failed
-   separately: [Reports and logs](/reference/reports-and-logs).
+4. Open the session summary. Attempted, completed, skipped and failed are counted
+   apart: [Reports and logs](/reference/reports-and-logs).
 
-## The facts, dated
+## Sensei's prices and rows, dated
 
-<RivalFacts slug="sensei" />
+Sensei's pages did not cover data from removed apps, a disk map, a free way to use
+it, notarisation or the Mac App Store, or its source. We left those rows out rather
+than guess; their absence below is not a "no".
+
+<RivalFacts slug="sensei" hideNotStated />

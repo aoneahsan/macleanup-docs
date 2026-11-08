@@ -44,8 +44,11 @@ function money(p: Price): string {
   return `$${figure} a ${p.period}`;
 }
 
-/** The dated fact table for one rival, from the same data the marketing site's page reads. */
-export default function RivalFacts({ slug }: { slug: string }): ReactNode {
+/**
+ * The dated fact table for one rival, from the same data the marketing site's page reads.
+ * `hideNotStated` drops the rows their pages said nothing about; the guide says once which ones.
+ */
+export default function RivalFacts({ slug, hideNotStated = false }: { slug: string; hideNotStated?: boolean }): ReactNode {
   const rival = rivals.find((r) => r.slug === slug);
   if (!rival) throw new Error(`RivalFacts: no rival "${slug}" in src/data/competitors.json`);
   return (
@@ -92,30 +95,32 @@ export default function RivalFacts({ slug }: { slug: string }): ReactNode {
           </tr>
         </thead>
         <tbody>
-          {hub.features.map((f) => {
-            const theirs = rival.features[f.key];
-            const mine = ours[f.key];
-            return (
-              <tr key={f.key}>
-                <td>{f.label}</td>
-                <td>
-                  {WORD[theirs.status]}
-                  {theirs.note ? <span className={styles.note}>{theirs.note}</span> : null}
-                  {theirs.source ? (
-                    <span className={styles.note}>
-                      <Theirs href={theirs.source} label={`Source for ${rival.name}: ${f.label}`}>
-                        Source
-                      </Theirs>
-                    </span>
-                  ) : null}
-                </td>
-                <td>
-                  {WORD[mine.status]}
-                  {mine.note ? <span className={styles.note}>{mine.note}</span> : null}
-                </td>
-              </tr>
-            );
-          })}
+          {hub.features
+            .filter((f) => !hideNotStated || rival.features[f.key].status !== 'not-stated')
+            .map((f) => {
+              const theirs = rival.features[f.key];
+              const mine = ours[f.key];
+              return (
+                <tr key={f.key}>
+                  <td>{f.label}</td>
+                  <td>
+                    {WORD[theirs.status]}
+                    {theirs.note ? <span className={styles.note}>{theirs.note}</span> : null}
+                    {theirs.source ? (
+                      <span className={styles.note}>
+                        <Theirs href={theirs.source} label={`Source for ${rival.name}: ${f.label}`}>
+                          Source
+                        </Theirs>
+                      </span>
+                    ) : null}
+                  </td>
+                  <td>
+                    {WORD[mine.status]}
+                    {mine.note ? <span className={styles.note}>{mine.note}</span> : null}
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>

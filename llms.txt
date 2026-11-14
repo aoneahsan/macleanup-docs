@@ -100,7 +100,7 @@ This file follows the [llmstxt.org](https://llmstxt.org) spec — a structured i
 
 ## White-label & licensing
 
-- [White-label licence and buyout](https://macleanup-docs.aoneahsan.com/white-label/overview): the desktop app and command-line tool built, published and updated under a buyer's name; what MIT already gives; non-exclusive until a buyout of the private desktop app.
+- [White-label licence and buyout](https://macleanup-docs.aoneahsan.com/white-label/overview): the desktop app and command-line tool built, published and updated under a buyer's name; what MIT already gives; non-exclusive until a buyout of the private desktop app, which carries a 7% royalty on macleanup's gross revenue for as long as it earns; paid by Wise bank transfer.
 - [What we deliver](https://macleanup-docs.aoneahsan.com/white-label/delivery): per group, and the steps from payment to the first build.
 - [Updates and renewals](https://macleanup-docs.aoneahsan.com/white-label/updates): what an update is and renewing by licence key.
 - [Check a licence](https://macleanup-docs.aoneahsan.com/white-label/verify): by key or website, and the /.well-known licence file.

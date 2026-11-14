@@ -83,6 +83,19 @@ const sidebars: SidebarsConfig = {
     'recipes',
     {
       type: 'category',
+      label: 'White-label & licensing',
+      collapsed: true,
+      link: {
+        type: 'generated-index',
+        title: 'White-label & licensing',
+        description:
+          'macleanup under your name: what a white-label licence delivers for the desktop app and the command-line tool, updates and renewals, the desktop app buyout, and how to check a licence.',
+        slug: '/white-label',
+      },
+      items: ['white-label/overview', 'white-label/delivery', 'white-label/updates', 'white-label/verify', 'white-label/faq'],
+    },
+    {
+      type: 'category',
       label: 'Moving to macleanup',
       collapsed: true,
       link: { type: 'doc', id: 'compare/index' },

@@ -33,8 +33,9 @@ sections, profiles and safety rules stay the same; see
 
 ## From payment to your first build {#timeline}
 
-1. **Choose and pay** on the [pricing page](https://macleanup.aoneahsan.com/white-label/pricing).
-   The licence key and certificate arrive by email.
+1. **Choose and pay** on the [pricing page](https://macleanup.aoneahsan.com/white-label/pricing),
+   by bank transfer to our Wise account. Once we have confirmed the transfer,
+   the licence key and certificate arrive by email.
 2. **Send your brand.** Reply with your name, icon, colours, npm scope and the
    site your download page lives on. We answer with a date for the first build.
 3. **We build and publish.** Your disk image and package ship under your name.

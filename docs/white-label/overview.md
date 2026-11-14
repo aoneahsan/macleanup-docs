@@ -43,6 +43,14 @@ The command-line tool stays public under MIT and is not part of the sale.
 Licences sold before a buyout keep their terms. Details are on the
 [buyout page](https://macleanup.aoneahsan.com/white-label/buyout).
 
+The buyout agreement carries a royalty. The buyer pays us 7% of the gross
+revenue macleanup earns, the desktop app and the command-line tool together,
+not counting sales tax or VAT collected. It is paid every quarter with a
+revenue statement, for as long as macleanup earns revenue, and it is still
+owed after a resale. The
+[licence terms](https://macleanup.aoneahsan.com/white-label/license-terms)
+set it out.
+
 ## Next
 
 - [What we deliver](/white-label/delivery)

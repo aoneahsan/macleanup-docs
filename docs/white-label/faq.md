@@ -12,7 +12,9 @@ keywords: [macleanup white-label faq]
 ## Is a licence exclusive? {#exclusive}
 
 No. We may license macleanup to other buyers until someone buys out the
-desktop app. After that buyout we stop selling macleanup white-label licences.
+desktop app. After that buyout we stop selling macleanup white-label licences,
+and the buyer pays us a 7% royalty on the gross revenue macleanup earns, for as
+long as it earns.
 
 ## Do I get the source code? {#source}
 

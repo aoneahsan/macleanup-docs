@@ -1,0 +1,15 @@
+%% aoneahsan-cccs-comparison-hub — flow (2026-11-07)
+flowchart TD
+    start([/comparison-hub in ONE production root]) --> excluded{FilesHub?}
+    excluded -->|yes| stop([No hub. Vision record only])
+    excluded -->|no| vision{docs/OWNER-VISION.md?}
+    vision -->|no| ask([Ask him. Stop])
+    vision -->|yes| exists{Hub exists?}
+    exists -->|yes| refresh[Agent reopens each source]
+    exists -->|no| kit[Story and SEO check, brand kit, LinkedIn review]
+    kit --> research[Agent researches 10+ per line]
+    research --> dummy[Dummy pages, site pages, docs pages, sitemaps, contract test]
+    dummy --> approve[His one approval of the words]
+    refresh --> ship
+    approve --> ship[Gates, render 1440 and 390, commit, push, deploy]
+    ship --> live[Live proof on both sites, IndexNow, status row]

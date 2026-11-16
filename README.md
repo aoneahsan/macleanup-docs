@@ -55,7 +55,7 @@ static/
 ├── robots.txt            Search + AI crawler policy
 ├── llms.txt              Structured index for language models
 ├── humans.txt · .well-known/security.txt
-└── img/                  logo.svg · favicon.svg · social-card.svg
+└── img/                  logo.svg · favicon.svg · social-card.png
 
 docusaurus.config.ts      Site config, JSON-LD, env-gated analytics
 sidebars.ts               Sidebar layout

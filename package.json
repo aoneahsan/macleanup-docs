@@ -18,7 +18,7 @@
     "url": "https://github.com/aoneahsan/macleanup-docs/issues"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=26.13.1"
   },
   "scripts": {
     "docusaurus": "docusaurus",
@@ -48,11 +48,10 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.10.2",
     "@docusaurus/plugin-content-docs": "^3.10.2",
-    "@docusaurus/tsconfig": "^3.10.2",
     "@docusaurus/types": "^3.10.2",
     "@types/react": "^19",
     "github-slugger": "^2.0.0",
-    "typescript": "~6.0.3"
+    "typescript": "~7.0.2"
   },
   "browserslist": {
     "production": [

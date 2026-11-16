@@ -1,12 +1,11 @@
 # Packages — macleanup docs
 
-Last Updated: 2026-11-02
+Last Updated: 2026-11-16
 
-Yarn 4, Node 24 (build sets `NODE_OPTIONS=--no-experimental-webstorage`: Docusaurus's SSG sandbox copies every
+Yarn 4, Node 26.13.1 LTS (`.nvmrc`, `engines.node >=26.13.1`; build sets `NODE_OPTIONS=--no-experimental-webstorage`: Docusaurus's SSG sandbox copies every
 Node global, and Node 26's disabled `localStorage` getter otherwise prints an ExperimentalWarning; re-check when
 Docusaurus or the `eval` package stops copying globals, then drop the flag). Upgraded with
-`npx -y npm-check-updates -u`, latest stable. `typescript` stays `~6.0.3` (the fleet pin: TypeScript 7 is outside
-typescript-eslint's peer range). This file is excluded from the published site.
+`npx -y npm-check-updates -u`, latest stable. `typescript` is `~7.0.2`: this site has no typescript-eslint or Capacitor, so the fleet's 6.0 pin does not apply. This file is excluded from the published site.
 
 | Package | Range | Kind |
 |---|---|---|
@@ -24,12 +23,16 @@ typescript-eslint's peer range). This file is excluded from the published site.
 | `strata-storage` | ^3.1.4 | runtime |
 | `@docusaurus/module-type-aliases` | ^3.10.2 | dev |
 | `@docusaurus/plugin-content-docs` | ^3.10.2 | dev |
-| `@docusaurus/tsconfig` | ^3.10.2 | dev |
 | `@docusaurus/types` | ^3.10.2 | dev |
 | `@types/react` | ^19 | dev |
 | `github-slugger` | ^2.0.0 | dev |
-| `typescript` | ~6.0.3 | dev |
+| `typescript` | ~7.0.2 | dev |
 
 2026-11-02: `github-slugger` 1 → 2 (ships its own types; the local declaration was removed) and
 `@easyops-cn/docusaurus-search-local` 0.55.3 (adds a search icon to the navbar field). Yarn reports unmet peers
 inside Docusaurus's own Algolia and bundler packages; this site declares neither and uses local search.
+
+2026-11-16: Node 24 → 26.13.1 (`.nvmrc`, `engines.node` was `>=22.0.0`). TypeScript 6.0 → 7.0.2. TypeScript 7 removed
+`baseUrl`, which `@docusaurus/tsconfig` still sets (TS5102), so the package and the `extends` are gone; `tsconfig.json`
+carries the same options without `baseUrl` or `ignoreDeprecations` (relative `paths` still resolve). A planted type
+error in `sidebars.ts` fails `yarn typecheck`; the build is clean.

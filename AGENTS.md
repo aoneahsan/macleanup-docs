@@ -1,5 +1,7 @@
 # macleanup-docs — Project Rules
 
+<!-- fleet:node-26-13-1 v1 --> Node 26.13.1 LTS (.nvmrc), packages latest — 2026-11-16
+
 **Type:** Docusaurus 3 documentation site for the npm package `macleanup`
 **Live:** https://macleanup-docs.aoneahsan.com (GitHub Pages)
 **Source package:** `../macleanup` (READ-ONLY from here) · https://github.com/aoneahsan/macleanup

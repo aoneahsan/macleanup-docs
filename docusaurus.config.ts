@@ -92,7 +92,7 @@ const config: Config = {
     },
     {
       tagName: 'meta',
-      attributes: { name: 'theme-color', content: '#6E56F7' },
+      attributes: { name: 'theme-color', content: '#005F45' },
     },
     {
       tagName: 'script',

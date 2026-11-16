@@ -1,6 +1,6 @@
 ---
 title: Install the desktop app
-description: Install the macleanup desktop app on macOS 11 or later — one disk image for Apple silicon and Intel, the one-time Gatekeeper Open Anyway step, optional Full Disk Access, and in-app updates.
+description: Install the macleanup desktop app on macOS 11 or later — one disk image for Apple silicon and Intel, the one-time Gatekeeper Open Anyway step, Full Disk Access setup, and in-app updates.
 tags: [desktop-app, installation, gatekeeper, full-disk-access]
 sidebar_position: 2
 sidebar_label: Install and first launch
@@ -38,17 +38,20 @@ launch may be refused. You allow it **once**:
 
 After that it opens normally.
 
-## Full Disk Access is optional {#full-disk-access}
+## Full Disk Access before a scan {#full-disk-access}
 
-Without Full Disk Access, macOS hides Mail, Messages and some Library folders
-from the app. Sections still run; **they skip what they cannot see and the
-receipt says so**.
+Full Disk Access lets macleanup scan protected folders without asking for each
+one. The app checks it before a preview or run.
 
 To grant it:
 
 1. Open **System Settings → Privacy & Security → Full Disk Access**.
 2. Turn on macleanup.
 3. Return to the app.
+
+If a run moves items to Trash in section 12, 21 or 24, the app explains Finder
+access and checks it before starting. macOS asks once if access is not already
+on. Accessibility access is not needed.
 
 ## Updates {#updates}
 

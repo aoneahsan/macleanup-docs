@@ -222,7 +222,7 @@ Open **System Settings → Privacy & Security → Automation**, find your termin
 Events**.
 
 `--notify` controls the completion notification, not Finder's Trash operation.
-If Finder access is denied, sections 12 and 21 warn and leave affected items
+If Finder access is denied, sections 12, 21 and 24 warn and leave affected items
 in place. Grant the permission before retrying those sections.
 
 ## Logs and reports

@@ -31,7 +31,7 @@ original location.
 
 :::warning[Finder permission matters]
 Emptying the Trash ends recovery. If macOS denies Finder Automation access,
-sections 12 and 21 leave affected items in place and warn; they do not fall
+sections 12, 21 and 24 leave affected items in place and warn; they do not fall
 back to direct deletion. See [Troubleshooting](/troubleshooting).
 :::
 

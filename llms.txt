@@ -62,7 +62,7 @@ Three equivalent ways to run it; the flags are identical in all three.
 ## Desktop app
 
 - [Overview](https://macleanup-docs.aoneahsan.com/desktop-app/overview): what the window adds on top of the same script — disk gauge, dry-run ledger with keep/archive/delete, run receipts, apps and leftovers, both launchd domains.
-- [Install and first launch](https://macleanup-docs.aoneahsan.com/desktop-app/install): macOS 11+, Apple silicon and Intel, the one-time Gatekeeper "Open Anyway" step, optional Full Disk Access, in-app updates.
+- [Install and first launch](https://macleanup-docs.aoneahsan.com/desktop-app/install): macOS 11+, Apple silicon and Intel, the one-time Gatekeeper "Open Anyway" step, Full Disk Access before a scan, Finder access before Trash-moving runs, in-app updates.
 - [Plans and allowance](https://macleanup-docs.aoneahsan.com/desktop-app/plans): Free, Pro and Team; previews are unlimited on every plan; prices as of 2026-10-30.
 - [Privacy in the app](https://macleanup-docs.aoneahsan.com/desktop-app/privacy): usage counts without paths; file paths never leave the Mac; what a signed-in sync carries.
 - [Keyboard shortcuts](https://macleanup-docs.aoneahsan.com/desktop-app/keyboard-shortcuts): the defaults, every one rebindable.

@@ -1,11 +1,15 @@
 /**
- * Update flow, layer 2 for the website: reads the admin-published release record for this
- * site (platform + channel) on start, every 15 minutes and when the tab comes back
- * (at most once a minute). An urgent newer release blocks now; a normal one is announced
+ * Update flow, layer 2 for the docs: reads the admin-published release record for this
+ * site (platform + channel) on start, when a release is published (the `app-releases`
+ * Realtime broadcast, and every rejoin of it), when the browser comes back online, and when
+ * the tab comes back (at most once a minute). Never on a timer (rules/realtime-not-polling.md). An urgent newer release blocks now; a normal one is announced
  * now and blocks from the next start. A failed read blocks nothing, except a normal
  * release this browser was already told about. Update reloads the page: every page is
  * served `no-cache`, so a reload is the new build.
  */
+import { RealtimeClient } from '@supabase/realtime-js';
+import { translate } from '@docusaurus/Translate';
+
 export const SEMVER = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/;
 
 /** -1, 0 or 1. Callers validate with SEMVER first. */
@@ -25,8 +29,8 @@ export function decide({ running, record, stored, newStart }) {
   return owed && newStart ? 'block' : 'notice';
 }
 
-const EVERY_MS = 15 * 60 * 1000;
 const RETURN_MS = 60 * 1000;
+const RELEASE_TOPIC = 'app-releases';
 
 /**
  * Start the gate. `config` comes from the build's `macleanup-release` meta tag; without it
@@ -36,7 +40,8 @@ const RETURN_MS = 60 * 1000;
  */
 export function startReleaseGate({ config, read, write }) {
   if (!config || !SEMVER.test(config.version) || !config.api || !config.key) return;
-  const noticeKey = `release-notice-${config.platform}`;
+  // Production keeps its original key; another channel (a test build on the same origin) never shares it.
+  const noticeKey = config.channel === 'production' ? `release-notice-${config.platform}` : `release-notice-${config.platform}-${config.channel}`;
   let lastRun = 0;
   let blocked = false;
   let firstCheck = true;
@@ -75,10 +80,32 @@ export function startReleaseGate({ config, read, write }) {
   const run = () => { void check(); };
   if ('requestIdleCallback' in window) window.requestIdleCallback(run, { timeout: 2000 });
   else window.setTimeout(run, 0);
-  window.setInterval(run, EVERY_MS);
+  watchReleases(config, run);
+  window.addEventListener('online', run);
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible' && Date.now() - lastRun >= RETURN_MS) run();
   });
+}
+
+/**
+ * Publishing a release broadcasts `{ platform, channel }` on the public topic `app-releases`
+ * (migration 20261117163024 in macleanup-desktop). The event only says "re-read"; each
+ * SUBSCRIBED (first join and every rejoin) re-reads too, because a broadcast sent while the
+ * socket was down is gone. The client's heartbeat keeps the open socket alive; it asks nothing.
+ */
+function watchReleases(config, onSignal) {
+  let client;
+  try {
+    client = new RealtimeClient(`${config.api.replace(/^http/, 'ws')}/realtime/v1`, { params: { apikey: config.key } });
+  } catch (_) {
+    return;
+  }
+  client
+    .channel(RELEASE_TOPIC, { config: { private: false } })
+    .on('broadcast', { event: 'release' }, ({ payload }) => {
+      if (payload && payload.platform === config.platform && payload.channel === config.channel) onSignal();
+    })
+    .subscribe((status) => { if (status === 'SUBSCRIBED') onSignal(); });
 }
 
 const reload = () => window.location.reload();
@@ -91,14 +118,14 @@ function el(tag, props = {}, children = []) {
 
 function showBlock({ version, reason, running, since }) {
   if (document.getElementById('release-block')) return;
-  const title = el('h2', { id: 'release-block-title', textContent: 'These docs need their newer version' });
+  const title = el('h2', { id: 'release-block-title', textContent: translate({ id: 'releaseGate.block.title', message: 'These docs need their newer version' }) });
   const lines = [title];
-  if (since) lines.push(el('p', { textContent: 'This version of the site is required since your last visit.' }));
+  if (since) lines.push(el('p', { textContent: translate({ id: 'releaseGate.block.since', message: 'This version of the site is required since your last visit.' }) }));
   if (reason) lines.push(el('p', { className: 'release-block-reason', textContent: reason }));
-  lines.push(el('p', { className: 'release-block-version', textContent: `You have ${running} · required ${version}` }));
-  const button = el('button', { type: 'button', className: 'release-block-update', textContent: 'Update now' });
+  lines.push(el('p', { className: 'release-block-version', textContent: translate({ id: 'releaseGate.block.versions', message: 'You have {running} · required {version}' }, { running, version }) }));
+  const button = el('button', { type: 'button', className: 'release-block-update', textContent: translate({ id: 'releaseGate.update', message: 'Update now' }) });
   button.addEventListener('click', reload);
-  lines.push(button, el('p', { className: 'release-block-note', textContent: 'The page reloads with the new version. Nothing you chose here is lost.' }));
+  lines.push(button, el('p', { className: 'release-block-note', textContent: translate({ id: 'releaseGate.block.note', message: 'The page reloads with the new version. Nothing you chose here is lost.' }) }));
   const card = el('div', { className: 'release-block-card' }, lines);
   const block = el('div', { id: 'release-block', className: 'release-block' }, [card]);
   block.setAttribute('role', 'alertdialog');
@@ -115,9 +142,9 @@ function showBlock({ version, reason, running, since }) {
 
 function showNotice({ version }) {
   if (document.getElementById('release-notice')) return;
-  const text = el('p', { textContent: `A new version of these docs (${version}) is out. It will be required from your next visit.` });
-  const update = el('button', { type: 'button', className: 'release-notice-update', textContent: 'Update now' });
-  const later = el('button', { type: 'button', className: 'release-notice-later', textContent: 'Later' });
+  const text = el('p', { textContent: translate({ id: 'releaseGate.notice', message: 'A new version of these docs ({version}) is out. It will be required from your next visit.' }, { version }) });
+  const update = el('button', { type: 'button', className: 'release-notice-update', textContent: translate({ id: 'releaseGate.update', message: 'Update now' }) });
+  const later = el('button', { type: 'button', className: 'release-notice-later', textContent: translate({ id: 'releaseGate.later', message: 'Later' }) });
   const notice = el('div', { id: 'release-notice', className: 'release-notice' }, [text, update, later]);
   notice.setAttribute('role', 'status');
   update.addEventListener('click', reload);

@@ -46,8 +46,9 @@ The same rule is a guarantee of the [JSON event stream](/reference/json-events#g
 - **Sign-in and sync** — only when you sign in.
 - **Checkout** — opens in your browser.
 - **Release notice** — the app reads the newest release notice from the backend
-  provider at start, every 15 minutes and when you return. It sends the
-  product's version and nothing about you.
+  provider at start and when you return, and keeps one connection open so a
+  newly published notice arrives at once. It says which product is asking and
+  nothing about you.
 - **Assistant** — only when you ask. It sends your question and per-section
   numbers, sizes and counts, never paths. Answers come from Anthropic's Claude
   models through FilesHub; a spoken question is transcribed by Groq and the

@@ -55,7 +55,8 @@ on. Accessibility access is not needed.
 
 ## Updates {#updates}
 
-The app checks for updates itself when it starts and every 6 hours. With
+The app checks for updates itself when it starts, when you come back to it,
+and the moment a new release is published. With
 **Install updates automatically** on, it downloads the signed update and
 relaunches at a quiet moment — never during a run. The check contacts GitHub
 Releases, which receives normal request details such as an IP address. See
@@ -64,8 +65,8 @@ Releases, which receives normal request details such as an IP address. See
 ### Required updates {#required-updates}
 
 Sometimes an update must be installed before you continue, for example when it
-fixes a safety rule. The app checks for a release notice when it starts, every
-15 minutes and when you come back to it:
+fixes a safety rule. The app reads the release notice when it starts, when you
+come back to it, and the moment a notice is published:
 
 - **Urgent:** the app stops and shows the reason with one **Update now**
   button. It installs the update and relaunches; your receipts and settings

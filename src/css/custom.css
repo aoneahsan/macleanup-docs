@@ -135,3 +135,15 @@
 .release-block-update:focus-visible, .release-notice-update:focus-visible, .release-notice-later:focus-visible {
   outline: 3px solid var(--ifm-color-primary); outline-offset: 2px; }
 @media (max-width: 480px) { .release-notice { inset-inline: 1rem; max-width: none; } }
+
+/* The dark footer (#303846) needs a lighter jade for links: #8ddbb9 is 7.4:1 there (axe color-contrast). */
+.footer--dark {
+  --ifm-footer-link-color: #8ddbb9;
+  --ifm-footer-link-hover-color: #ffffff;
+}
+
+/* Links inside prose and tables carry an underline, not colour alone (axe link-in-text-block). */
+.markdown a:not(.button) {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

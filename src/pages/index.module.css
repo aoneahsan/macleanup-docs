@@ -44,6 +44,22 @@
   flex-wrap: wrap;
 }
 
+/* The outline button sits on the jade hero: white text and border keep it readable (axe color-contrast). */
+.buttons :global(.button--outline) {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+.buttons :global(.button--outline):hover,
+.buttons :global(.button--outline):focus-visible {
+  background: #ffffff;
+  color: #005f45;
+}
+
+.warningStrip a {
+  text-decoration: underline;
+}
+
 .warningStrip {
   background: var(--ml-surface-danger);
   border-top: 1px solid var(--ifm-color-danger);

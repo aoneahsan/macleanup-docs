@@ -2,6 +2,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import { createSitemapItems } from './plugins/site-pages';
+import { OTHER_PLATFORMS } from './src/data/platforms';
 
 // ---------------------------------------------------------------------------
 // macleanup — Documentation site config
@@ -331,6 +332,15 @@ const config: Config = {
         { to: '/reference/cli', label: 'CLI', position: 'left' },
         { to: '/faq', label: 'FAQ', position: 'left' },
         {
+          type: 'dropdown',
+          label: 'Get macleanup',
+          position: 'right',
+          items: [
+            ...OTHER_PLATFORMS.map((platform) => ({ label: platform.name, href: platform.href })),
+            { label: 'All apps', to: '/apps' },
+          ],
+        },
+        {
           href: 'https://www.npmjs.com/package/macleanup',
           label: 'npm',
           position: 'right',
@@ -345,6 +355,13 @@ const config: Config = {
     footer: {
       style: 'dark',
       links: [
+        {
+          title: 'Get macleanup',
+          items: [
+            ...OTHER_PLATFORMS.map((platform) => ({ label: platform.name, href: platform.href })),
+            { label: 'All apps', to: '/apps' },
+          ],
+        },
         {
           title: 'Before you run',
           items: [

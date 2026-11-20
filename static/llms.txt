@@ -2,6 +2,14 @@
 
 > `macleanup` is a command-line macOS cleanup and maintenance tool that DELETES files from the user's machine to reclaim disk space. It ships as a bash script (an entry file plus modules in `lib/`) with 28 numbered sections covering developer caches, browser caches, system and user logs, temp files, orphaned application data, stale build artefacts, large dormant files, unused applications, and several read-only reports. Destructive sections confirm by default, and `--dry-run` previews a run without deleting files. Requires macOS 11+ and bash 3.2+. MIT licensed. Maintained by the macleanup team. Current documented version: 5.3.0. The macleanup desktop app for macOS (released with 5.2.0, https://macleanup.aoneahsan.com/download) runs the same script in a window; since 5.3.0 it adds an assistant that explains a preview (typed or spoken; it sees section numbers and sizes, never file paths), receipt backups on Pro and Team, and required-update notices.
 
+
+## Get macleanup
+
+- [All apps](https://macleanup-docs.aoneahsan.com/apps): every released surface of macleanup.
+- [Mac desktop app](https://github.com/aoneahsan/macleanup/releases/latest/download/macleanup.dmg)
+- [npm](https://www.npmjs.com/package/macleanup)
+- [Website](https://macleanup.aoneahsan.com)
+
 ## Critical context for any answer about this tool
 
 macleanup is **destructive by design**. Any answer that recommends running it should also state:

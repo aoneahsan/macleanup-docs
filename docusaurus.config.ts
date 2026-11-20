@@ -9,7 +9,7 @@ import { OTHER_PLATFORMS } from './src/data/platforms';
 // Author: Ahsan Mahmood (https://aoneahsan.com)
 // Source package: https://github.com/aoneahsan/macleanup (npm: macleanup)
 //
-// Deployment: GitHub Pages ONLY (.github/workflows/deploy-pages.yml).
+// Deployment: GitHub Pages ONLY, built here and pushed to `gh-pages` by hand (no GitHub Actions).
 // This repo is PUBLIC and holds no secrets — every analytics provider below is
 // gated on its own env var, so an absent key skips it and the build still runs.
 // ---------------------------------------------------------------------------
@@ -37,6 +37,77 @@ console.log(
   `[macleanup-docs] GA_MEASUREMENT_ID: ${GA_MEASUREMENT_ID ? 'SET' : 'NOT SET'} · ` +
     `CLARITY_PROJECT_ID: ${CLARITY_PROJECT_ID ? 'SET' : 'NOT SET'}`,
 );
+
+/** A markdown node as rehype hands it over: only the fields this step reads or sets. */
+interface HastNode {
+  type: string;
+  tagName?: string;
+  properties?: Record<string, unknown>;
+  children?: HastNode[];
+}
+
+/**
+ * Wide tables scroll sideways on a phone; a scroll region must take keyboard focus
+ * (axe `scrollable-region-focusable`), so every table gets tabIndex 0.
+ */
+function focusableTables() {
+  const walk = (node: HastNode): void => {
+    if (node.type === 'element' && node.tagName === 'table') {
+      node.properties = { ...node.properties, tabIndex: 0 };
+    }
+    node.children?.forEach(walk);
+  };
+  return (tree: HastNode): void => walk(tree);
+}
+
+type PrismTheme = typeof prismThemes.github;
+
+/** `#rgb`, `#rrggbb` or `rgb(r, g, b)` as three 0–255 channels; null for anything else. */
+function channels(color: string): [number, number, number] | null {
+  const rgb = /^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i.exec(color);
+  if (rgb) return [Number(rgb[1]), Number(rgb[2]), Number(rgb[3])];
+  let hex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(color)?.[1];
+  if (!hex) return null;
+  if (hex.length === 3) hex = hex.split('').map((c) => c + c).join('');
+  return [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16)) as [number, number, number];
+}
+
+/** WCAG contrast ratio between two colours given as channels. */
+function contrast(a: [number, number, number], b: [number, number, number]): number {
+  const lum = (c: [number, number, number]) => {
+    const [r, g, bl] = c.map((v) => {
+      const s = v / 255;
+      return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+    });
+    return 0.2126 * r + 0.7152 * g + 0.0722 * bl;
+  };
+  const [x, y] = [lum(a), lum(b)];
+  return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+}
+
+/**
+ * The stock code themes keep some token colours under 4.5:1 on their own background
+ * (GitHub numbers 2.6:1, Dracula comments 3.0:1). Mix each such colour toward the
+ * theme's plain text colour, in small steps, until it reads at 4.6:1; hues stay close.
+ */
+function readable(theme: PrismTheme): PrismTheme {
+  const bg = channels(theme.plain.backgroundColor ?? '');
+  const text = channels(theme.plain.color ?? '');
+  if (!bg || !text) return theme;
+  const fix = (color: string): string => {
+    const start = channels(color);
+    if (!start || contrast(start, bg) >= 4.6) return color;
+    for (let t = 0.05; t <= 1; t += 0.05) {
+      const mixed = start.map((v, i) => Math.round(v + (text[i] - v) * t)) as [number, number, number];
+      if (contrast(mixed, bg) >= 4.6) return `rgb(${mixed.join(', ')})`;
+    }
+    return theme.plain.color ?? color;
+  };
+  return {
+    ...theme,
+    styles: theme.styles.map((s) => (s.style.color ? { ...s, style: { ...s.style, color: fix(s.style.color) } } : s)),
+  };
+}
 
 const config: Config = {
   customFields: { release: RELEASE },
@@ -207,6 +278,7 @@ const config: Config = {
           editUrl: 'https://github.com/aoneahsan/macleanup-docs/edit/main/',
           showLastUpdateTime: true,
           breadcrumbs: true,
+          rehypePlugins: [focusableTables],
           // `docs/` is BOTH the published content dir and the home of the
           // fixed-path internal file docs/MANUAL-TASKS.md. Keep the path (the
           // global rule fixes it) but never publish it — this repo is public.
@@ -413,8 +485,8 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} Ahsan Mahmood. Built with Docusaurus. macleanup is MIT-licensed and comes with no warranty.`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: readable(prismThemes.github),
+      darkTheme: readable(prismThemes.dracula),
       additionalLanguages: ['bash', 'json', 'ini', 'diff'],
     },
   } satisfies Preset.ThemeConfig,

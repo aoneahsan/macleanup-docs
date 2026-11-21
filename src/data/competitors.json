@@ -566,15 +566,15 @@
       "line": "mac-cleaner",
       "officialUrl": "https://mackeeper.com/",
       "whatItIs": "A subscription Mac suite from Clario that bundles cleanup and an uninstaller with antivirus, a VPN, adware blocking and identity monitoring.",
-      "lastChecked": "2026-11-17",
+      "lastChecked": "2026-11-21",
       "prices": [
         {
           "plan": "1-month plan, 1 Mac",
-          "amount": 14.95,
+          "amount": 10.95,
           "currency": "USD",
           "period": "month",
-          "note": "The plan page lists a 1-month plan for 1 Mac, billed monthly.",
-          "source": "https://mackeeper.com/pricing/",
+          "note": "The public product page says starting at $10.95/month and one 1-month checkout variant shows $10.95; another pricing redirect showed $14.95 on 21 November 2026. The price offered to a visitor may vary.",
+          "source": "https://mackeeper.com/",
           "checkedOn": "2026-11-21"
         },
         {
@@ -582,18 +582,18 @@
           "amount": 71.4,
           "currency": "USD",
           "period": "year",
-          "note": "First-year price; the plan page shows $119.40 struck through. It no longer states the renewal price.",
+          "note": "First-year offer shown in one pricing redirect; the amount and any later billing can vary by checkout offer.",
           "source": "https://mackeeper.com/pricing/",
-          "checkedOn": "2026-11-17"
+          "checkedOn": "2026-11-21"
         },
         {
           "plan": "12-month plan, 3 Macs",
           "amount": 89.4,
           "currency": "USD",
           "period": "year",
-          "note": "First-year price; the plan page shows $358.20 struck through. It no longer states the renewal price.",
+          "note": "First-year offer shown in one pricing redirect; the amount and any later billing can vary by checkout offer.",
           "source": "https://mackeeper.com/pricing/",
-          "checkedOn": "2026-11-17"
+          "checkedOn": "2026-11-21"
         }
       ],
       "features": {

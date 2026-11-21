@@ -14,7 +14,7 @@ changelog lives with the source:
 [CHANGELOG.md](https://github.com/aoneahsan/macleanup/blob/main/CHANGELOG.md).
 Versions follow [semantic versioning](https://semver.org).
 
-This documentation describes **5.1.0**. Verify the published version with
+This documentation describes **5.3.1**. Verify the published version with
 `macleanup --check-update` before installing or updating.
 
 ```bash
@@ -23,6 +23,12 @@ macleanup --check-update   # what is published
 ```
 
 Entries before 5.0.0 use the names that were current at the time.
+
+## 5.3.1 — where to get macleanup
+
+*Released 2026-11-21.*
+
+- The [source README](https://github.com/aoneahsan/macleanup#available-on) lists the released places to get macleanup. The cleanup script did not change.
 
 ## 5.3.0 — an assistant, receipt backups and required updates
 

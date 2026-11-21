@@ -5,8 +5,16 @@
     <link>https://macleanup-docs.aoneahsan.com/changelog</link>
     <description>Every macleanup release: what changed, newest first.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 30 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 21 Nov 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://macleanup-docs.aoneahsan.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>macleanup 5.3.1 — where to get macleanup</title>
+      <link>https://macleanup-docs.aoneahsan.com/changelog#531--where-to-get-macleanup</link>
+      <guid isPermaLink="false">macleanup-5.3.1</guid>
+      <pubDate>Sat, 21 Nov 2026 00:00:00 GMT</pubDate>
+      <category>release</category>
+      <description>The source README lists the released places to get macleanup. The cleanup script did not change.</description>
+    </item>
     <item>
       <title>macleanup 5.3.0 — an assistant, receipt backups and required updates</title>
       <link>https://macleanup-docs.aoneahsan.com/changelog#530--an-assistant-receipt-backups-and-required-updates</link>

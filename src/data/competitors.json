@@ -570,12 +570,12 @@
       "prices": [
         {
           "plan": "1-month plan, 1 Mac",
-          "amount": 10.95,
+          "amount": 14.95,
           "currency": "USD",
           "period": "month",
-          "note": "The home page says “Starting at $10.95/month”; the plan page lists a 1-month plan for 1 Mac.",
-          "source": "https://mackeeper.com/",
-          "checkedOn": "2026-11-17"
+          "note": "The plan page lists a 1-month plan for 1 Mac, billed monthly.",
+          "source": "https://mackeeper.com/pricing/",
+          "checkedOn": "2026-11-21"
         },
         {
           "plan": "12-month plan, 1 Mac",

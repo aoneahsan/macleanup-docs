@@ -2,8 +2,31 @@ import { execSync } from 'node:child_process';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import GithubSlugger from 'github-slugger';
+import type { BlogContent } from '@docusaurus/plugin-content-blog';
 import type { LoadContext, Plugin, RouteConfig } from '@docusaurus/types';
 import sidebars from '../sidebars';
+
+/** One blog post as /feed lists it: published on `date` (`YYYY-MM-DD`, its own front matter). */
+export type FeedPost = { title: string; description: string; permalink: string; date: string };
+
+/**
+ * The blog posts the blog plugin loaded, newest first. Drafts are already gone from a production build; an unlisted
+ * post stays out, as it does from the blog's own lists. Empty while the blog is off (no post in blog/ yet).
+ *
+ * @param blog - the blog plugin's loaded content, or undefined while the blog is off
+ * @returns the posts /feed and /sitemap list
+ */
+function blogPosts(blog: BlogContent | undefined): FeedPost[] {
+  return (blog?.blogPosts ?? [])
+    .filter((post) => !post.metadata.unlisted)
+    .map(({ metadata }) => ({
+      title: metadata.title,
+      description: metadata.description,
+      permalink: metadata.permalink,
+      date: new Date(metadata.date).toISOString().slice(0, 10),
+    }))
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
 
 /**
  * site-pages — the four discovery routes every docs site ships.
@@ -59,7 +82,9 @@ function plainText(markdown: string): string {
 
 /** Parse every dated release from docs/changelog.md, newest first. */
 export function readReleases(): Release[] {
-  const source = readFileSync(path.join(SITE_DIR, CHANGELOG), 'utf8');
+  // Line endings normalised first: a Windows checkout (core.autocrlf) writes CRLF, and `.` in the heading pattern
+  // stops at the `\r`, so no release would ever be found.
+  const source = readFileSync(path.join(SITE_DIR, CHANGELOG), 'utf8').replace(/\r\n?/g, '\n');
   const slugger = new GithubSlugger();
   const releases: Release[] = [];
   let current: (Release & { body: string[] }) | null = null;
@@ -237,6 +262,19 @@ export default function sitePages(context: LoadContext): Plugin<Release[]> {
         }
         return { key: g.key, label: g.label, cards };
       });
+      // The blog, once it has posts: led by the blog's own page, its words the blog plugin's (src/data/blog.ts).
+      const blog = (allContent['docusaurus-plugin-content-blog'] as { default?: BlogContent } | undefined)?.default;
+      const posts = blogPosts(blog);
+      if (blog && posts.length) {
+        groups.push({
+          key: 'blog',
+          label: 'Blog',
+          cards: [
+            { title: blog.blogTitle, description: blog.blogDescription, permalink: '/blog', tags: ['blog'], keywords: ['posts'] },
+            ...posts.map((post) => ({ title: post.title, description: post.description, permalink: post.permalink, tags: ['blog'], keywords: [] })),
+          ],
+        });
+      }
       groups.push({
         key: 'site',
         label: 'Site',
@@ -247,7 +285,7 @@ export default function sitePages(context: LoadContext): Plugin<Release[]> {
       });
       const releases = readReleases();
       const sitemapData = await actions.createData('sitemap-page.json', JSON.stringify({ groups }));
-      const feedData = await actions.createData('feed-page.json', JSON.stringify({ releases }));
+      const feedData = await actions.createData('feed-page.json', JSON.stringify({ releases, posts }));
       actions.addRoute({ path: '/sitemap', component: '@site/src/components/SitemapPage', exact: true, modules: { data: sitemapData } });
       actions.addRoute({ path: '/feed', component: '@site/src/components/FeedPage', exact: true, modules: { data: feedData } });
     },
@@ -336,6 +374,9 @@ export async function createSitemapItems<T extends SitemapItem>(params: {
   byPath.set('/compare', compareData.lastChecked);
   for (const c of compareData.competitors) byPath.set(`/compare/${c.slug}`, c.lastChecked);
   byPath.set('/feed', fileDate(CHANGELOG));
+  // The blog's own page lists its posts, so it takes the newest of their dates (each post is dated by its file).
+  const postDates = [...byPath].filter(([p]) => p.startsWith('/blog/')).map(([, date]) => date);
+  if (postDates.length) byPath.set('/blog', newest(postDates) ?? '');
   byPath.set('/sitemap', newest([...byPath.values()]) ?? '');
   const undated: string[] = [];
   const result = items.map((item) => {

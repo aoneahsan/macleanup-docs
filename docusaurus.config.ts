@@ -1,7 +1,10 @@
+import { existsSync, readdirSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import { createSitemapItems } from './plugins/site-pages';
+import { BLOG_DESCRIPTION, BLOG_PATH, BLOG_TITLE } from './src/data/blog';
 import { OTHER_PLATFORMS } from './src/data/platforms';
 
 // ---------------------------------------------------------------------------
@@ -15,6 +18,14 @@ import { OTHER_PLATFORMS } from './src/data/platforms';
 // ---------------------------------------------------------------------------
 
 const SITE_URL = 'https://macleanup-docs.aoneahsan.com';
+
+/**
+ * Whether blog/ holds a post yet. Until it does, the blog stays off: an empty blog page would sit in sitemap.xml with
+ * nothing on it, and a Blog link would point at it. The first post added to blog/ turns on the blog, its RSS and Atom
+ * feeds, its search index, its dated sitemap entries, its Blog group on /sitemap and Posts on /feed, and the Blog links.
+ */
+const BLOG_DIR = fileURLToPath(new URL('./blog', import.meta.url));
+const HAS_POSTS = existsSync(BLOG_DIR) && readdirSync(BLOG_DIR).some((name) => name.endsWith('.md') || name.endsWith('.mdx'));
 const PKG_VERSION = '5.3.1';
 // Update flow, layer 2: this docs build's own version and where its release record is read.
 // The URL and publishable key are public by design (the desktop app ships them too).
@@ -293,7 +304,32 @@ const config: Config = {
             'story/**',
           ],
         },
-        blog: false,
+        blog: HAS_POSTS && {
+          path: 'blog',
+          routeBasePath: BLOG_PATH.slice(1),
+          blogTitle: BLOG_TITLE,
+          blogDescription: BLOG_DESCRIPTION,
+          blogSidebarTitle: 'Recent posts',
+          blogSidebarCount: 10,
+          postsPerPage: 10,
+          showReadingTime: false,
+          // A post's last update comes from git, like a doc's: shown under the post, and its sitemap lastmod.
+          showLastUpdateTime: true,
+          showLastUpdateAuthor: false,
+          // Every author and tag is defined once, in blog/authors.yml (and blog/tags.yml when a post uses one).
+          onInlineAuthors: 'throw',
+          onInlineTags: 'throw',
+          // markdown.format is 'detect', so a post written as .md marks its excerpt with <!-- truncate -->.
+          onUntruncatedBlogPosts: 'throw',
+          feedOptions: {
+            type: ['rss', 'atom'],
+            xslt: true,
+            title: BLOG_TITLE,
+            description: BLOG_DESCRIPTION,
+            copyright: 'Made by the macleanup team.',
+            language: 'en-GB',
+          },
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -304,7 +340,8 @@ const config: Config = {
           changefreq: null,
           priority: null,
           lastmod: 'date',
-          ignorePatterns: ['/tags/**', '/search'],
+          // The blog's tag, author, archive and later list pages only repeat its posts; each post is listed once.
+          ignorePatterns: ['/tags/**', '/search', '/blog/tags/**', '/blog/authors/**', '/blog/archive', '/blog/page/**'],
           createSitemapItems,
         },
         // GA4 — the key is spread in only when it exists, so an unset env var
@@ -327,7 +364,8 @@ const config: Config = {
       {
         hashed: true,
         indexDocs: true,
-        indexBlog: false,
+        indexBlog: HAS_POSTS,
+        blogRouteBasePath: BLOG_PATH,
         indexPages: true,
         docsRouteBasePath: '/',
         language: ['en'],
@@ -403,6 +441,7 @@ const config: Config = {
         },
         { to: '/reference/cli', label: 'CLI', position: 'left' },
         { to: '/faq', label: 'FAQ', position: 'left' },
+        ...(HAS_POSTS ? [{ to: BLOG_PATH, label: 'Blog', position: 'left' as const }] : []),
         {
           type: 'dropdown',
           label: 'Get macleanup',
@@ -472,6 +511,7 @@ const config: Config = {
         {
           title: 'Find everything',
           items: [
+            ...(HAS_POSTS ? [{ label: 'Blog', to: BLOG_PATH }] : []),
             { label: 'Sitemap', to: '/sitemap' },
             { label: 'Moving to macleanup', to: '/compare' },
             { label: 'Release feed', to: '/feed' },

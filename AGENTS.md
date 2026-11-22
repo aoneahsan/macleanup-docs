@@ -61,6 +61,15 @@ find build -iname '*MANUAL*'    # must return nothing
 - `docs/compare/` holds the moving guides. Their facts render from `src/data/competitors.json`, a copy of the marketing site's `docs/comparison-hub/competitors.json`; that build refuses a copy that differs. `yarn build` refuses a third-party link on a guide without `nofollow`.
 - `yarn build` IS the link checker (`onBrokenLinks` + `onBrokenAnchors` both `throw`).
 
+## Blog
+
+`blog/` holds the team's posts, one `.md` each (front matter: `slug`, `title`, `description`, `authors: [team]`, `image`,
+`date`). `markdown.format` is `detect`, so a `.md` post marks its excerpt with `<!-- truncate -->` after the opening line. Each
+image goes in `static/img/social/`. Empty, the blog stays off; the first post turns on the blog, its RSS and Atom feeds
+(`/blog/rss.xml`, beside the release feed `/feed.xml`), its search index, its sitemap entries (dated from git; `/blog` by its
+newest post), its Blog group on `/sitemap` and Posts on `/feed`, and the Blog links. The words live in `src/data/blog.ts`
+(2026-11-22). `plugins/site-pages.ts` normalises CRLF when it reads the changelog, so a Windows checkout builds.
+
 ## Commands
 
 ```bash

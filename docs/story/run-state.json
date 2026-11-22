@@ -2,16 +2,16 @@
   "schema": "story-run-state/1",
   "project": "macleanup",
   "bibleApproved": true,
-  "surface": "macleanup 4.7.1 package and public documentation",
-  "phase": "finalize",
-  "status": "approved",
-  "round": 1,
-  "gate": 4,
+  "surface": "Privacy Policy, Terms and desktop Settings corrections",
+  "phase": "map",
+  "status": "awaiting-approval",
+  "round": 0,
+  "gate": 2,
   "openDecisions": [],
-  "approvedAt": "2026-10-26T12:16:00Z",
+  "approvedAt": null,
   "escalatedAt": null,
   "registryUpdatedAt": "2026-10-26T10:46:56Z",
-  "updatedAt": "2026-10-26T12:16:00Z",
+  "updatedAt": "2026-11-22T10:26:00Z",
   "history": [
     {
       "at": "2026-10-23T07:42:00Z",
@@ -54,6 +54,14 @@
       "phase": "finalize",
       "status": "approved",
       "note": "Owner wrote “approve all, finish all remaining work now”, approving the reviewed 4.7.1 public package and docs publication at GATE 4"
+    },
+    {
+      "at": "2026-11-22T10:26:00Z",
+      "phase": "map",
+      "status": "awaiting-approval",
+      "note": "Privacy Policy account-data row prepared; GATE 2 requested."
     }
-  ]
+  ],
+  "approval": null,
+  "note": "Changed account-backup and analytics content-map rows await GATE 2 approval before reader-facing copy is drafted."
 }

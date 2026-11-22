@@ -31,3 +31,7 @@ The owner wrote: “please get everything fully on 1 name please, macleanup”, 
 - **Analytics (owner's choice of option: “Follow the fleet rule”).** The desktop app and website follow the fleet analytics standard: on by default, told once in the legal bar, no opt-out, never a path, file name or email. The command line stays free of telemetry. Until the analytics IDs exist, nothing is collected, and every surface keeps saying so; the privacy text, the bar line and the “no analytics” claims change in the same release that turns analytics on.
 - **The CLI is split into modules** (owner: “Split the CLI too”). Copy says “plain bash in short files” where it said “a single script” or “two readable files”.
 - **Backups (owner: “Platform backups only”).** Account data sits in the database host's daily backups for up to 7 days; a deleted account is never restored from them.
+
+## 2026-11-22 — Recovery policy corrected
+
+The production Supabase project is on the Free plan and its backup list was empty. Supabase's Free-plan guidance says automatic backups are unavailable, so the seven-day daily-backup claim above was based on a mistaken assumption. The owner chose “Correct the policy to say no restorable database backup is available (Recommended).” The database note now records that choice; the public Privacy Policy awaits its content-map and publication approvals. The historical 30 October decision remains above to show why the old claim existed.

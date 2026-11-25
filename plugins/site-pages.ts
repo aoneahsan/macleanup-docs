@@ -1,10 +1,29 @@
 import { execSync } from 'node:child_process';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import GithubSlugger from 'github-slugger';
 import type { BlogContent } from '@docusaurus/plugin-content-blog';
 import type { LoadContext, Plugin, RouteConfig } from '@docusaurus/types';
 import sidebars from '../sidebars';
+
+/**
+ * Docusaurus writes every route module's path into the client bundle, so the absolute path createData returns
+ * would publish this machine's folders and give each machine different chunk names. addRoute gets the alias.
+ */
+function generatedModule(generatedFilesDir: string, file: string): string {
+  return `@generated/${path.relative(generatedFilesDir, file).split(path.sep).join('/')}`;
+}
+
+/** Fails the build when any client bundle still carries this site's absolute path. */
+function assertNoLocalPaths(outDir: string, siteDir: string): void {
+  const jsDir = path.join(outDir, 'assets', 'js');
+  const forms = [siteDir.split(path.sep).join('/'), siteDir.split(path.sep).join('\\\\')];
+  for (const file of readdirSync(jsDir).filter((name) => name.endsWith('.js'))) {
+    const text = readFileSync(path.join(jsDir, file), 'utf8');
+    const found = forms.find((form) => text.includes(form));
+    if (found) throw new Error(`${file} carries the local path ${found}: pass createData paths to addRoute through generatedModule()`);
+  }
+}
 
 /** One blog post as /feed lists it: published on `date` (`YYYY-MM-DD`, its own front matter). */
 export type FeedPost = { title: string; description: string; permalink: string; date: string };
@@ -284,8 +303,8 @@ export default function sitePages(context: LoadContext): Plugin<Release[]> {
         ],
       });
       const releases = readReleases();
-      const sitemapData = await actions.createData('sitemap-page.json', JSON.stringify({ groups }));
-      const feedData = await actions.createData('feed-page.json', JSON.stringify({ releases, posts }));
+      const sitemapData = generatedModule(context.generatedFilesDir, await actions.createData('sitemap-page.json', JSON.stringify({ groups })));
+      const feedData = generatedModule(context.generatedFilesDir, await actions.createData('feed-page.json', JSON.stringify({ releases, posts })));
       actions.addRoute({ path: '/sitemap', component: '@site/src/components/SitemapPage', exact: true, modules: { data: sitemapData } });
       actions.addRoute({ path: '/feed', component: '@site/src/components/FeedPage', exact: true, modules: { data: feedData } });
     },
@@ -298,6 +317,7 @@ export default function sitePages(context: LoadContext): Plugin<Release[]> {
       ],
     }),
     async postBuild({ outDir, content }) {
+      assertNoLocalPaths(outDir, context.siteDir);
       writeFileSync(path.join(outDir, 'feed.xml'), renderFeedXml(siteUrl, content));
       checkCompareLinks(outDir, siteUrl);
       // GitHub Pages serves 404.html for every unknown path. It must not be

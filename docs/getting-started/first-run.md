@@ -1,7 +1,7 @@
 ---
 title: Your first run
 description: A step-by-step first session with macleanup — preview, read the report, run one section, then widen. Nothing is deleted before you choose to run a cleanup.
-tags: [getting-started, tutorial, dry-run, walkthrough]
+topics: [getting-started, tutorial, dry-run, walkthrough]
 sidebar_position: 2
 sidebar_label: Your first run
 keywords: [macleanup tutorial, first cleanup mac, how to use macleanup]

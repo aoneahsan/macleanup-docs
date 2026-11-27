@@ -1,7 +1,7 @@
 ---
 title: Recipes
 description: Copy-paste macleanup commands organised by goal — reclaim developer space, audit before deciding, uninstall an app properly, automate a weekly sweep.
-tags: [recipes, examples, cookbook, cli]
+topics: [recipes, examples, cookbook, cli]
 sidebar_position: 4
 sidebar_label: Recipes
 keywords: [macleanup examples, free disk space mac command, delete old node_modules, mac cleanup cron]

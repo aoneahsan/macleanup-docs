@@ -1,7 +1,7 @@
 ---
 title: Desktop app plans and allowance
 description: What the macleanup desktop app's Free, Pro and Team plans include — unlimited previews on every plan, 15 real runs a month per Mac plus 15 signed in, and Pro and Team prices as of 2026-10-30.
-tags: [desktop-app, plans, pricing]
+topics: [desktop-app, plans, pricing]
 sidebar_position: 3
 sidebar_label: Plans and allowance
 keywords: [macleanup pricing, macleanup pro, macleanup team, macleanup free plan, macleanup real runs]

@@ -1,7 +1,7 @@
 ---
 title: What a white-label build delivers
 description: What you receive for the macleanup desktop app and the command-line tool under a white-label licence, and the steps from payment to your first build.
-tags: [white-label, licensing, desktop-app]
+topics: [white-label, licensing, desktop-app]
 sidebar_position: 2
 sidebar_label: What we deliver
 keywords: [macleanup white-label desktop app, macleanup white-label npm, branded macleanup build]

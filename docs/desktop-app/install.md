@@ -1,7 +1,7 @@
 ---
 title: Install the desktop app
 description: Install the macleanup desktop app on macOS 11 or later — one disk image for Apple silicon and Intel, the one-time Gatekeeper Open Anyway step, Full Disk Access setup, and in-app updates.
-tags: [desktop-app, installation, gatekeeper, full-disk-access]
+topics: [desktop-app, installation, gatekeeper, full-disk-access]
 sidebar_position: 2
 sidebar_label: Install and first launch
 keywords: [install macleanup app, macleanup gatekeeper, open anyway macos, macleanup full disk access, macleanup dmg]

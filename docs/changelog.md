@@ -1,7 +1,7 @@
 ---
 title: Release history
 description: What changed in each macleanup release — the safety fixes, the two-condition rule, age-aware cache pruning, and the sections added along the way.
-tags: [changelog, releases, versions, history]
+topics: [changelog, releases, versions, history]
 sidebar_position: 6
 sidebar_label: Release history
 keywords: [macleanup changelog, macleanup versions, macleanup 5.2.2, macleanup 5.2.1, macleanup 5.2.0, macleanup 5.1.0, macleanup 5.0.0, macleanup 4.7.1, macleanup 4.3.1 safety fix]

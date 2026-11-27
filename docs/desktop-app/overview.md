@@ -1,7 +1,7 @@
 ---
 title: The macleanup desktop app
 description: What the macleanup desktop app adds to the command line — the same script underneath, a disk gauge, a dry-run ledger with keep, archive or delete, run receipts, apps and leftovers, and both launchd domains.
-tags: [desktop-app, macos, overview]
+topics: [desktop-app, macos, overview]
 sidebar_position: 1
 sidebar_label: Overview
 keywords: [macleanup app, macleanup desktop app, macleanup mac app, macos cleanup app, dry-run ledger]

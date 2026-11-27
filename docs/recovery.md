@@ -1,7 +1,7 @@
 ---
 title: Recovery
 description: What to do when a cleanup removed something you needed — including the exact commands to restore global developer tooling broken by the v4.3.0 section 23 bug.
-tags: [recovery, incident, restore, 4.3.0, safety]
+topics: [recovery, incident, restore, 4.3.0, safety]
 sidebar_position: 2
 sidebar_label: Recovery
 keywords: [macleanup broke my tools, restore bun pnpm after cleanup, macleanup 4.3.0 bug, brew autoremove undo]

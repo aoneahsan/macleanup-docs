@@ -1,7 +1,7 @@
 ---
 title: White-label updates and renewals
 description: What counts as an update to a macleanup white-label build, how long updates are included, and renewing them by licence key.
-tags: [white-label, licensing, updates]
+topics: [white-label, licensing, updates]
 sidebar_position: 3
 sidebar_label: Updates and renewals
 keywords: [macleanup white-label updates, macleanup licence renewal]

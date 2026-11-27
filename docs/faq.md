@@ -1,7 +1,7 @@
 ---
 title: FAQ
 description: Straight answers about macleanup — whether it is safe, what it can break, why it ships as one bash file, whether it collects telemetry, and what it deliberately will not do.
-tags: [faq, questions, safety, licence, privacy]
+topics: [faq, questions, safety, licence, privacy]
 sidebar_position: 5
 sidebar_label: FAQ
 keywords: [is macleanup safe, does macleanup collect data, macleanup license, macleanup vs cleanmymac]

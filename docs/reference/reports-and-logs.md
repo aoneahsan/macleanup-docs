@@ -1,7 +1,7 @@
 ---
 title: Reports and logs
 description: Where macleanup writes its dated session logs and per-section report files, what each one contains, and how to move, skip or prune them.
-tags: [reference, logs, artefacts, output]
+topics: [reference, logs, artefacts, output]
 sidebar_position: 5
 sidebar_label: Reports and logs
 keywords: [macleanup logs, macleanup report files, dot macleanup directory, prune-history]

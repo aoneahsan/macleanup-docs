@@ -1,7 +1,7 @@
 ---
 title: Privacy in the desktop app
 description: What the macleanup desktop app keeps on your Mac and what it syncs — usage counts with no paths, file paths never leave the Mac, and a signed-in sync of section ids, byte counts, statuses and the macOS version only.
-tags: [desktop-app, privacy, sync]
+topics: [desktop-app, privacy, sync]
 sidebar_position: 5
 sidebar_label: Privacy in the app
 keywords: [macleanup privacy, macleanup telemetry, macleanup sync, macleanup data, macleanup account]

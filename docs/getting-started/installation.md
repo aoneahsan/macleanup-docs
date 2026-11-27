@@ -1,7 +1,7 @@
 ---
 title: Installation
 description: Three ways to run macleanup on macOS — zero-install with npx, a global npm install, or a direct git checkout that needs no Node at all.
-tags: [installation, npx, npm, macos, setup]
+topics: [installation, npx, npm, macos, setup]
 sidebar_position: 1
 sidebar_label: Installation
 keywords: [install macleanup, npx macleanup, macleanup npm, macos cleanup install]

@@ -1,7 +1,7 @@
 ---
 title: Profiles
 description: The five named macleanup section bundles — dev, minimal, cache-only, deep and audit — what each one runs, when to use it, and which of them can delete permanently.
-tags: [reference, profiles, presets, cli]
+topics: [reference, profiles, presets, cli]
 sidebar_position: 3
 sidebar_label: Profiles
 keywords: [macleanup profiles, macleanup dev profile, macleanup audit profile, mac cleanup preset]

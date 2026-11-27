@@ -4,6 +4,8 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import { createSitemapItems } from './plugins/site-pages';
+import faqSchema from './plugins/faq-schema';
+import { seoRedirects } from './plugins/seo-redirects.mts';
 import { BLOG_DESCRIPTION, BLOG_PATH, BLOG_TITLE } from './src/data/blog';
 import { OTHER_PLATFORMS } from './src/data/platforms';
 
@@ -147,7 +149,9 @@ const config: Config = {
     locales: ['en'],
   },
 
-  trailingSlash: false,
+  // Every page is `<route>/index.html`: GitHub Pages then 301s `/x` to `/x/`. With `false` it served `x.html` and
+  // 404ed every slashed link (`/docs/` and the rest, macleanup-docs#1, SA-P26).
+  trailingSlash: true,
 
   markdown: {
     mermaid: true,
@@ -302,6 +306,8 @@ const config: Config = {
             'MANUAL-TASKS.md',
             'PACKAGES.md',
             'story/**',
+            // docs/search-consoles/ is the fleet's fixed-path record of search-console work, never a page.
+            'search-consoles/**',
           ],
         },
         blog: HAS_POSTS && {
@@ -354,7 +360,13 @@ const config: Config = {
   ],
 
   // /sitemap, /feed, /feed.xml and the 404 head fix.
-  plugins: ['./plugins/site-pages.ts'],
+  plugins: [
+    './plugins/site-pages.ts',
+    // FAQPage JSON-LD read off the built /faq/ page, so the markup is the page (SA-P30).
+    faqSchema,
+    // The retired /tags/* pages lead to real pages; plugins/seo-contract.ts re-checks every one after the build.
+    ['@docusaurus/plugin-client-redirects', {redirects: seoRedirects(fileURLToPath(new URL('.', import.meta.url)))}],
+  ],
   clientModules: ['./src/clientModules/releaseGate.ts'],
 
   themes: [

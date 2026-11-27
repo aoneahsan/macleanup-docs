@@ -1,7 +1,7 @@
 ---
 title: White-label questions
 description: Answers about the macleanup white-label — exclusivity, source code, changes to your build, updates and payments.
-tags: [white-label, licensing, faq]
+topics: [white-label, licensing, faq]
 sidebar_position: 5
 sidebar_label: Questions
 keywords: [macleanup white-label faq]

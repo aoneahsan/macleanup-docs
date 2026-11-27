@@ -1,7 +1,7 @@
 ---
 title: Configuration
 description: Set macleanup defaults once in ~/.macleanuprc, point logs and reports elsewhere with environment variables, and understand the precedence order between them.
-tags: [reference, configuration, config-file, environment]
+topics: [reference, configuration, config-file, environment]
 sidebar_position: 4
 sidebar_label: Configuration
 keywords: [macleanuprc, macleanup config file, MACLEANUP_LOGS_DIR, macleanup defaults]

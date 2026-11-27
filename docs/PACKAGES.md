@@ -11,6 +11,7 @@ Docusaurus or the `eval` package stops copying globals, then drop the flag). Upg
 |---|---|---|
 | `@docusaurus/core` | ^3.10.2 | runtime |
 | `@docusaurus/faster` | ^3.10.2 | runtime |
+| `@docusaurus/plugin-client-redirects` | ^3.10.2 | runtime — old `/tags/*` addresses redirect to real pages (macleanup-docs#1, 2026-11-27) |
 | `@docusaurus/preset-classic` | ^3.10.2 | runtime |
 | `@docusaurus/theme-common` | ^3.10.2 | runtime |
 | `@docusaurus/theme-mermaid` | ^3.10.2 | runtime |

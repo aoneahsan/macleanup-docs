@@ -1,7 +1,7 @@
 ---
 title: CLI reference
 description: Every macleanup command-line flag — selection, confirmation, thresholds, output, persistence and informational commands — with defaults, examples and exit codes.
-tags: [reference, cli, flags, options]
+topics: [reference, cli, flags, options]
 sidebar_position: 1
 sidebar_label: CLI reference
 keywords: [macleanup flags, macleanup options, macleanup cli reference, dry-run, only, profile]

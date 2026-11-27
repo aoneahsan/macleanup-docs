@@ -1,7 +1,7 @@
 ---
 title: About and contact
 description: How to reach the macleanup team — get in touch, report an issue, contribute, or report a security problem privately.
-tags: [about, contact, contributing, security]
+topics: [about, contact, contributing, security]
 sidebar_position: 1
 sidebar_label: About and contact
 keywords: [macleanup contact, macleanup support, macleanup security, macleanup contributing]

@@ -1,7 +1,7 @@
 ---
 title: Troubleshooting
 description: Symptom, cause and fix for the problems people actually hit with macleanup — install failures, sections that find nothing, permission prompts and slow scans.
-tags: [troubleshooting, errors, fixes, support]
+topics: [troubleshooting, errors, fixes, support]
 sidebar_position: 1
 sidebar_label: Troubleshooting
 keywords: [macleanup not working, macleanup command not found, section 23 finds nothing, macleanup permission]

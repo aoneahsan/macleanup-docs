@@ -1,7 +1,7 @@
 ---
 title: Preview with --dry-run
 description: How to see exactly which files macleanup would delete, without deleting anything — the flag to use first on every new machine, section and script.
-tags: [safety, dry-run, preview, cli]
+topics: [safety, dry-run, preview, cli]
 sidebar_position: 2
 sidebar_label: Preview with --dry-run
 keywords: [macleanup dry run, preview mac cleanup, test cleanup without deleting]

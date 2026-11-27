@@ -1,7 +1,7 @@
 ---
 title: The 28 sections
 description: Every macleanup section from 0 to 27 — what it removes, whether it needs sudo, whether it is reversible, and which flags tune it.
-tags: [reference, sections, macos, cleanup, sudo]
+topics: [reference, sections, macos, cleanup, sudo]
 sidebar_position: 2
 sidebar_label: The 28 sections
 keywords: [macleanup sections, macleanup section 23, section 21 uninstall, macleanup section list]

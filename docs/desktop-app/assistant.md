@@ -1,7 +1,7 @@
 ---
 title: Assistant, Speak and receipt backups
 description: Ask the macleanup desktop app about a preview by typing or speaking. The assistant sees section numbers and sizes, never file paths. Pro and Team can back up receipt summaries and restore them on another Mac.
-tags: [desktop-app, assistant, privacy, plans]
+topics: [desktop-app, assistant, privacy, plans]
 sidebar_position: 4
 sidebar_label: Assistant and backups
 keywords: [macleanup assistant, macleanup speak, explain preview, macleanup receipt backup, restore receipt another mac]

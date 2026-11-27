@@ -1,7 +1,7 @@
 ---
 title: JSON event stream
 description: The macleanup --json-events schema, version 1 — the newline-delimited JSON events a run writes to stdout, their fields, ordering guarantees and exit codes.
-tags: [reference, json, events, automation, scripting]
+topics: [reference, json, events, automation, scripting]
 sidebar_position: 6
 sidebar_label: JSON event stream
 keywords: [macleanup json-events, macleanup ndjson, macleanup event schema, macleanup automation, section_result]

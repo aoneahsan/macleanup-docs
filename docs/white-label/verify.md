@@ -1,7 +1,7 @@
 ---
 title: Check a macleanup licence
 description: How to check a macleanup white-label licence by key or by website, and the licence file each deployment serves.
-tags: [white-label, licensing, verification]
+topics: [white-label, licensing, verification]
 sidebar_position: 4
 sidebar_label: Check a licence
 keywords: [verify macleanup licence, macleanup licence key, macleanup white-label license file]

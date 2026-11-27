@@ -1,7 +1,7 @@
 ---
 title: Safety model
 description: The six design rules that keep macleanup from deleting more than you intended — the two-condition rule, the deep-section gate, sudo handling, and where the guarantees stop.
-tags: [safety, design, sudo, confirmation, macos]
+topics: [safety, design, sudo, confirmation, macos]
 sidebar_position: 3
 sidebar_label: Safety model
 keywords: [macleanup safety, is macleanup safe, i-understand-deep, two condition rule]

@@ -1,7 +1,7 @@
 ---
 title: Upgrading to 5.0
 description: macleanup 5.0.0 uses one name everywhere. What changed for the command, data folder, config file and environment variables, and what the first 5.x run does for you.
-tags: [upgrade, migration, installation, configuration]
+topics: [upgrade, migration, installation, configuration]
 sidebar_position: 3
 sidebar_label: Upgrading to 5.0
 keywords: [macleanup 5.0.0, upgrade macleanup, macleanup command renamed, macleanuprc, MACLEANUP_LOGS_DIR]

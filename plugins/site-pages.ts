@@ -218,8 +218,7 @@ type DocLike = {
   title: string;
   description: string;
   permalink: string;
-  tags: { label: string }[];
-  frontMatter: { keywords?: string[] };
+  frontMatter: { keywords?: string[]; topics?: string[] };
 };
 
 /** Facts about other Mac cleaners; a copy of the marketing site's file, which refuses to build if the two differ. */
@@ -231,13 +230,14 @@ const compareData = JSON.parse(readFileSync(path.join(SITE_DIR, 'src/data/compet
 /** Every third-party link on a compare guide is a new tab with nofollow, checked in the built HTML. */
 function checkCompareLinks(outDir: string, siteUrl: string): void {
   const ours = [siteUrl, 'https://macleanup.aoneahsan.com', 'https://aoneahsan.com', 'https://github.com/aoneahsan/', 'https://www.npmjs.com/package/macleanup'];
-  const files = ['compare.html', ...compareData.competitors.map((c) => `compare/${c.slug}.html`)];
+  // `trailingSlash: true`: every page is `<route>/index.html` (macleanup-docs#1, SA-P26).
+  const files = ['compare/index.html', ...compareData.competitors.map((c) => `compare/${c.slug}/index.html`)];
   const faults: string[] = [];
   let links = 0;
   for (const file of files) {
     const html = readFileSync(path.join(outDir, file), 'utf8');
     const canonicals = [...html.matchAll(/<link[^>]*rel=["']?canonical["']?[^>]*>/g)];
-    const self = `${siteUrl}/${file.replace(/\.html$/, '')}`;
+    const self = `${siteUrl}/${file.replace(/index\.html$/, '')}`;
     // The built HTML is minified, so an attribute may have no quotes.
     if (canonicals.length !== 1 || !new RegExp(`href=["']?${self.replace(/[.]/g, '\\.')}["'\\s/>]`).test(canonicals[0][0])) faults.push(`${file}: canonical is not ${self}`);
     for (const a of html.matchAll(/<a\s[^>]*href=["']?(https?:\/\/[^"'\s>]+)[^>]*>/g)) {
@@ -266,7 +266,8 @@ export default function sitePages(context: LoadContext): Plugin<Release[]> {
         title: d.title,
         description: d.description,
         permalink: d.permalink,
-        tags: d.tags.map((t) => t.label),
+        // Topics are front matter, not tag routes: the /tags/* pages were retired (macleanup-docs#1, SA-P32).
+        tags: topicsOf(d.frontMatter),
         keywords: d.frontMatter.keywords ?? [],
       });
       const groups: SitemapGroup[] = sidebarGroups().map((g) => {
@@ -331,7 +332,7 @@ export default function sitePages(context: LoadContext): Plugin<Release[]> {
       writeFileSync(notFound, html);
       // The local-search results page is a utility screen, not content: keep it out
       // of the index while its links stay followable.
-      const search = path.join(outDir, 'search.html');
+      const search = path.join(outDir, 'search', 'index.html');
       if (existsSync(search)) {
         const page = readFileSync(search, 'utf8')
           .replace(/(<meta[^>]*name=["']?robots["']?[^>]*content=)("[^"]*"|[^\s>]+)/g, '$1"noindex, follow"');
@@ -372,6 +373,28 @@ const newest = (dates: (string | undefined)[]): string | undefined =>
  * `createSitemapItems` for the sitemap plugin: no changefreq or priority, no
  * `/search`, and a truthful lastmod on every URL. Throws on an undated URL.
  */
+/**
+ * A pathname without its trailing slash (`/` stays `/`): under `trailingSlash: true` routes and sitemap URLs end in
+ * `/`, and the date lookups compare routes in this one form.
+ *
+ * @param pathname - a pathname or route path
+ * @returns the same route, slashless
+ */
+export function routeKey(pathname: string): string {
+  return pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
+}
+
+/**
+ * A doc's topic labels from its `topics:` front matter.
+ *
+ * @param frontMatter - the doc's front matter
+ * @returns the labels, empty when it has none
+ */
+function topicsOf(frontMatter: object | undefined): string[] {
+  const topics = (frontMatter as {topics?: unknown} | undefined)?.topics;
+  return Array.isArray(topics) ? topics.map(String) : [];
+}
+
 export async function createSitemapItems<T extends SitemapItem>(params: {
   defaultCreateSitemapItems: (p: { siteConfig: LoadContext['siteConfig']; routes: RouteConfig[] }) => Promise<T[]>;
   siteConfig: LoadContext['siteConfig'];
@@ -379,11 +402,11 @@ export async function createSitemapItems<T extends SitemapItem>(params: {
 }): Promise<T[]> {
   const { defaultCreateSitemapItems, ...rest } = params;
   const siteUrl = rest.siteConfig.url.replace(/\/$/, '');
-  const items = (await defaultCreateSitemapItems(rest)).filter((i) => !/\/search$/.test(i.url));
+  const items = (await defaultCreateSitemapItems(rest)).filter((i) => !/\/search\/?$/.test(i.url));
   const byPath = new Map<string, string>();
   for (const route of flatten(rest.routes)) {
     const source = route.metadata?.sourceFilePath;
-    if (source && !byPath.has(route.path)) byPath.set(route.path, fileDate(source.replace(/^@site\//, '')));
+    if (source && !byPath.has(routeKey(route.path))) byPath.set(routeKey(route.path), fileDate(source.replace(/^@site\//, '')));
   }
   // Category index pages take the newest of the pages they list.
   const docPath = (id: string) => `/${id === 'intro' ? 'intro' : id}`;
@@ -400,7 +423,7 @@ export async function createSitemapItems<T extends SitemapItem>(params: {
   byPath.set('/sitemap', newest([...byPath.values()]) ?? '');
   const undated: string[] = [];
   const result = items.map((item) => {
-    const p = item.url.slice(siteUrl.length) || '/';
+    const p = routeKey(item.url.slice(siteUrl.length) || '/');
     const lastmod = byPath.get(p);
     if (!lastmod) undated.push(p);
     return { ...item, lastmod, changefreq: null, priority: null };

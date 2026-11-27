@@ -1,7 +1,7 @@
 ---
 title: What gets deleted
 description: A section-by-section inventory of macleanup deletion methods, recovery paths, and limits.
-tags: [safety, deletion, macos, cleanup, reference]
+topics: [safety, deletion, macos, cleanup, reference]
 sidebar_position: 1
 sidebar_label: What gets deleted
 keywords: [what does macleanup delete, is macleanup safe, mac cleanup irreversible, macleanup trash]

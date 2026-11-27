@@ -1,7 +1,7 @@
 ---
 title: White-label licence and buyout
 description: How the macleanup white-label works — the desktop app and the command-line tool built, published and updated under your name, the MIT boundary, and the desktop app buyout.
-tags: [white-label, licensing]
+topics: [white-label, licensing]
 sidebar_position: 1
 sidebar_label: Overview
 keywords: [macleanup white-label, macleanup licence, macleanup reseller, macleanup buyout]

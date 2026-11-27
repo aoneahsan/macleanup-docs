@@ -1,7 +1,7 @@
 ---
 title: Introduction
 description: macleanup is a safe-by-default macOS cleanup CLI that reclaims disk space from caches, logs, stale build artefacts and unused apps — with per-section confirmation and a real dry-run.
-tags: [macleanup, macos, cleanup, cli, overview]
+topics: [macleanup, macos, cleanup, cli, overview]
 sidebar_position: 1
 slug: /intro
 keywords: [macleanup, mac cleanup, macos disk space, clear cache mac, cleanup cli]

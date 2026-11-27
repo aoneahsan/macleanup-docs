@@ -57,8 +57,8 @@ export function seoRedirects(siteDir: string): Redirect[] {
     byTarget.set(to, [...(byTarget.get(to) ?? []), from]);
   };
   add('/sitemap', '/tags');
-  for (const topic of topicsIn(docsDir, files)) {
-    const tag = slug(topic);
+  // Two labels can share one permalink ("Getting started", "getting-started"): one redirect per permalink.
+  for (const tag of new Set([...topicsIn(docsDir, files)].map(slug))) {
     const home = [...TOPIC_HOMES.map((dir) => `/${dir}/${tag}`), `/${tag}`].find((route) => routes.has(route));
     add(home ?? '/sitemap', `/tags/${tag}`);
   }

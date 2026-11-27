@@ -62,5 +62,7 @@ export function seoRedirects(siteDir: string): Redirect[] {
     const home = [...TOPIC_HOMES.map((dir) => `/${dir}/${tag}`), `/${tag}`].find((route) => routes.has(route));
     add(home ?? '/sitemap', `/tags/${tag}`);
   }
+  // `/docs` and `/docs/` were never pages here (docs are served from the root), but search engines request them.
+  add('/intro', '/docs');
   return [...byTarget].map(([to, from]) => ({to, from}));
 }

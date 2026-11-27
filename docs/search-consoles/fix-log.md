@@ -5,13 +5,13 @@ Fixed path in every repo (`aoneahsan-cccs-search-issue-remediation`). Newest fir
 
 ## macleanup-docs#1 — URL-level indexing + AEO fix list · 2026-11-27 · commit: see `git log -- docs/search-consoles/fix-log.md`
 
-Status: trailing-slash box and boxes 3, 4 and 6 fixed (live proof added after publishing); 1 and 5 Pending; 2 answered by
+Status: trailing-slash box and boxes 3, 4 and 6 live-verified, google-pending (IndexNow 200); 1 and 5 Pending; 2 answered by
 owner law. `yarn build` (zero warnings) ends with `yarn seo:contract` (`plugins/seo-contract.mts`), which failed on a
 planted noindex on `/intro/` and then passed. Rendered `/faq/` at 1440.
 
 | Box | SA | What was wrong (evidence) | Root fix (file) | Contract | Live proof |
 |---|---|---|---|---|---|
-| Trailing-slash 404 (`/docs/` and every `/x/`) | P26 | `trailingSlash: false` wrote `x.html` | `docusaurus.config.ts` `trailingSlash: true`; `plugins/site-pages.ts` follows the `<route>/index.html` layout (compare-link check, `/search/`), and sitemap dates compare routes slashless (`routeKey`) | fails on any `x.html` page, unslashed canonical or sitemap URL | see Retest |
+| Trailing-slash 404 (`/docs/` and every `/x/`) | P26/P31 | `trailingSlash: false` wrote `x.html`; `/docs` itself was never a page here (docs live at the root) | `docusaurus.config.ts` `trailingSlash: true`; `/docs` → `/intro/` (`plugins/seo-redirects.mts`); `plugins/site-pages.ts` follows the `<route>/index.html` layout (compare-link check, `/search/`), and sitemap dates compare routes slashless (`routeKey`) | fails on any `x.html` page, unslashed canonical or sitemap URL | see Retest |
 | 3 · 16 tag pages | P32 | thin lists of pages the sidebar already groups | `tags:` → `topics:` in 43 docs (the `/sitemap` chips read it, `topicsOf`); every `/tags/*` redirects to its matching page or `/sitemap` (`plugins/seo-redirects.mts`, new dependency `@docusaurus/plugin-client-redirects`). Not noindexed | each redirect and target checked | `/tags/macos/` → refresh `/sitemap/` |
 | 6 · AEO: FAQ without FAQPage | P30 | `/faq` shows 23 questions, no FAQPage | `plugins/faq-schema.ts` reads every `<h3>` question and its answer off the BUILT `/faq/` and writes FAQPage into its head (shared with clearhire-docs), so the markup is the page word for word | build fails if `/faq/` shows no question | see Retest |
 | 4 · feeds / llms.txt / sitemap | P33 | machine files; no `.md` mirrors on this host | none needed | — | — |
